@@ -5,7 +5,6 @@ class ServerError extends Error {
   
 		this.isSuccess = false;
 		this.status = args[0].status;
-		console.log(this.status);
 		this.message = args[0].message;
 	}
 }

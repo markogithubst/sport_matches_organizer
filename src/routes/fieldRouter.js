@@ -5,10 +5,12 @@ const {callbackErrorHandler} = require('../middleware/errorHandler');
 
 const router = express.Router();
 
-// wrap controller calls in the callbackErrorHandler to avoid writing try..catch blocks
-router.use('/', callbackErrorHandler(fieldController.dummy));
 
-
+router.get('/', callbackErrorHandler(fieldController.viewAllFields));
+router.post('/', callbackErrorHandler(fieldController.createField));
+router.get('/:id', callbackErrorHandler(fieldController.viewSingleField));
+router.put('/:id', callbackErrorHandler(fieldController.updateField));
+router.delete('/:id', callbackErrorHandler(fieldController.deleteField));
 
 
 module.exports = router;

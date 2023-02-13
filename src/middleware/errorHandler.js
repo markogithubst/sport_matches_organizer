@@ -4,11 +4,6 @@ const errorHandler = (err, req, res, next) => {
 	let status;
 	let msg;
 
-	// console.log(err);
-	// if (SequelizeErrorCodes[err.name]) {
-	// 	status = SequelizeErrorCodes[err.name] || 500;
-	// 	msg = err.error || err.message;
-	// } else {
 	status = err.status || 500;
 	msg = err.error || err.message;
 	

@@ -1,10 +1,29 @@
 
+const createMatch = async () => {
+	// await crud;
+};
 
-const dummy = () => {
-	return 'hello world!';
+const viewAllMacthes = async () => {
+	// await crud;
+};
+
+const viewSingleMatch = async () => {
+	// await crud;
+};
+
+const updateMatch = async () => {
+	// await crud;
+};
+
+const deleteMatch = async () => {
+	// await crud;
 };
 
 
 module.exports = {
-	dummy
+	createMatch,
+	viewAllMacthes,
+	viewSingleMatch,
+	updateMatch,
+	deleteMatch
 };
