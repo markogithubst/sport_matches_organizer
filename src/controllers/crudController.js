@@ -1,7 +1,7 @@
 const { ErrorTypes } = require('../errors/errorTypes');
 const { ServerError } = require('../errors/ServerError');
 
-const getOne = async (req, res, model) => {
+const getOne = async (model, req, res) => {
 	const { id } = req.params;
 	const dataFound = await model.findById(id);
 	if(!dataFound) throw new ServerError(ErrorTypes.notFound);
@@ -9,12 +9,12 @@ const getOne = async (req, res, model) => {
 	res.status(200).json({ success: true, data: dataFound });
 };
 
-const getAll = async (req, res, model) => {
+const getAll = async (model, req, res) => {
 	const dataFound = await model.find();
 	res.status(200).json({ success: true, data: dataFound });
 };
 
-const deleteOne = async (req, res, model) => {
+const deleteOne = async (model, req, res) => {
 	const { id } = req.params;
 	const datadeleted = await model.findByIdAndDelete(id);
 	if(!datadeleted) throw new ServerError(ErrorTypes.notFound);
@@ -22,12 +22,12 @@ const deleteOne = async (req, res, model) => {
 	res.status(200).json({ success: true, data: datadeleted });
 };
 
-const createOne = async (req, res, model) => {
+const createOne = async (model, req, res) => {
 	const dataCreated = await model.create(req.body);
 	res.status(201).json({ success: true, data: dataCreated });
 };
 
-const updateOne = async (req, res, model) => {
+const updateOne = async (model, req, res) => {
 	const { id } = req.params;
 	const dataUpdated = await model.findByIdAndUpdate(id, req.body, {
 		new: true,

@@ -1,22 +1,24 @@
+const { getOne, getAll, deleteOne, createOne, updateOne  } = require('./crudController');
+const Result = require('../models/Result');
 
-const createResult = async () => {
-	// await crud;
+const createResult = async (req, res) => {
+	await createOne(Result, req, res);
 };
 
-const viewAllResluts = async () => {
-	// await crud;
+const viewAllResluts = async (req, res) => {
+	await getAll(Result, req, res);
 };
 
-const viewSingleResult = async () => {
-	// await crud;
+const viewSingleResult = async (req, res) => {
+	await getOne(Result, req, res);
 };
 
-const updateResult = async () => {
-	// await crud;
+const updateResult = async (req, res) => {
+	await updateOne(Result, req, res);
 };
 
-const deleteResult = async () => {
-	// await crud;
+const deleteResult = async (req, res) => {
+	await deleteOne(Result, req, res);
 };
 
 
