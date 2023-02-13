@@ -1,14 +1,21 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 const server = require('./app');
 
-
-// eslint-disable-next-line no-undef
 const PORT = process.env.PORT;
 
+const runServer = () => {
+	mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:27017/`)
+		.then(() => {
+			console.log('Connected!');
+			server.listen(PORT, () => {
+				console.log(`Listening on port ${PORT}`);
+			});
+		})
+		.catch(err => console.log(err.message));
+};
 
-server.listen(PORT, () => {
-	console.log(`Listening on port ${PORT}`);
-});
+runServer();
 
 
 
