@@ -10,15 +10,15 @@ const fieldSchema = Joi.object({
 }).options({ abortEarly: false });
 
 const matchSchema = Joi.object({
-  whiteTeam: Joi.array().items(Joi.string()).max(3),
-  blackTeam: Joi.array().items(Joi.string()).max(3),
+  whiteTeam: Joi.string().min(3).max(50).hex().required(),
+  blackTeam: Joi.string().min(3).max(50).hex().required(),
   result: Joi.string().min(3).max(50).hex().required()
 }).options({ abortEarly: false });
 
 const reservationSchema = Joi.object({
   field: Joi.string().min(3).max(50).hex().required(),
   match: Joi.string().min(3).max(50).hex().required(),
-  status: Joi.boolean().required(),
+  isCanceled: Joi.boolean().required(),
   isFilled: Joi.boolean().required(),
   registeredPlayers: Joi.array().items(Joi.string()).max(6)
 }).options({ abortEarly: false });
@@ -29,7 +29,7 @@ const resultSchema = Joi.object({
 }).options({ abortEarly: false });
 
 const teamSchema = Joi.object({
-  players: Joi.string().min(3).max(50).hex().required(),
+  players: Joi.array().items(Joi.string()).max(3),
   color: Joi.string().valid('white', 'black').required()
 }).options({ abortEarly: false });
 
@@ -38,8 +38,8 @@ const userSchema = Joi.object({
   name: Joi.string().min(3).max(25).required(),
   surname: Joi.string().min(3).max(25).required(),
   email: Joi.string().min(3).max(50).email({ minDomainSegments: 2 }).required(),
-  password: Joi.string().min(8).max(50),
-  phone: Joi.string().regex(/^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/).required(),
+  password: Joi.string().min(8).max(50).required(),
+  phone: Joi.string().regex(/^0[0-9]{9}$/),
   role: Joi.string().valid('ADMIN', 'USER').required()
 
 }).options({ abortEarly: false });
