@@ -1,7 +1,7 @@
-const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudController');
+const { getOne, createOne, getAll, deleteOne, updateOne } = require('./crudController');
 const User = require('../models/User');
 
-const createUser = async (req, res) => {
+const registerUser = async (req, res) => {
   await createOne(User, req, res);
 };
 
@@ -22,7 +22,7 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
-  createUser,
+  registerUser,
   viewAllUsers,
   viewSingleUser,
   updateUser,

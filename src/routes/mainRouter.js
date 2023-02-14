@@ -5,6 +5,7 @@ const reservationRouter = require('./reservationRouter');
 const resultRouter = require('./resultRouter');
 const teamRouter = require('./teamRouter');
 const userRouter = require('./userRouter');
+const authRouter = require('./authRouter');
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use('/reservation', reservationRouter);
 router.use('/result', resultRouter);
 router.use('/team', teamRouter);
 router.use('/user', userRouter);
+router.use('/', authRouter);
 
 module.exports = router;
