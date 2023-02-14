@@ -10,7 +10,7 @@ const reservationSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Match'
   },
-  status: {
+  isCanceled: {
     type: Boolean
   },
   isFilled: {

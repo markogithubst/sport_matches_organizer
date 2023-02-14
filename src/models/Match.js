@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
 const matchSchema = mongoose.Schema({
-  whiteTeam: [{
+
+  whiteTeam: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  blackTeam: [{
+    ref: 'Team'
+  },
+  blackTeam: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
+    ref: 'Team'
+  },
   result: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Result'

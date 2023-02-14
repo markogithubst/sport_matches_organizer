@@ -5,7 +5,6 @@ const teamSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
-
   color: {
     type: String,
     enum: ['white', 'black']

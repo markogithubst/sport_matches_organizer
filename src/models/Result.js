@@ -7,7 +7,6 @@ const resultSchema = mongoose.Schema({
   blackTeamScore: {
     type: Number
   }
-
 }, {
   timestamps: true,
   strict: true
