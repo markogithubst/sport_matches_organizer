@@ -1,7 +1,6 @@
 const express = require('express');
 const reservationController = require('../controllers/reservationController');
-const {callbackErrorHandler} = require('../middleware/errorHandler');
-
+const { callbackErrorHandler } = require('../middleware/errorHandler');
 
 const router = express.Router();
 
@@ -11,6 +10,4 @@ router.get('/:id', callbackErrorHandler(reservationController.viewSingleReservat
 router.put('/:id', callbackErrorHandler(reservationController.updateReservation));
 router.delete('/:id', callbackErrorHandler(reservationController.deleteReservation));
 
-
 module.exports = router;
-

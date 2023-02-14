@@ -1,20 +1,18 @@
-
+/* eslint-disable prefer-const */
 
 const errorHandler = (err, req, res, next) => {
-	let status;
-	let msg;
+  let status;
+  let msg;
 
-	status = err.status || 500;
-	msg = err.error || err.message;
-	
+  status = err.status || 500;
+  msg = err.error || err.message;
 
-	res.status(status).send({ status, error: msg });
-	next();
+  res.status(status).send({ status, error: msg });
+  next();
 };
 
 const callbackErrorHandler = (callback) => {
-	return (req, res, next) => callback(req, res, next)
-		.catch(next);
+  return (req, res, next) => callback(req, res, next)
+    .catch(next);
 };
 module.exports = { errorHandler, callbackErrorHandler };
-

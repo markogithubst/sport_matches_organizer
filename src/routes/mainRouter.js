@@ -6,10 +6,7 @@ const resultRouter = require('./resultRouter');
 const teamRouter = require('./teamRouter');
 const userRouter = require('./userRouter');
 
-
-
 const router = express.Router();
-
 
 router.use('/field', fieldRouter);
 router.use('/match', matchRouter);
@@ -18,7 +15,4 @@ router.use('/result', resultRouter);
 router.use('/team', teamRouter);
 router.use('/user', userRouter);
 
-
-
 module.exports = router;
-

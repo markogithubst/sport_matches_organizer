@@ -1,19 +1,17 @@
 const mongoose = require('mongoose');
 
-
 const fieldSchema = mongoose.Schema({
-    name: {
-        type: String,
+  name: {
+    type: String
 
-    },
-    address: {
-        type: String
-    }
+  },
+  address: {
+    type: String
+  }
 
 }, {
-    timestamps: true,
-    strict: true
+  timestamps: true,
+  strict: true
 });
 
-
-module.exports = mongoose.model("Field", fieldSchema);
+module.exports = mongoose.model('Field', fieldSchema);
