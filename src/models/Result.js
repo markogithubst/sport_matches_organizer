@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 
-
 const resultSchema = mongoose.Schema({
-    whiteTeamScore: {
-        type: Number
-    },
-    blackTeamScore: {
-        type: Number
-    }
+  whiteTeamScore: {
+    type: Number
+  },
+  blackTeamScore: {
+    type: Number
+  }
 
 }, {
-    timestamps: true,
-    strict: true
+  timestamps: true,
+  strict: true
 });
 
-
-module.exports = mongoose.model("Result", resultSchema);
+module.exports = mongoose.model('Result', resultSchema);
