@@ -1,13 +1,14 @@
 const express = require('express');
 const teamController = require('../controllers/teamController');
 const { callbackErrorHandler } = require('../middleware/errorHandler');
+const { validateId, validateTeam } = require('../middleware/requestValidationHandler');
 
 const router = express.Router();
 
 router.get('/', callbackErrorHandler(teamController.viewAllTeams));
-router.post('/', callbackErrorHandler(teamController.createTeam));
-router.get('/:id', callbackErrorHandler(teamController.viewSingleTeam));
-router.put('/:id', callbackErrorHandler(teamController.updateTeam));
-router.delete('/:id', callbackErrorHandler(teamController.deleteTeam));
+router.post('/', validateTeam, callbackErrorHandler(teamController.createTeam));
+router.get('/:id', validateId, callbackErrorHandler(teamController.viewSingleTeam));
+router.put('/:id', validateId, validateTeam, callbackErrorHandler(teamController.updateTeam));
+router.delete('/:id', validateId, callbackErrorHandler(teamController.deleteTeam));
 
 module.exports = router;

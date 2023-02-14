@@ -1,13 +1,14 @@
 const express = require('express');
 const fieldController = require('../controllers/fieldController');
 const { callbackErrorHandler } = require('../middleware/errorHandler');
+const { validateId, validateField } = require('../middleware/requestValidationHandler');
 
 const router = express.Router();
 
 router.get('/', callbackErrorHandler(fieldController.viewAllFields));
-router.post('/', callbackErrorHandler(fieldController.createField));
-router.get('/:id', callbackErrorHandler(fieldController.viewSingleField));
-router.put('/:id', callbackErrorHandler(fieldController.updateField));
-router.delete('/:id', callbackErrorHandler(fieldController.deleteField));
+router.post('/', validateField, callbackErrorHandler(fieldController.createField));
+router.get('/:id', validateId, callbackErrorHandler(fieldController.viewSingleField));
+router.put('/:id', validateId, validateField, callbackErrorHandler(fieldController.updateField));
+router.delete('/:id', validateId, callbackErrorHandler(fieldController.deleteField));
 
 module.exports = router;
