@@ -44,7 +44,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/, 'Please enter a valid phone number']
+    match: [/^\+(?:\d\s?){6,14}\d$/, 'Please enter a valid phone number']
 
   },
   role: {

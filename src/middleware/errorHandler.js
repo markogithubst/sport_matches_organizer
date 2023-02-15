@@ -8,7 +8,6 @@ const errorHandler = (err, req, res, next) => {
   msg = err.error || err.message;
 
   res.status(status).send({ status, error: msg });
-  next();
 };
 
 const callbackErrorHandler = (callback) => {

@@ -16,10 +16,10 @@ const getAll = async (model, req, res) => {
 
 const deleteOne = async (model, req, res) => {
   const { id } = req.params;
-  const datadeleted = await model.findByIdAndDelete(id);
-  if (!datadeleted) throw new ServerError(ErrorTypes.notFound);
+  const dataDeleted = await model.findByIdAndDelete(id);
+  if (!dataDeleted) throw new ServerError(ErrorTypes.notFound);
 
-  res.status(200).json({ success: true, data: datadeleted });
+  res.status(200).json({ success: true, data: dataDeleted });
 };
 
 const createOne = async (model, req, res) => {
