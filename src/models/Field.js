@@ -2,11 +2,15 @@ const mongoose = require('mongoose');
 
 const fieldSchema = mongoose.Schema({
   name: {
-    type: String
-
+    type: String,
+    minLength: 3,
+    maxLength: 50,
+    unique: true
   },
   address: {
-    type: String
+    type: String,
+    unique: true
+
   }
 
 }, {

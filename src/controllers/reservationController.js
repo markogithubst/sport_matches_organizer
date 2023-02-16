@@ -1,4 +1,5 @@
 const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudController');
+const mongoose = require('mongoose');
 const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/errorMessages');
 const { NotFoundError } = require('../errors/Errors');
@@ -35,11 +36,25 @@ const cancelReservation = async (req, res) => {
   res.status(200).json({ success: true, data: dataUpdated });
 };
 
+const addPlayerToReservation = async (req, res) => {
+  const player = req.params.playerId;
+
+  await Reservation
+    .updateOne({ _id: req.params.id },
+      {
+        $addToSet: { registeredPlayers: mongoose.Types.ObjectId(player) },
+        $inc: { num: 1 }
+      });
+
+  res.json('success');
+};
+
 module.exports = {
   createReservation,
   viewAllReservations,
   viewSingleReservation,
   updateReservation,
   deleteReservation,
-  cancelReservation
+  cancelReservation,
+  addPlayerToReservation
 };

@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const idSchema = Joi.object({
-  id: Joi.string().min(3).max(50).hex().required()
+  id: Joi.string().min(24).max(24).hex().required()
 });
 
 const fieldSchema = Joi.object({
@@ -10,22 +10,24 @@ const fieldSchema = Joi.object({
 }).options({ abortEarly: false });
 
 const matchSchema = Joi.object({
-  whiteTeam: Joi.string().min(3).max(50).hex().required(),
-  blackTeam: Joi.string().min(3).max(50).hex().required(),
-  result: Joi.string().min(3).max(50).hex().required()
+  whiteTeam: Joi.string().min(24).max(24).hex().required(),
+  blackTeam: Joi.string().min(24).max(24).hex().required(),
+  result: Joi.string().min(24).max(24).hex().required()
 }).options({ abortEarly: false });
 
 const reservationSchema = Joi.object({
-  field: Joi.string().min(3).max(50).hex().required(),
-  match: Joi.string().min(3).max(50).hex().required(),
-  isCanceled: Joi.boolean().required(),
-  isFilled: Joi.boolean().required(),
+  field: Joi.string().min(24).max(24).hex().required(),
+  time: Joi.string().isoDate().required(),
+  match: Joi.string(),
+  num: Joi.number(),
+  isCanceled: Joi.boolean(),
+  isFilled: Joi.boolean(),
   registeredPlayers: Joi.array().items(Joi.string()).max(6)
 }).options({ abortEarly: false });
 
 const resultSchema = Joi.object({
-  whiteTeamScore: Joi.number().min(1).max(30).required(),
-  blackTeamScore: Joi.number().min(1).max(30).required()
+  whiteTeamScore: Joi.number().min(0).max(30).required(),
+  blackTeamScore: Joi.number().min(0).max(30).required()
 }).options({ abortEarly: false });
 
 const teamSchema = Joi.object({
