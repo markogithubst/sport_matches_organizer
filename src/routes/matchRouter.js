@@ -1,6 +1,6 @@
 const express = require('express');
 const matchController = require('../controllers/matchController');
-const { callbackErrorHandler } = require('../middleware/errorHandler');
+const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
 const { validateId, validateMatch } = require('../middleware/requestValidationHandler');
 
 const router = express.Router();

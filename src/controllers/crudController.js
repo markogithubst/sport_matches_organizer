@@ -1,10 +1,10 @@
-const { ErrorTypes } = require('../errors/errorTypes');
-const { ServerError } = require('../errors/ServerError');
+const { ErrorMessages } = require('../errors/errorMessages');
+const { NotFoundError } = require('../errors/Errors');
 
 const getOne = async (model, req, res) => {
   const { id } = req.params;
   const dataFound = await model.findById(id);
-  if (!dataFound) throw new ServerError(ErrorTypes.notFound);
+  if (!dataFound) throw new NotFoundError(ErrorMessages.dataNotFound);
 
   res.status(200).json({ success: true, data: dataFound });
 };
@@ -17,7 +17,7 @@ const getAll = async (model, req, res) => {
 const deleteOne = async (model, req, res) => {
   const { id } = req.params;
   const dataDeleted = await model.findByIdAndDelete(id);
-  if (!dataDeleted) throw new ServerError(ErrorTypes.notFound);
+  if (!dataDeleted) throw new NotFoundError(ErrorMessages.dataNotFound);
 
   res.status(200).json({ success: true, data: dataDeleted });
 };
@@ -32,7 +32,7 @@ const updateOne = async (model, req, res) => {
   const dataUpdated = await model.findByIdAndUpdate(id, req.body, {
     new: true
   });
-  if (!dataUpdated) throw new ServerError(ErrorTypes.notFound);
+  if (!dataUpdated) throw new NotFoundError(ErrorMessages.dataNotFound);
 
   res.status(200).json({ success: true, data: dataUpdated });
 };

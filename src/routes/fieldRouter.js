@@ -1,6 +1,6 @@
 const express = require('express');
 const fieldController = require('../controllers/fieldController');
-const { callbackErrorHandler } = require('../middleware/errorHandler');
+const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
 const { validateId, validateField } = require('../middleware/requestValidationHandler');
 
 const router = express.Router();

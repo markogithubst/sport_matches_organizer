@@ -3,7 +3,7 @@ const fs = require('fs');
 const morgan = require('morgan');
 const path = require('path');
 
-const { errorHandler } = require('./middleware/errorHandler');
+const { errorMiddleware } = require('./middleware/errorMiddlewareHandler');
 const routes = require('./routes/mainRouter');
 
 const app = express();
@@ -11,8 +11,8 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'),
 
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(express.json());
-app.use(errorHandler);
 
 app.use('/', routes);
+app.use(errorMiddleware);
 
 module.exports = app;

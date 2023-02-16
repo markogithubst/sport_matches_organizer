@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 const express = require('express');
 const resultController = require('../controllers/resultController');
-const { callbackErrorHandler } = require('../middleware/errorHandler');
+const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
 const { validateId, validateResult } = require('../middleware/requestValidationHandler');
 const { authenticateToken, validateTokenAdmin } = require('../middleware/authorizationHandler');
 
