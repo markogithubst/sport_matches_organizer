@@ -12,5 +12,5 @@ router.post('/', validateReservation, authenticateToken, validateTokenAdmin, cal
 router.get('/:id', validateId, callbackErrorHandler(reservationController.viewSingleReservation));
 router.put('/:id', validateId, validateReservation, authenticateToken, validateTokenAdmin, callbackErrorHandler(reservationController.updateReservation));
 router.delete('/:id', validateId, authenticateToken, validateTokenAdmin, callbackErrorHandler(reservationController.deleteReservation));
-
+router.put('/cancel/:id', validateId, authenticateToken, validateTokenAdmin, callbackErrorHandler(reservationController.cancelReservation));
 module.exports = router;

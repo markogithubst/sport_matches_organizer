@@ -1,5 +1,7 @@
 const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudController');
 const Reservation = require('../models/Reservation');
+const { ErrorMessages } = require('../errors/errorMessages');
+const { NotFoundError } = require('../errors/Errors');
 
 const createReservation = async (req, res) => {
   await createOne(Reservation, req, res);
@@ -21,10 +23,23 @@ const deleteReservation = async (req, res) => {
   await deleteOne(Reservation, req, res);
 };
 
+const cancelReservation = async (req, res) => {
+  const { id } = req.params;
+
+  const dataUpdated = await Reservation.findByIdAndUpdate(id, { isCanceled: true }, {
+    new: true
+  });
+
+  if (!dataUpdated) throw new NotFoundError(ErrorMessages.dataNotFound);
+
+  res.status(200).json({ success: true, data: dataUpdated });
+};
+
 module.exports = {
   createReservation,
   viewAllReservations,
   viewSingleReservation,
   updateReservation,
-  deleteReservation
+  deleteReservation,
+  cancelReservation
 };
