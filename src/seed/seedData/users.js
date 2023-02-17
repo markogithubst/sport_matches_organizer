@@ -9,7 +9,7 @@ module.exports = [
     surname: 'Bogunovic',
     email: 'jboguno@gmail.com',
     password: 'password',
-    phone: '0993404575',
+    phone: '+385993404575',
     role: 'USER'
   },
   {
@@ -19,7 +19,7 @@ module.exports = [
     surname: 'Vukusic',
     email: 'mvukusic@gmail.com',
     password: 'password',
-    phone: '0993404576',
+    phone: '+385993404576',
     role: 'USER'
   },
   {
@@ -39,7 +39,7 @@ module.exports = [
     surname: 'Kalebic',
     email: 'fkalebic@gmail.com',
     password: 'password',
-    phone: '0993404544',
+    phone: '+385993404544',
     role: 'USER'
   },
   {
@@ -49,7 +49,7 @@ module.exports = [
     surname: 'Begovic',
     email: 'lbegovic@gmail.com',
     password: 'password',
-    phone: '0993411576',
+    phone: '+385993411576',
     role: 'USER'
   },
   {
@@ -58,6 +58,16 @@ module.exports = [
     name: 'Karlo',
     surname: 'Dujmic',
     email: 'kdujemic@gmail.com',
+    password: 'password',
+    phone: '+1993231457',
+    role: 'USER'
+  },
+  {
+    _id: new ObjectId('63eb788d339bb827e5fe77d5'),
+    username: 'admin',
+    name: 'admin',
+    surname: 'admin',
+    email: 'admin@gmail.com',
     password: 'password',
     phone: '+1993231457',
     role: 'USER'
