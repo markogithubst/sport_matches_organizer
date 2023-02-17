@@ -9,6 +9,9 @@ const router = express.Router();
 
 router.get('/', callbackErrorHandler(reservationController.viewAllReservations));
 router.post('/', validateReservation, authenticateToken, validateTokenAdmin, callbackErrorHandler(reservationController.createReservation));
+router.get('/filter-by-date', callbackErrorHandler(reservationController.filterByDate));
+router.get('/filter-by-hour', callbackErrorHandler(reservationController.filterByHour));
+router.get('/filter-by-day-of-week', callbackErrorHandler(reservationController.filterByDayOfWeek));
 router.get('/:id', validateId, callbackErrorHandler(reservationController.viewSingleReservation));
 router.put('/:id', validateId, validateReservation, authenticateToken, validateTokenAdmin, callbackErrorHandler(reservationController.updateReservation));
 router.put('/:id/add-player/:playerId', callbackErrorHandler(reservationController.addPlayerToReservation));

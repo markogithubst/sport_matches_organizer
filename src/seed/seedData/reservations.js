@@ -8,6 +8,7 @@ module.exports = [
     time: '2023-03-25T12:00:00Z',
     isCanceled: false,
     isFilled: true,
+    time: '2023-03-25T12:00:00Z',
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
       new ObjectId('63eb6abf9792291234cd6a76'),
@@ -24,6 +25,7 @@ module.exports = [
     time: '2023-03-25T12:00:00Z',
     isCanceled: false,
     isFilled: true,
+    time: '2023-03-25T12:00:00Z',
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
       new ObjectId('63eb788d339bb827e5fe77d3'),

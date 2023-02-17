@@ -49,6 +49,56 @@ const addPlayerToReservation = async (req, res) => {
   res.json('success');
 };
 
+const filterByDate = async (req, res) => {
+  const { date } = req.query;
+  const startDateTime = new Date(`${date}T00:00:00.000+00:00`);
+  const endDateTime = new Date(`${date}T23:59:00.000+00:00`);
+
+  const reservationsByDate = await Reservation.find({
+    time: {
+      $gte: startDateTime,
+      $lte: endDateTime
+    }
+  });
+
+  if (reservationsByDate.length === 0) throw new NotFoundError(ErrorMessages.dataNotFound);
+
+  res.status(200).json({
+    message: 'Reservations fetched successfully',
+    reservationsByDate
+  });
+};
+
+const filterByHour = async (req, res) => {
+  const { hour } = req.query;
+
+  const reservationsByHour = await Reservation.find({
+    $expr: { $eq: [{ $hour: '$time' }, hour] }
+  });
+
+  if (reservationsByHour.length === 0) throw new NotFoundError(ErrorMessages.dataNotFound);
+  res.status(200).json({
+    message: 'Reservations fetched successfully',
+    reservationsByHour
+  });
+};
+
+const filterByDayOfWeek = async (req, res) => {
+  const { dayOfWeek } = req.query;
+
+  const reservationsByDayOfWeek = await Reservation.find({
+    $expr: {
+      $eq: [{ $dayOfWeek: '$time' }, parseInt(dayOfWeek)]
+    }
+  });
+
+  if (reservationsByDayOfWeek.length === 0) throw new NotFoundError(ErrorMessages.dataNotFound);
+  res.status(200).json({
+    message: 'Reservations fetched successfully',
+    reservationsByDayOfWeek
+  });
+};
+
 module.exports = {
   createReservation,
   viewAllReservations,
@@ -56,5 +106,8 @@ module.exports = {
   updateReservation,
   deleteReservation,
   cancelReservation,
-  addPlayerToReservation
+  addPlayerToReservation,
+  filterByDate,
+  filterByHour,
+  filterByDayOfWeek
 };
