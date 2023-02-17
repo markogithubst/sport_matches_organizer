@@ -11,8 +11,14 @@ const teamSchema = mongoose.Schema({
   }
 }, {
   timestamps: true,
-  strict: true
-
+  strict: true,
+  versionKey: false,
+  toJSON: {
+    transform: function (doc, ret) {
+      delete ret.createdAt;
+      delete ret.updatedAt;
+    }
+  }
 });
 
 module.exports = mongoose.model('Team', teamSchema);

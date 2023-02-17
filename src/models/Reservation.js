@@ -50,8 +50,16 @@ const reservationSchema = mongoose.Schema({
 },
 {
   timestamps: true,
-  strict: true
+  strict: true,
+  versionKey: false,
+  toJSON: {
+    transform: function (doc, ret) {
+      delete ret.createdAt;
+      delete ret.updatedAt;
+    }
+  }
 });
+
 reservationSchema.method('createMatch', async function () {
   const blackTeam = new Team({ color: 'black' });
   const whiteTeam = new Team({ color: 'white' });

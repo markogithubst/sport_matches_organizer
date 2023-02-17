@@ -55,7 +55,15 @@ const userSchema = mongoose.Schema({
 
 }, {
   timestamps: true,
-  strict: true
+  strict: true,
+  versionKey: false,
+  toJSON: {
+    transform: function (doc, ret) {
+      delete ret.password;
+      delete ret.createdAt;
+      delete ret.updatedAt;
+    }
+  }
 });
 
 userSchema.pre('save', async function (next) {

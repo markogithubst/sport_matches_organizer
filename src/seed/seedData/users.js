@@ -69,7 +69,7 @@ module.exports = [
     surname: 'admin',
     email: 'admin@gmail.com',
     password: 'password',
-    phone: '+1993231457',
+    phone: '+1993231456',
     role: 'USER'
   }
 ];

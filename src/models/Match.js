@@ -20,7 +20,14 @@ const matchSchema = mongoose.Schema({
   }
 }, {
   timestamps: true,
-  strict: true
+  strict: true,
+  versionKey: false,
+  toJSON: {
+    transform: function (doc, ret) {
+      delete ret.createdAt;
+      delete ret.updatedAt;
+    }
+  }
 });
 
 matchSchema.plugin(require('mongoose-autopopulate'));
