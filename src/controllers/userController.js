@@ -1,7 +1,7 @@
 const { getOne, createOne, getAll, deleteOne, updateOne } = require('./crudController');
 const User = require('../models/User');
 const Reservation = require('../models/Reservation');
-const { ErrorMessages } = require('../errors/errorMessages');
+const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
 
 const registerUser = async (req, res) => {

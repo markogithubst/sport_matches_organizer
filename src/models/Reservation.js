@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const { ValidationError } = require('../errors/Errors');
+const { ErrorMessages } = require('../errors/ErrorMessages');
+
 const Team = require('./Team');
 const Match = require('./Match');
 
@@ -73,7 +76,7 @@ reservationSchema.method('createMatch', async function () {
 
 reservationSchema.pre('updateOne', async function (next) {
   const doc = await this.model.findOne(this.getQuery());
-  if (doc.num === 6) throw new Error('Can only contain 6 players');
+  if (doc.num === 6) throw new ValidationError(ErrorMessages.playerLimit);
 });
 
 reservationSchema.post('updateOne', async function (doc) {

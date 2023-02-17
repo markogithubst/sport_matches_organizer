@@ -1,4 +1,4 @@
-const { ErrorMessages } = require('../errors/errorMessages');
+const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
 
 const getOne = async (model, req, res) => {

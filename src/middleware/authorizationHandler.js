@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
-const { ErrorMessages } = require('../errors/errorMessages');
+const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError, AuthenticationError, AuthorizationError } = require('../errors/Errors');
 
 const isLoggedIn = callbackErrorHandler(async (req, res, next) => {
