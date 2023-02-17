@@ -1,4 +1,4 @@
-const { ValidationError, NotFoundError, AuthorizationError } = require('../errors/Errors');
+const { ValidationError, NotFoundError, AuthorizationError, AuthenticationError } = require('../errors/Errors');
 
 const callbackErrorHandler = (callback) => {
   return (req, res, next) => callback(req, res, next).catch(next);
@@ -6,6 +6,8 @@ const callbackErrorHandler = (callback) => {
 
 const errorMiddleware = async (err, req, res, next) => {
   if (err instanceof ValidationError) {
+    res.status(err.statusCode).json({ message: err.message });
+  } else if (err instanceof AuthenticationError) {
     res.status(err.statusCode).json({ message: err.message });
   } else if (err instanceof AuthorizationError) {
     res.status(err.statusCode).json({ message: err.message });

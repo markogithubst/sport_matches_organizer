@@ -14,6 +14,14 @@ class AuthorizationError extends Error {
   }
 }
 
+class AuthenticationError extends Error {
+  constructor (message) {
+    super(message);
+    this.name = 'AuthenticationError';
+    this.statusCode = 403;
+  }
+}
+
 class NotFoundError extends Error {
   constructor (message) {
     super(message);
@@ -24,4 +32,5 @@ class NotFoundError extends Error {
 
 module.exports.ValidationError = ValidationError;
 module.exports.AuthorizationError = AuthorizationError;
+module.exports.AuthenticationError = AuthenticationError;
 module.exports.NotFoundError = NotFoundError;

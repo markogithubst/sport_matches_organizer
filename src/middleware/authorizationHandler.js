@@ -1,40 +1,50 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
+const { ErrorMessages } = require('../errors/errorMessages');
+const { NotFoundError, AuthenticationError, AuthorizationError } = require('../errors/Errors');
 
-const authenticateToken = async (req, res, next) => {
+const isLoggedIn = callbackErrorHandler(async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) {
-    return res.status(403).json('You must be logged in to view this page');
-  }
-  try {
-    const decoded = await jwt.verify(token, `${process.env.JWT_SECRET}`);
-    req.user = decoded;
+  if (!token) throw new AuthenticationError(ErrorMessages.noLoggedIn);
 
-    const user = await User.findOne({ username: req.user.username });
-    if (!user) {
-      return res.status(404).json('User not found');
-    }
-    if (user.role === 'ADMIN') {
-      req.isAdmin = true;
-    }
-    if (user.role === 'USER') {
-      req.isUser = true;
-    }
-    return next();
-  } catch (err) {
-    return res.status(401).json('Token is invalid');
-  }
-};
+  const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
+  req.user = decoded;
 
-const validateTokenAdmin = async (req, res, next) => {
-  return req.isAdmin !== true
-    ? res.status(401).json({ message: 'ADMIN role required for this action' })
-    : next();
-};
+  const user = await User.findOne({ id: req.user._id });
+  if (!user) throw new NotFoundError(ErrorMessages.userNotFound);
+
+  if (user.role === 'ADMIN') req.isAdmin = true;
+
+  if (user.role === 'USER') req.isUser = true;
+
+  return next();
+});
+
+const isAdmin = callbackErrorHandler(async (req, res, next) => {
+  if (!res.isAdmin) throw new AuthorizationError(ErrorMessages.unauthorized);
+
+  next();
+});
+
+const isProfileOwner = callbackErrorHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const user = await User.findOne({ id });
+
+  if (!user) {
+    throw new NotFoundError(ErrorMessages.userNotFound);
+  } else if (id !== req.user.id) {
+    throw new AuthorizationError(ErrorMessages.unauthorized);
+  }
+
+  return next();
+});
 
 module.exports = {
-  authenticateToken,
-  validateTokenAdmin
+  isLoggedIn,
+  isAdmin,
+  isProfileOwner
 };
