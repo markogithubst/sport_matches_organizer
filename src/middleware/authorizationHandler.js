@@ -12,19 +12,14 @@ const isLoggedIn = callbackErrorHandler(async (req, res, next) => {
 
   const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
   req.user = decoded;
-
   const user = await User.findOne({ id: req.user._id });
   if (!user) throw new NotFoundError(ErrorMessages.userNotFound);
-
-  if (user.role === 'ADMIN') req.isAdmin = true;
-
-  if (user.role === 'USER') req.isUser = true;
 
   return next();
 });
 
 const isAdmin = callbackErrorHandler(async (req, res, next) => {
-  if (!res.isAdmin) throw new AuthorizationError(ErrorMessages.unauthorized);
+  if (req.user.role !== 'ADMIN') throw new AuthorizationError(ErrorMessages.unauthorized);
 
   next();
 });

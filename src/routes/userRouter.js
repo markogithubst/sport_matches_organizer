@@ -8,7 +8,7 @@ const { isProfileOwner, isLoggedIn, isAdmin } = require('../middleware/authoriza
 const router = express.Router();
 
 router.get('/', callbackErrorHandler(userController.viewAllUsers));
-router.get('/:id/history', isLoggedIn, isProfileOwner, callbackErrorHandler(userController.viewHistory));
+router.get('/:id/history', validateId, isLoggedIn, isProfileOwner, callbackErrorHandler(userController.viewHistory));
 router.post('/', validateUser, callbackErrorHandler(userController.registerUser));
 router.get('/:id', validateId, callbackErrorHandler(userController.viewSingleUser));
 router.put('/:id', validateId, validateUser, callbackErrorHandler(userController.updateUser));

@@ -14,7 +14,8 @@ router.get('/filter-by-hour', callbackErrorHandler(reservationController.filterB
 router.get('/filter-by-day-of-week', callbackErrorHandler(reservationController.filterByDayOfWeek));
 router.get('/:id', validateId, callbackErrorHandler(reservationController.viewSingleReservation));
 router.put('/:id', validateId, validateReservation, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.updateReservation));
-router.put('/:id/add-player/:playerId', callbackErrorHandler(reservationController.addPlayerToReservation));
+router.put('/:id/add-player/:playerId', isLoggedIn, callbackErrorHandler(reservationController.addPlayerToReservation));
+router.put('/:id/player-withraw/:playerId', isLoggedIn, callbackErrorHandler(reservationController.removePlayerFromReservation));
 router.delete('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.deleteReservation));
 router.put('/cancel/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.cancelReservation));
 module.exports = router;

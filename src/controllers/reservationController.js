@@ -2,7 +2,7 @@ const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudContr
 const mongoose = require('mongoose');
 const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/errorMessages');
-const { NotFoundError } = require('../errors/Errors');
+const { NotFoundError, AuthorizationError } = require('../errors/Errors');
 
 const createReservation = async (req, res) => {
   await createOne(Reservation, req, res);
@@ -46,7 +46,22 @@ const addPlayerToReservation = async (req, res) => {
         $inc: { num: 1 }
       });
 
-  res.json('success');
+  res.status(200).json({ success: true });
+};
+
+const removePlayerFromReservation = async (req, res) => {
+  const player = req.params.playerId;
+  if (player !== req.user.id) {
+    throw new AuthorizationError(ErrorMessages.unauthorized);
+  }
+  await Reservation
+    .updateOne({ _id: req.params.id },
+      {
+        $pull: { registeredPlayers: mongoose.Types.ObjectId(player) },
+        $inc: { num: -1 }
+      });
+
+  res.status(200).json({ success: true });
 };
 
 const filterByDate = async (req, res) => {
@@ -109,5 +124,6 @@ module.exports = {
   addPlayerToReservation,
   filterByDate,
   filterByHour,
-  filterByDayOfWeek
+  filterByDayOfWeek,
+  removePlayerFromReservation
 };
