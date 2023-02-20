@@ -1,8 +1,17 @@
-const Joi = require('joi');
+const JoiBase = require('joi');
+const JoiDate = require('@joi/date');
+
+const Joi = JoiBase.extend(JoiDate);
 
 const idSchema = Joi.object({
   id: Joi.string().min(24).max(24).hex().required()
 });
+
+const querySchema = Joi.object({
+  hour: Joi.number().min(0).max(24),
+  dayOfWeek: Joi.number().min(1).max(7),
+  date: Joi.date().format('YYYY-MM-DD')
+}).options({ abortEarly: false });
 
 const fieldSchema = Joi.object({
   name: Joi.string().min(3).max(50).required(),
@@ -49,6 +58,7 @@ const userSchema = Joi.object({
 
 module.exports = {
   idSchema,
+  querySchema,
   fieldSchema,
   matchSchema,
   reservationSchema,

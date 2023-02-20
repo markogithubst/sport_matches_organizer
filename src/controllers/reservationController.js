@@ -2,7 +2,7 @@ const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudContr
 const mongoose = require('mongoose');
 const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/errorMessages');
-const { NotFoundError, AuthorizationError } = require('../errors/Errors');
+const { NotFoundError, AuthorizationError, ValidationError } = require('../errors/Errors');
 
 const createReservation = async (req, res) => {
   await createOne(Reservation, req, res);
@@ -64,54 +64,32 @@ const removePlayerFromReservation = async (req, res) => {
   res.status(200).json({ success: true });
 };
 
-const filterByDate = async (req, res) => {
-  const { date } = req.query;
+const filterReservation = async (req, res) => {
+  const { hour, dayOfWeek, date } = req.query;
+  const exclude = '-registeredPlayers -num';
   const startDateTime = new Date(`${date}T00:00:00.000+00:00`);
   const endDateTime = new Date(`${date}T23:59:00.000+00:00`);
 
-  const reservationsByDate = await Reservation.find({
-    time: {
-      $gte: startDateTime,
-      $lte: endDateTime
-    }
-  });
+  let filteredReservation;
 
-  if (reservationsByDate.length === 0) throw new NotFoundError(ErrorMessages.dataNotFound);
+  if ((hour && hour !== '') || (dayOfWeek && dayOfWeek !== '')) {
+    filteredReservation = await Reservation.find({
+      $or: [
+        { $expr: { $eq: [{ $hour: '$time' }, hour] } },
+        { $expr: { $eq: [{ $dayOfWeek: '$time' }, parseInt(dayOfWeek)] } }
+      ]
+    }, exclude);
+  } else if (date && date !== '') {
+    filteredReservation = await Reservation.find({
+      time: { $gte: startDateTime, $lte: endDateTime }
+    }, exclude);
+  } else {
+    throw new ValidationError(ErrorMessages.invalidQuery);
+  }
 
-  res.status(200).json({
-    message: 'Reservations fetched successfully',
-    reservationsByDate
-  });
-};
+  if (!filteredReservation.length) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-const filterByHour = async (req, res) => {
-  const { hour } = req.query;
-
-  const reservationsByHour = await Reservation.find({
-    $expr: { $eq: [{ $hour: '$time' }, hour] }
-  });
-
-  if (reservationsByHour.length === 0) throw new NotFoundError(ErrorMessages.dataNotFound);
-  res.status(200).json({
-    message: 'Reservations fetched successfully',
-    reservationsByHour
-  });
-};
-
-const filterByDayOfWeek = async (req, res) => {
-  const { dayOfWeek } = req.query;
-
-  const reservationsByDayOfWeek = await Reservation.find({
-    $expr: {
-      $eq: [{ $dayOfWeek: '$time' }, parseInt(dayOfWeek)]
-    }
-  });
-
-  if (reservationsByDayOfWeek.length === 0) throw new NotFoundError(ErrorMessages.dataNotFound);
-  res.status(200).json({
-    message: 'Reservations fetched successfully',
-    reservationsByDayOfWeek
-  });
+  res.status(200).json({ filteredReservation });
 };
 
 module.exports = {
@@ -122,8 +100,6 @@ module.exports = {
   deleteReservation,
   cancelReservation,
   addPlayerToReservation,
-  filterByDate,
-  filterByHour,
-  filterByDayOfWeek,
-  removePlayerFromReservation
+  removePlayerFromReservation,
+  filterReservation
 };

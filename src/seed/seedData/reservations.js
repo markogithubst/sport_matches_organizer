@@ -5,7 +5,7 @@ module.exports = [
   {
     field: new ObjectId('63eb76f1c6a15537f1bbb59f'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454c'),
-    time: '2023-03-25T12:00:00Z',
+    time: '2023-03-27T12:00:00Z',
     isCanceled: false,
     isFilled: true,
     registeredPlayers: [
@@ -21,7 +21,7 @@ module.exports = [
   {
     field: new ObjectId('63eb76f1c6a15537f1bbb59f'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454d'),
-    time: '2023-03-25T12:00:00Z',
+    time: '2023-03-25T13:00:00Z',
     isCanceled: false,
     isFilled: true,
     registeredPlayers: [

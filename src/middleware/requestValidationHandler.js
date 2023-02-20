@@ -1,11 +1,19 @@
 // eslint-disable-next-line max-len
-const { idSchema, fieldSchema, matchSchema, reservationSchema, resultSchema, teamSchema, userSchema } = require('../schemas/schemas');
+const { idSchema, fieldSchema, matchSchema, reservationSchema, resultSchema, teamSchema, userSchema, querySchema } = require('../schemas/schemas');
 const { validateSchema } = require('../schemas/validateSchema');
 
 const validateId = (req, res, next) => {
   const { error } = idSchema.validate(req.params);
   if (error) {
     return res.status(400).json({ message: error.details[0].message });
+  }
+  next();
+};
+
+const validateQuery = (req, res, next) => {
+  const { error } = querySchema.validate(req.query);
+  if (error) {
+    return res.status(400).json({ message: error.message || error.details.map(err => err.message) });
   }
   next();
 };
@@ -29,5 +37,6 @@ module.exports = {
   validateReservation,
   validateResult,
   validateTeam,
-  validateUser
+  validateUser,
+  validateQuery
 };
