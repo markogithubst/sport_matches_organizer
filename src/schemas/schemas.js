@@ -7,6 +7,11 @@ const idSchema = Joi.object({
   id: Joi.string().min(24).max(24).hex().required()
 });
 
+const doubleIdSchema = Joi.object({
+  id: Joi.string().min(24).max(24).hex().required(),
+  playerId: Joi.string().min(24).max(24).hex().required()
+});
+
 const querySchema = Joi.object({
   hour: Joi.number().min(0).max(24),
   dayOfWeek: Joi.number().min(1).max(7),
@@ -64,5 +69,6 @@ module.exports = {
   reservationSchema,
   resultSchema,
   teamSchema,
-  userSchema
+  userSchema,
+  doubleIdSchema
 };

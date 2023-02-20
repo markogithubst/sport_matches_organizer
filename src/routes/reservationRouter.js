@@ -2,7 +2,7 @@
 const express = require('express');
 const reservationController = require('../controllers/reservationController');
 const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
-const { validateId, validateQuery, validateReservation } = require('../middleware/requestValidationHandler');
+const { validateId, validateDoubleId, validateQuery, validateReservation } = require('../middleware/requestValidationHandler');
 const { isLoggedIn, isAdmin } = require('../middleware/authorizationHandler');
 
 const router = express.Router();
@@ -12,8 +12,8 @@ router.post('/', isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(
 router.get('/filter', validateQuery, callbackErrorHandler(reservationController.filterReservation));
 router.get('/:id', validateId, callbackErrorHandler(reservationController.viewSingleReservation));
 router.put('/:id', validateId, isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.updateReservation));
-router.put('/:id/add-player/:playerId', validateId, isLoggedIn, callbackErrorHandler(reservationController.addPlayerToReservation));
-router.put('/:id/player-withraw/:playerId', validateId, isLoggedIn, callbackErrorHandler(reservationController.removePlayerFromReservation));
+router.put('/:id/add-player/:playerId', validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.addPlayerToReservation));
+router.put('/:id/player-withraw/:playerId', validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.removePlayerFromReservation));
 router.delete('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.deleteReservation));
 router.put('/cancel/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.cancelReservation));
 module.exports = router;
