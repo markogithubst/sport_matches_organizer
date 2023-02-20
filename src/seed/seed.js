@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
 const Team = require('../models/Team');
@@ -22,6 +23,17 @@ mongoose.connect('mongodb://root:root@localhost:27017/')
   .catch(err => console.log(err.message));
 
 const seedDB = async () => {
+  const userWithHashPasswordPromiseArray = users.map(
+    async (user) => {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(user.password, salt);
+      user.password = hashedPassword;
+      return user;
+    }
+  );
+
+  const userWithHashedPasswordArray = await Promise.all(userWithHashPasswordPromiseArray);
+
   await User.deleteMany();
   await Team.deleteMany();
   await Match.deleteMany();
@@ -29,7 +41,7 @@ const seedDB = async () => {
   await Result.deleteMany();
   await Reservation.deleteMany();
 
-  await User.insertMany(users);
+  await User.insertMany(userWithHashedPasswordArray);
   await Team.insertMany(teams);
   await Field.insertMany(fields);
   await Match.insertMany(matches);

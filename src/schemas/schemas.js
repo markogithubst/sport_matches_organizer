@@ -54,7 +54,7 @@ const userSchema = Joi.object({
   name: Joi.string().min(3).max(25).required(),
   surname: Joi.string().min(3).max(25).required(),
   email: Joi.string().min(3).max(50).email({ minDomainSegments: 2 }).required(),
-  password: Joi.string().min(8).max(50).required(),
+  password: Joi.string().min(8).max(20).required(),
   phone: Joi.string().regex(/^\+(?:\d\s?){6,14}\d$/).required()
     .error(new Error('Please enter a phone number in the following format: "+385951234122"')),
   role: Joi.string().valid('ADMIN', 'USER').required()
