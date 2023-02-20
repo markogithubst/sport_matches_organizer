@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "9f6e12eb-124d-4380-ab17-4969fc6b6ebc",
+		"_postman_id": "6f03d1bc-b5d5-43a5-85a8-61ca7c645e75",
 		"name": "SPORTS MATCH ORGANIZER",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24881187"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -26,7 +25,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"john.fhbfgh@example.com\",\n  \"password\": \"mysevfcret12\"\n}",
+							"raw": "{\n  \"email\": \"mate@example.com\",\n  \"password\": \"admin123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,14 +101,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/field/63eb76f1c6a15537f1bbb5a0",
+							"raw": "localhost:{{port}}/field/1234",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"field",
-								"63eb76f1c6a15537f1bbb5a0"
+								"1234"
 							]
 						}
 					},
@@ -286,6 +285,16 @@
 				{
 					"name": "RESULT",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWU0YjY4MzE2NmU4MDA4MTZhMTI1MCIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjc2NjIxNzc5LCJleHAiOjE2NzY3MDgxNzl9.EGiB7MXHW-3o3NDQleJ_-fD566AcqB9QP0BQ1LZW0YI",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -350,11 +359,21 @@
 				{
 					"name": "RESULT",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjc2NTQ1MzE0LCJleHAiOjE2NzY2MzE3MTR9.sH6rXJFh_ajkBWYD1iTdnon4scLZ2sMK2ZBRd69F2l8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"whiteTeamScore\": 5,\n  \"blackTeamScore\": 5\n}",
+							"raw": "{\n  \"whiteTeamScore\": 6,\n  \"blackTeamScore\": 12\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -522,7 +541,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username\": \"jon3xxdc4\",\n  \"name\": \"Jvdcfn\",\n  \"surname\": \"fvfdcvvfddfv\",\n  \"email\": \"john.fhbfgh@example.com\",\n  \"password\": \"mysevfcret12\",\n  \"phone\": \"0983366655\",\n  \"role\": \"USER\"\n}",
+							"raw": "{\n    \"username\": \"jops12\",\n    \"name\": \"Josip\",\n    \"surname\": \"Bogunovic\",\n    \"password\": \"password\",\n    \"email\": \"jboguno@gmail.com\",\n    \"phone\": \"+385993404575\",\n    \"role\": \"USER\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -566,14 +585,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/user/63eb6bf303ffb651ea1b3ba1",
+							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a75",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"user",
-								"63eb6bf303ffb651ea1b3ba1"
+								"63eb6abf9792291234cd6a75"
 							]
 						}
 					},
@@ -625,6 +644,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "HISTORY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWU0YjY4MzE2NmU4MDA4MTZhMTI1MCIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjc2NTYxMjc0LCJleHAiOjE2NzY2NDc2NzR9.YfJv8F7LaG3zjyxPYgB1_4Yc4HbkGGRcrTnvZGmKaLM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a80/history",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"63eb6abf9792291234cd6a80",
+								"history"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -638,7 +687,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"field\": \"63eb76f1c6a15537f1bbb59f\",\n  \"match\": \"63eb7f4a8bda2a035ce6454c\",\n  \"isCanceled\": false,\n  \"isFilled\": true,\n  \"registeredPlayers\": [\n    \"63eb6abf9792291234cd6a75\",\n    \"63eb6abf9792291234cd6a76\",\n    \"63eb6abf9792291234cd6a77\",\n    \"63eb788d339bb827e5fe77d2\",\n    \"63eb788d339bb827e5fe77d3\",\n    \"63eb788d339bb827e5fe77d4\"\n  ]\n}",
+							"raw": "{\n  \"field\": \"63eb76f1c6a15537f1bbb59f\",\n  \"match\": \"63eb7f4a8bda2a035ce6454c\",\n  \"time\": \"2023-03-28T19:30:00Z\",\n  \"isCanceled\": false,\n  \"isFilled\": false,\n  \"registeredPlayers\": [\n    \"63eb6abf9792291234cd6a75\",\n    \"63eb6abf9792291234cd6a76\",\n    \"63eb6abf9792291234cd6a77\",\n    \"63eb788d339bb827e5fe77d2\"\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -682,14 +731,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/reservation/63eb965b7971904d408d8a46",
+							"raw": "localhost:{{port}}/reservation/63efb0187b276e8b81e316db",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"reservation",
-								"63eb965b7971904d408d8a46"
+								"63efb0187b276e8b81e316db"
 							]
 						}
 					},
@@ -737,6 +786,123 @@
 							"path": [
 								"reservation",
 								"63eba207d710de6a5dedae6d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FILTER BY DATE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{port}}/reservation/filter?date=2023-03-27",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"reservation",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2023-03-27"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FILTER BY DAY OF WEEK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{port}}/reservation/filter?dayOfWeek=7",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"reservation",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "dayOfWeek",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FILTER BY HOUR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{port}}/reservation/filter?hour=13",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"reservation",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "hour",
+									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD PLAYER TO RESERVATION",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{port}}/reservation/63efb0187b276e8b81e316db/add-player/63eb6abf9792291234cd6a75",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"reservation",
+								"63efb0187b276e8b81e316db",
+								"add-player",
+								"63eb6abf9792291234cd6a75"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REMOVE PLAYER FROM RESERVATION",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{port}}/reservation/63efb0187b276e8b81e316db/player-withdraw/63eb6abf9792291234cd6a77",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"reservation",
+								"63efb0187b276e8b81e316db",
+								"player-withdraw",
+								"63eb6abf9792291234cd6a77"
 							]
 						}
 					},
