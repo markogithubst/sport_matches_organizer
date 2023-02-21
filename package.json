@@ -8,6 +8,7 @@
     "test": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.test",
     "production": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.production",
     "seed": "node src/seed/seed.js",
+    "unseed": "node src/seed/unseed.js",
     "jest": "jest --runInBand",
     "tests": "npm run seed && npm run jest"
   },

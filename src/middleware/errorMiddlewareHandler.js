@@ -17,7 +17,7 @@ const errorMiddleware = async (err, req, res, next) => {
     res.status(err.statusCode).json({ message: err.message });
   } else if (err instanceof MongoServerError) {
     const status = mongooseStatusCodes[err.message.split(' ')[0]];
-    res.status(status).json(err.message);
+    res.status(status).json({ message: err.message });
   } else {
     res.status(err.statusCode || 500).json({
       message: err.message || 'Something went wrong!'

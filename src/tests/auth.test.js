@@ -1,14 +1,17 @@
 const request = require('supertest');
 const app = require('../app');
 const mongoose = require('mongoose');
+const { execSync } = require('child_process');
 
 describe('Testing all auth validations', () => {
   beforeAll(async () => {
     mongoose.set('strictQuery', true);
+    execSync('npm run seed');
     await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:27017/`);
   });
 
   afterAll(async () => {
+    execSync('npm run unseed');
     await mongoose.connection.close();
   });
 
