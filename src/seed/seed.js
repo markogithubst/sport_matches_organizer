@@ -15,13 +15,6 @@ const matches = require('./seedData/matches');
 const results = require('./seedData/results');
 const fields = require('./seedData/fields');
 
-mongoose.set('strictQuery', true);
-mongoose.connect('mongodb://root:root@localhost:27017/')
-  .then(() => {
-    console.log('Connected!');
-  })
-  .catch(err => console.log(err.message));
-
 const seedDB = async () => {
   const userWithHashPasswordPromiseArray = users.map(
     async (user) => {
@@ -53,6 +46,18 @@ const seedDB = async () => {
   ]).catch(err => { throw new Error(err); });
 };
 
-seedDB()
-  .then(() => mongoose.connection.close())
-  .catch(err => console.log(err));
+const runSeed = async () => {
+  mongoose.set('strictQuery', true);
+  await mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:27017/`);
+  await seedDB();
+  await mongoose.connection.close();
+};
+module.exports.runSeed = runSeed;
+
+if (require.main === module) {
+  runSeed().then(() => {
+    console.log('done');
+  }).catch((err) => {
+    console.error(err);
+  });
+}

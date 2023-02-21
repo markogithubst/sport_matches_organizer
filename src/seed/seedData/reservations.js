@@ -4,6 +4,7 @@ const ObjectId = mongoose.Types.ObjectId;
 module.exports = [
 
   { // Finished reservation with result
+    _id: ObjectId('63eb7dfe5f58194a262d8222'),
     field: new ObjectId('63eb76f1c6a15537f1bbb59f'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454c'),
     time: '2023-03-27T12:00:00Z',
@@ -21,6 +22,7 @@ module.exports = [
 
   },
   { // Finished reservation with result
+    _id: ObjectId('63eb7dfe5f58194a262d8223'),
     field: new ObjectId('63eb76f1c6a15537f1bbb59f'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454d'),
     time: '2023-03-25T13:00:00Z',
@@ -38,6 +40,7 @@ module.exports = [
 
   },
   { // Reservation to be filled, no match created
+    _id: ObjectId('63eb7dfe5f58194a262d8224'),
     field: new ObjectId('63eb76f1c6a15537f1bbb5a1'),
     time: '2023-03-28T10:00:00Z',
     isCanceled: false,
@@ -52,6 +55,7 @@ module.exports = [
 
   },
   { // Canceled reservation
+    _id: ObjectId('63eb7dfe5f58194a262d8225'),
     field: new ObjectId('63eb76f1c6a15537f1bbb5a0'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454e'),
     time: '2023-03-24T19:00:00Z',
@@ -69,6 +73,7 @@ module.exports = [
 
   },
   { // Reservation which has no result entered
+    _id: ObjectId('63eb7dfe5f58194a262d8226'),
     field: new ObjectId('63eb76f1c6a15537f1bbb5a0'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454f'),
     time: '2023-02-23T12:00:00Z',
