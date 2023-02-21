@@ -34,22 +34,23 @@ const seedDB = async () => {
 
   const userWithHashedPasswordArray = await Promise.all(userWithHashPasswordPromiseArray);
 
-  Promise.all(
+  await Promise.all([
     User.deleteMany(),
     Team.deleteMany(),
     Match.deleteMany(),
     Field.deleteMany(),
     Result.deleteMany(),
-    Reservation.deleteMany()).catch(err => { throw new Error(err); });
+    Reservation.deleteMany()
+  ]).catch(err => { throw new Error(err); });
 
-  Promise.all(
+  await Promise.all([
     User.insertMany(userWithHashedPasswordArray),
     Team.insertMany(teams),
     Field.insertMany(fields),
     Match.insertMany(matches),
     Result.insertMany(results),
-    Reservation.insertMany(reservations))
-    .catch(err => { throw new Error(err); });
+    Reservation.insertMany(reservations)
+  ]).catch(err => { throw new Error(err); });
 };
 
 seedDB()

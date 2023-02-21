@@ -9,7 +9,7 @@ module.exports = [
     surname: 'Bogunovic',
     email: 'jboguno@gmail.com',
     password: 'password',
-    phone: '+385993404575',
+    phone: '+385993222575',
     role: 'USER'
   },
   {
@@ -29,7 +29,7 @@ module.exports = [
     surname: 'Burazin',
     email: 'iburazin@gmail.com',
     password: 'password',
-    phone: '+1993404577',
+    phone: '+1993444577',
     role: 'USER'
   },
   {
@@ -39,7 +39,7 @@ module.exports = [
     surname: 'Kalebic',
     email: 'fkalebic@gmail.com',
     password: 'password',
-    phone: '+385993404544',
+    phone: '+385993555544',
     role: 'USER'
   },
   {
@@ -49,7 +49,7 @@ module.exports = [
     surname: 'Begovic',
     email: 'lbegovic@gmail.com',
     password: 'password',
-    phone: '+385993411576',
+    phone: '+385993666576',
     role: 'USER'
   },
   {
@@ -59,17 +59,17 @@ module.exports = [
     surname: 'Dujmic',
     email: 'kdujemic@gmail.com',
     password: 'password',
-    phone: '+1993231457',
+    phone: '+1993277757',
     role: 'USER'
   },
   {
-    _id: new ObjectId('63eb788d339bb827e5fe77d5'),
+    _id: new ObjectId('63eb788d339bb827e5fe72d5'),
     username: 'user1',
     name: 'user1',
     surname: 'user1',
     email: 'user1@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1993288858',
     role: 'USER'
   },
   {
@@ -79,7 +79,7 @@ module.exports = [
     surname: 'user2',
     email: 'user2@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+199399958',
     role: 'USER'
   },
   {
@@ -89,7 +89,7 @@ module.exports = [
     surname: 'user3',
     email: 'user3@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1993122458',
     role: 'USER'
   },
   {
@@ -99,7 +99,7 @@ module.exports = [
     surname: 'user4',
     email: 'user4@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1996761458',
     role: 'USER'
   },
   {
@@ -109,7 +109,7 @@ module.exports = [
     surname: 'user5',
     email: 'user5@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1998771458',
     role: 'USER'
   },
   {
@@ -119,7 +119,7 @@ module.exports = [
     surname: 'user6',
     email: 'user6@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1993441458',
     role: 'USER'
   },
   {
@@ -139,7 +139,7 @@ module.exports = [
     surname: 'user8',
     email: 'user8@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1996543258',
     role: 'USER'
   },
   {
@@ -149,7 +149,7 @@ module.exports = [
     surname: 'user9',
     email: 'user9@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1993333458',
     role: 'USER'
   },
   {
@@ -159,7 +159,7 @@ module.exports = [
     surname: 'user10',
     email: 'user10@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1997777458',
     role: 'USER'
   },
   {
@@ -169,7 +169,7 @@ module.exports = [
     surname: 'user11',
     email: 'user11@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1993888858',
     role: 'USER'
   },
   {
@@ -179,7 +179,7 @@ module.exports = [
     surname: 'user12',
     email: 'user12@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1993200008',
     role: 'USER'
   },
   {
@@ -189,7 +189,7 @@ module.exports = [
     surname: 'user13',
     email: 'user13@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1922231458',
     role: 'USER'
   },
   {
@@ -199,17 +199,17 @@ module.exports = [
     surname: 'user14',
     email: 'user14@gmail.com',
     password: 'password',
-    phone: '+1993231458',
+    phone: '+1933231458',
     role: 'USER'
   },
   {
-    _id: new ObjectId('63eb788d339bb827e5fe77d5'),
+    _id: new ObjectId('63eb788d339bb827e5fe71d5'),
     username: 'admin',
     name: 'admin',
     surname: 'admin',
     email: 'admin@gmail.com',
     password: 'password',
-    phone: '+1993231456',
+    phone: '+1944231456',
     role: 'USER'
   }
 ];

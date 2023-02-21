@@ -71,7 +71,7 @@ module.exports = [
   { // Reservation which has no result entered
     field: new ObjectId('63eb76f1c6a15537f1bbb5a0'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454f'),
-    time: '2023-02-21T12:00:00Z',
+    time: '2023-02-23T12:00:00Z',
     isCanceled: false,
     isFilled: true,
     isFinished: false,
