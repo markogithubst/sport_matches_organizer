@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
 module.exports = [
-  {
+
+  { // Finished reservation with result
     field: new ObjectId('63eb76f1c6a15537f1bbb59f'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454c'),
     time: '2023-03-27T12:00:00Z',
     isCanceled: false,
     isFilled: true,
+    isFinished: true,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
       new ObjectId('63eb6abf9792291234cd6a76'),
@@ -18,12 +20,13 @@ module.exports = [
     ]
 
   },
-  {
+  { // Finished reservation with result
     field: new ObjectId('63eb76f1c6a15537f1bbb59f'),
     match: new ObjectId('63eb7f4a8bda2a035ce6454d'),
     time: '2023-03-25T13:00:00Z',
     isCanceled: false,
     isFilled: true,
+    isFinished: true,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
       new ObjectId('63eb788d339bb827e5fe77d3'),
@@ -34,12 +37,12 @@ module.exports = [
     ]
 
   },
-  {
+  { // Reservation to be filled, no match created
     field: new ObjectId('63eb76f1c6a15537f1bbb5a1'),
-    match: new ObjectId('63eb7f4a8bda2a035ce6454d'),
     time: '2023-03-28T10:00:00Z',
     isCanceled: false,
     isFilled: false,
+    isFinished: false,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
       new ObjectId('63eb788d339bb827e5fe77d3'),
@@ -48,18 +51,37 @@ module.exports = [
     ]
 
   },
-  {
+  { // Canceled reservation
     field: new ObjectId('63eb76f1c6a15537f1bbb5a0'),
-    match: new ObjectId('63eb7f4a8bda2a035ce6454d'),
+    match: new ObjectId('63eb7f4a8bda2a035ce6454e'),
     time: '2023-03-24T19:00:00Z',
     isCanceled: true,
-    isFilled: false,
+    isFilled: true,
+    isFinished: false,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
       new ObjectId('63eb788d339bb827e5fe77d3'),
       new ObjectId('63eb6abf9792291234cd6a77'),
-      new ObjectId('63eb788d339bb827e5fe77d2')
+      new ObjectId('63eb788d339bb827e5fe77d2'),
+      new ObjectId('63eb788d339bb827e5fe77d5'),
+      new ObjectId('63eb788d339bb827e5fe77d6')
     ]
 
+  },
+  { // Reservation which has no result entered
+    field: new ObjectId('63eb76f1c6a15537f1bbb5a0'),
+    match: new ObjectId('63eb7f4a8bda2a035ce6454f'),
+    time: '2023-02-21T12:00:00Z',
+    isCanceled: false,
+    isFilled: true,
+    isFinished: false,
+    registeredPlayers: [
+      new ObjectId('63eb788d339bb827e5fe77da'),
+      new ObjectId('63eb788d339bb827e5fe77db'),
+      new ObjectId('63eb788d339bb827e5fe77dc'),
+      new ObjectId('63eb788d339bb827e5fe77dd'),
+      new ObjectId('63eb788d339bb827e5fe77de'),
+      new ObjectId('63eb788d339bb827e5fe77df')
+    ]
   }
 ];

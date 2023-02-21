@@ -8,7 +8,8 @@
     "test": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.test",
     "production": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.production",
     "seed": "node src/seed/seed.js",
-    "jest": "jest --runInBand"
+    "jest": "jest --runInBand",
+    "tests": "npm run seed && npm run jest"
   },
   "name": "sport_matches_organizer",
   "description": "API for scheduling cage ball matches",
