@@ -14,5 +14,4 @@ router.get('/:id', validateId, callbackErrorHandler(userController.viewSingleUse
 router.put('/:id', validateId, isLoggedIn, isProfileOwner, validateUser, callbackErrorHandler(userController.updateUser));
 router.delete('/:id', validateId, isLoggedIn, isProfileOwner, callbackErrorHandler(userController.deleteUser));
 
-
 module.exports = router;
