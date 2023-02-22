@@ -10,7 +10,7 @@ class AuthorizationError extends Error {
   constructor (message) {
     super(message);
     this.name = 'AuthorizationError';
-    this.statusCode = 401;
+    this.statusCode = 403;
   }
 }
 
@@ -18,7 +18,7 @@ class AuthenticationError extends Error {
   constructor (message) {
     super(message);
     this.name = 'AuthenticationError';
-    this.statusCode = 403;
+    this.statusCode = 401;
   }
 }
 

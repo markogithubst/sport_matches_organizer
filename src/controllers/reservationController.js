@@ -2,7 +2,7 @@ const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudContr
 const mongoose = require('mongoose');
 const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/errorMessages');
-const { NotFoundError, AuthorizationError, ValidationError } = require('../errors/Errors');
+const { NotFoundError, AuthorizationError } = require('../errors/Errors');
 
 const createReservation = async (req, res) => {
   await createOne(Reservation, req, res);
@@ -70,22 +70,22 @@ const filterReservation = async (req, res) => {
   const startDateTime = new Date(`${date}T00:00:00.000+00:00`);
   const endDateTime = new Date(`${date}T23:59:00.000+00:00`);
 
-  let filteredReservation;
+  const findQuery = {};
+  const andCond = [];
 
-  if ((hour && hour !== '') || (dayOfWeek && dayOfWeek !== '')) {
-    filteredReservation = await Reservation.find({
-      $or: [
-        { $expr: { $eq: [{ $hour: '$time' }, hour] } },
-        { $expr: { $eq: [{ $dayOfWeek: '$time' }, parseInt(dayOfWeek)] } }
-      ]
-    }, exclude);
-  } else if (date && date !== '') {
-    filteredReservation = await Reservation.find({
-      time: { $gte: startDateTime, $lte: endDateTime }
-    }, exclude);
-  } else {
-    throw new ValidationError(ErrorMessages.invalidQuery);
+  if (hour && hour !== '') {
+    andCond.push({ $expr: { $eq: [{ $hour: '$time' }, hour] } });
   }
+  if (dayOfWeek && dayOfWeek !== '') {
+    andCond.push({ $expr: { $eq: [{ $dayOfWeek: '$time' }, parseInt(dayOfWeek)] } });
+  }
+  if (andCond.length > 0) findQuery.$and = andCond;
+
+  if (date && date !== '') {
+    findQuery.time = { $gte: startDateTime, $lte: endDateTime };
+  }
+
+  const filteredReservation = await Reservation.find(findQuery, exclude);
 
   if (!filteredReservation.length) throw new NotFoundError(ErrorMessages.dataNotFound);
 

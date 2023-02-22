@@ -2,6 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 const mongoose = require('mongoose');
 const { postUserData } = require('./test-data/postUserData');
+const { putUserData } = require('./test-data/putUserData');
 const { runSeed } = require('../seed/seed');
 const { runUnseed } = require('../seed/unseed');
 
@@ -50,20 +51,39 @@ describe('Test /user routes', () => {
     test('Should return 200 status for a logged in user with valid credentials', async () => {
       const login = await request(app).post('/login').send({ email: 'iburazin@gmail.com', password: 'password' });
       const token = login.headers.authorization;
-      const response = await request(app)
+
+      const { headers, statusCode } = await request(app)
         .get('/user/63eb6abf9792291234cd6a77/history').set('Authorization', `${token}`);
 
-      expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.statusCode).toBe(200);
+      expect(headers['content-type']).toMatch(/json/);
+      expect(statusCode).toBe(200);
     });
   });
 
   describe('Test POST on /user route', () => {
     describe.each(postUserData)('POST on /user route returns appropriate status code and data format',
-      (user, expectedStatus) => {
+      (userData, expectedStatus) => {
         test(`POST request returns ${expectedStatus} status code`, async () => {
           const { statusCode, headers, body } = await request(app).post('/user')
-            .send(user);
+            .send(userData);
+          expect(headers['content-type']).toMatch(/json/);
+          expect(body).toEqual(expect.any(Object));
+          expect(statusCode).toBe(expectedStatus);
+        });
+      });
+  });
+
+  describe('Test PUT on /user route', () => {
+    describe.each(putUserData)('PUT on /user route returns appropriate status code and data format',
+      (userId, userData, expectedStatus) => {
+        test(`PUT request returns ${expectedStatus} status code`, async () => {
+          const login = await request(app).post('/login').send({ email: 'iburazin@gmail.com', password: 'password' });
+          const token = login.headers.authorization;
+          const { statusCode, headers, body } = await request(app)
+            .put(`/user/${userId}`)
+            .set('Authorization', `${token}`)
+            .send(userData);
+
           expect(headers['content-type']).toMatch(/json/);
           expect(body).toEqual(expect.any(Object));
           expect(statusCode).toBe(expectedStatus);
@@ -73,13 +93,15 @@ describe('Test /user routes', () => {
 
   describe('Test DELETE request for /user route with invalid and valid ID', () => {
     describe.each([
-      ['23eb6abf9792291234cd6a77', 404],
-      ['63eb6abf9792291234cd6a77', 200],
-      ['a', 400],
-      [0, 400]
-    ])('DELETE on /user route returns expected status code', (id, expectedStatus) => {
+      ['22eb6abf9792291234cd6a75', 401, 'iburazin@gmail.com'],
+      ['63eb6abf9792291234cd6a75', 403, 'admin@gmail.com'],
+      ['63eb6abf9792291234cd6a75', 200, 'jboguno@gmail.com'],
+      ['a', 400, 'admin@gmail.com'],
+      [0, 400, 'iburazin@gmail.com']
+    ])('DELETE on /user route returns expected status code', (id, expectedStatus, email) => {
       test(`DELETE request returns ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: `${email}`, password: 'password' });
+
         const token = login.headers.authorization;
         const { statusCode } = await request(app)
           .delete(`/user/${id}`).set('Authorization', `${token}`);
