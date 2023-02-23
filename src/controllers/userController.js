@@ -1,8 +1,9 @@
-const { getOne, createOne, getAll, deleteOne, updateOne } = require('./crudController');
+const { getOne, createOne, getAll, updateOne } = require('./crudController');
 const User = require('../models/User');
 const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
+const { HTTP_STATUS } = require('../utils/httpCodes.js');
 
 const registerUser = async (req, res) => {
   await createOne(User, req, res);
@@ -21,7 +22,24 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  await deleteOne(User, req, res);
+  const { id } = req.params;
+
+  const userToDelete = await User.findByIdAndDelete(id);
+
+  if (userToDelete) {
+    await Reservation.updateMany({
+      registeredPlayers: { $in: [id] }
+    },
+    {
+      $inc: { num: -1 },
+      $set: { isFilled: false },
+      $pull: { registeredPlayers: id }
+    });
+  } else {
+    throw new NotFoundError(ErrorMessages.dataNotFound);
+  }
+
+  res.status(HTTP_STATUS.OK).json({ success: true, message: `${userToDelete.username} deleted!` });
 };
 
 const viewHistory = async (req, res) => {

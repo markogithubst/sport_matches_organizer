@@ -23,8 +23,6 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
   </ol>
@@ -49,8 +47,7 @@ If the match is canceled, the registered users will be notified via email. The s
 
 Once the match has been finished, a user with admin access is expected to input the result of the match. Another cron job is set to check if the results have been added for the matches that are finished. If there are no results, admin users will be notified via email.
 
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<br>
 
 
 
@@ -63,7 +60,7 @@ Once the match has been finished, a user with admin access is expected to input 
 * [MongoDB](https://www.mongodb.com/)
 * [Mongoose](https://www.mongoosejs.com/)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<br>
 
 
 ## Getting Started
