@@ -16,7 +16,7 @@ describe('Test /user routes', () => {
 
   afterAll(async () => {
     await runUnseed();
-    mongoose.connection.close();
+    await mongoose.connection.close();
   });
 
   describe('Test GET requests for /user route', () => {

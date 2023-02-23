@@ -14,7 +14,7 @@ describe('Field', () => {
 
   afterAll(async () => {
     await runUnseed();
-    mongoose.connection.close();
+    await mongoose.connection.close();
   });
   describe('GET', () => {
     test('when id is valid, should respond with 200 and an object containing success and data attributes', async () => {

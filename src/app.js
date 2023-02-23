@@ -10,7 +10,9 @@ const cronSchedule = require('./utils/cronSchedule');
 const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 
-cronSchedule.initScheduledJobs();
+if (process.env.NODE_ENV !== 'test') {
+  cronSchedule.initScheduledJobs();
+}
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(express.json());
 app.use('/', routes);
