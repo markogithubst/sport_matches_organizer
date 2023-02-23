@@ -39,12 +39,14 @@ const cancelReservation = async (req, res) => {
 const addPlayerToReservation = async (req, res) => {
   const player = req.params.playerId;
 
-  await Reservation
-    .updateOne({ _id: req.params.id },
+  const find = await Reservation
+    .findByIdAndUpdate({ _id: req.params.id },
       {
         $addToSet: { registeredPlayers: mongoose.Types.ObjectId(player) },
         $inc: { num: 1 }
       });
+
+  if (!find) throw new NotFoundError(ErrorMessages.dataNotFound);
 
   res.status(200).json({ success: true });
 };
@@ -54,12 +56,14 @@ const removePlayerFromReservation = async (req, res) => {
   if (player !== req.user.id) {
     throw new AuthorizationError(ErrorMessages.unauthorized);
   }
-  await Reservation
-    .updateOne({ _id: req.params.id },
+  const find = await Reservation
+    .findByIdAndUpdate({ _id: req.params.id },
       {
         $pull: { registeredPlayers: mongoose.Types.ObjectId(player) },
         $inc: { num: -1 }
       });
+
+  if (!find) throw new NotFoundError(ErrorMessages.dataNotFound);
 
   res.status(200).json({ success: true });
 };

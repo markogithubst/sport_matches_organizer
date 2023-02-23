@@ -1,3 +1,5 @@
+const { HTTP_STATUS } = require('../../utils/httpCodes');
+
 const putReservationData = [
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
@@ -14,7 +16,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  200],
+  HTTP_STATUS.ACCEPTED],
   ['63eb7dfe5f58194a262d9999', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -30,7 +32,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  404],
+  HTTP_STATUS.NOT_FOUND],
   ['63eb7dfe5f58194a262d8224', {
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-26T17:00:00Z',
@@ -45,7 +47,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -60,7 +62,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: 5,
@@ -76,7 +78,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -92,7 +94,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -108,7 +110,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -126,7 +128,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77df'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224222', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -142,7 +144,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a26224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -158,7 +160,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -174,7 +176,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -190,7 +192,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400],
+  HTTP_STATUS.INVALID],
   ['63eb7dfe5f58194a262d8224', {
     field: '63eb76f1c6a15537f1bbb59f',
     match: '63eb7f4a8bda2a035ce6454c',
@@ -206,7 +208,7 @@ const putReservationData = [
       '63eb788d339bb827e5fe77d4'
     ]
   },
-  400]
+  HTTP_STATUS.INVALID]
 ];
 
 module.exports = putReservationData;

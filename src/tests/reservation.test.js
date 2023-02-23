@@ -6,6 +6,7 @@ const { runSeed } = require('../seed/seed');
 const { runUnseed } = require('../seed/unseed');
 const postReservationData = require('./test-data/postReservationData');
 const putReservationData = require('./test-data/putReservationData');
+const { HTTP_STATUS } = require('../utils/httpCodes');
 
 describe('Testing all RESERVATION routes', () => {
   beforeAll(async () => {
@@ -20,11 +21,11 @@ describe('Testing all RESERVATION routes', () => {
   });
 
   describe('Testing GET RESERVATION route', () => {
-    test('should respond with a 200 status code to GET all reservations', async () => {
+    test(`should respond with a ${HTTP_STATUS.OK} status code to GET all reservations`, async () => {
       const response = await request(app).get('/reservation');
-      expect(response.statusCode).toBe(200);
+      expect(response.statusCode).toBe(HTTP_STATUS.OK);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.body).toEqual(
         {
           success: expect.any(Boolean),
@@ -33,11 +34,11 @@ describe('Testing all RESERVATION routes', () => {
     });
   });
   describe.each([
-    ['63f354c2255f21a3f4605fff', 404],
-    ['63f354c2255f21a3f46xxxxf', 400],
-    [0, 400],
-    ['a', 400]
-  ])('Testing GET ONE RESERVATION route with invalid reservation id, should respond with a 400/404 status code to GET one reservation', (reservationId, expectedStatus) => {
+    ['63f354c2255f21a3f4605fff', HTTP_STATUS.NOT_FOUND],
+    ['63f354c2255f21a3f46xxxxf', HTTP_STATUS.INVALID],
+    [0, HTTP_STATUS.INVALID],
+    ['a', HTTP_STATUS.INVALID]
+  ])(`Testing GET ONE RESERVATION route with invalid reservation id, should respond with a ${HTTP_STATUS.INVALID}/${HTTP_STATUS.NOT_FOUND} status code to GET one reservation`, (reservationId, expectedStatus) => {
     test(`should respond with a ${expectedStatus} status code`, async () => {
       const response = await request(app).get(`/reservation/${reservationId}`);
       expect(response.statusCode).toBe(expectedStatus);
@@ -47,12 +48,12 @@ describe('Testing all RESERVATION routes', () => {
           message: expect.any(String)
         });
     });
-    test('Testing GET ONE RESERVATION route, should respond with a 200 status code to GET one reservation', async () => {
+    test(`Testing GET ONE RESERVATION route, should respond with a ${HTTP_STATUS.OK} status code to GET one reservation`, async () => {
       reservationId = '63eb7dfe5f58194a262d8226';
       const response = await request(app).get(`/reservation/${reservationId}`);
-      expect(response.statusCode).toBe(200);
+      expect(response.statusCode).toBe(HTTP_STATUS.OK);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.body).toEqual(
         {
           success: expect.any(Boolean),
@@ -82,11 +83,11 @@ describe('Testing all RESERVATION routes', () => {
           .set('Authorization', `${token}`)
           .send(newReservation);
         expect(response.statusCode).toBe(expectedStatus);
-        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toEqual(expect.any(Object));
         expect(response.headers['content-type']).toMatch(/json/);
       });
     });
-    test('Testing POST RESERVATION route with USER role. Should respond with a 403 status code to POST reservation', async () => {
+    test(`Testing POST RESERVATION route with USER role. Should respond with a ${HTTP_STATUS.FORBIDDEN} status code to POST reservation`, async () => {
       const login = await request(app).post('/login').send({ email: 'user9@gmail.com', password: 'password' });
       const token = login.headers.authorization;
       const newReservation = {
@@ -106,15 +107,15 @@ describe('Testing all RESERVATION routes', () => {
         .post('/reservation')
         .set('Authorization', `${token}`)
         .send(newReservation);
-      expect(response.statusCode).toBe(403);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.statusCode).toBe(HTTP_STATUS.FORBIDDEN);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.headers['content-type']).toMatch(/json/);
       expect(response.body).toEqual(
         {
           message: expect.any(String)
         });
     });
-    test('Testing POST RESERVATION route, not logged in. Should respond with a 401 status code to POST reservation', async () => {
+    test(`Testing POST RESERVATION route, not logged in. Should respond with a ${HTTP_STATUS.NO_AUTH} status code to POST reservation`, async () => {
       const newReservation = {
         field: '63eb76f1c6a15537f1bbb5a0',
         match: '63eb7f4a8bda2a035ce6454c',
@@ -131,8 +132,8 @@ describe('Testing all RESERVATION routes', () => {
       const response = await request(app)
         .post('/reservation')
         .send(newReservation);
-      expect(response.statusCode).toBe(401);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.statusCode).toBe(HTTP_STATUS.NO_AUTH);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.headers['content-type']).toMatch(/json/);
       expect(response.body).toEqual(
         {
@@ -151,10 +152,10 @@ describe('Testing all RESERVATION routes', () => {
           .set('Authorization', `${token}`)
           .send(updatedReservation);
         expect(response.statusCode).toBe(expectedStatus);
-        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toEqual(expect.any(Object));
         expect(response.headers['content-type']).toMatch(/json/);
       });
-      test('Testing PUT RESERVATION route with USER role. Should respond with a 403 status code to PUT reservation', async () => {
+      test(`Testing PUT RESERVATION route with USER role. Should respond with a ${HTTP_STATUS.FORBIDDEN} status code to PUT reservation`, async () => {
         const login = await request(app).post('/login').send({ email: 'user9@gmail.com', password: 'password' });
         const token = login.headers.authorization;
         const reservationId = '63eb7dfe5f58194a262d8224';
@@ -177,15 +178,15 @@ describe('Testing all RESERVATION routes', () => {
           .put(`/reservation/${reservationId}`)
           .set('Authorization', `${token}`)
           .send(updatedReservation);
-        expect(response.statusCode).toBe(403);
-        expect(response.body).toBeInstanceOf(Object);
+        expect(response.statusCode).toBe(HTTP_STATUS.FORBIDDEN);
+        expect(response.body).toEqual(expect.any(Object));
         expect(response.headers['content-type']).toMatch(/json/);
         expect(response.body).toEqual(
           {
             message: expect.any(String)
           });
       });
-      test('Testing PUT RESERVATION route, not logged in. Should respond with a 401 status code to PUT reservation', async () => {
+      test(`Testing PUT RESERVATION route, not logged in. Should respond with a ${HTTP_STATUS.NO_AUTH} status code to PUT reservation`, async () => {
         const reservationId = '63eb7dfe5f58194a262d8224';
         const updatedReservation = {
           field: '63eb76f1c6a15537f1bbb59f',
@@ -205,8 +206,8 @@ describe('Testing all RESERVATION routes', () => {
         const response = await request(app)
           .put(`/reservation/${reservationId}`)
           .send(updatedReservation);
-        expect(response.statusCode).toBe(401);
-        expect(response.body).toBeInstanceOf(Object);
+        expect(response.statusCode).toBe(HTTP_STATUS.NO_AUTH);
+        expect(response.body).toEqual(expect.any(Object));
         expect(response.headers['content-type']).toMatch(/json/);
       });
     });
@@ -214,10 +215,10 @@ describe('Testing all RESERVATION routes', () => {
 
   describe('Testing DELETE RESERVATION route', () => {
     describe.each([
-      ['63f354c2255f21a3f4605fff', 404],
-      ['63f354c2255f21a3f46xxxxf', 400],
-      [0, 400],
-      ['a', 400]
+      ['63f354c2255f21a3f4605fff', HTTP_STATUS.NOT_FOUND],
+      ['63f354c2255f21a3f46xxxxf', HTTP_STATUS.INVALID],
+      [0, HTTP_STATUS.INVALID],
+      ['a', HTTP_STATUS.INVALID]
     ])('Test DELETE request for /reservation route with invalid and valid ID', (id, expectedStatus) => {
       test(`with invalid ID, should respond with a ${expectedStatus} status code`, async () => {
         const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
@@ -227,23 +228,23 @@ describe('Testing all RESERVATION routes', () => {
           .set('Authorization', `${token}`);
         expect(response.statusCode).toBe(expectedStatus);
         expect(response.headers['content-type']).toMatch(/json/);
-        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toEqual(expect.any(Object));
         expect(response.body).toEqual(
           {
             message: expect.any(String)
           });
       });
     });
-    test('with valid ID, should respond with a 200 status code', async () => {
+    test(`with valid ID, should respond with a ${HTTP_STATUS.OK} status code`, async () => {
       const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
       const token = login.headers.authorization;
       const id = '63eb7dfe5f58194a262d8226';
       const response = await request(app)
         .delete(`/reservation/${id}`)
         .set('Authorization', `${token}`);
-      expect(response.statusCode).toBe(200);
+      expect(response.statusCode).toBe(HTTP_STATUS.OK);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.body).toEqual(
         {
           success: expect.any(Boolean),
@@ -265,11 +266,11 @@ describe('Testing all RESERVATION routes', () => {
 
   describe('Testing CANCEL RESERVATION route', () => {
     describe.each([
-      ['63f354c2255f21a3f4605fff', 404],
-      ['63f354c2255f21a3f46xxxxf', 400],
-      [0, 400],
-      ['a', 400]
-    ])('Testing CANCEL ONE RESERVATION route with invalid reservation id, should respond with a 400/404 status code to CANCEL one reservation', (reservationId, expectedStatus) => {
+      ['63f354c2255f21a3f4605fff', HTTP_STATUS.NOT_FOUND],
+      ['63f354c2255f21a3f46xxxxf', HTTP_STATUS.INVALID],
+      [0, HTTP_STATUS.INVALID],
+      ['a', HTTP_STATUS.INVALID]
+    ])(`Testing CANCEL ONE RESERVATION route with invalid reservation id, should respond with a ${HTTP_STATUS.INVALID}/${HTTP_STATUS.NOT_FOUND} status code to CANCEL one reservation`, (reservationId, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
         const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
         const token = login.headers.authorization;
@@ -282,15 +283,15 @@ describe('Testing all RESERVATION routes', () => {
             message: expect.any(String)
           });
       });
-      test('Testing CANCEL ONE RESERVATION route, should respond with a 200 status code to CANCEL one reservation', async () => {
+      test(`Testing CANCEL ONE RESERVATION route, should respond with a ${HTTP_STATUS.OK} status code to CANCEL one reservation`, async () => {
         const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
         const token = login.headers.authorization;
         reservationId = '63eb7dfe5f58194a262d8224';
         const response = await request(app).put(`/reservation/cancel/${reservationId}`)
           .set('Authorization', `${token}`);
-        expect(response.statusCode).toBe(200);
+        expect(response.statusCode).toBe(HTTP_STATUS.OK);
         expect(response.headers['content-type']).toMatch(/json/);
-        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toEqual(expect.any(Object));
         expect(response.body).toEqual(
           {
             success: expect.any(Boolean),
@@ -313,14 +314,14 @@ describe('Testing all RESERVATION routes', () => {
 
   describe('Testing ADD PLAYER RESERVATION route', () => {
     describe.each([
-      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f4605fff', 500],
-      ['63f354c2255f21a3f46xxxxf', '63f354c2255f21a3f4605fff', 400],
-      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f46xxxxf', 400],
-      [0, '63f354c2255f21a3f4605fff', 400],
-      ['a', '63f354c2255f21a3f4605fff', 400],
-      ['63f354c2255f21a3f4605fff', 0, 400],
-      ['63f354c2255f21a3f4605fff', 'a', 400]
-    ])('Testing ADD PLAYER to RESERVATION route with invalid id, should respond with a 400/404 status code to CANCEL one reservation', (reservationId, playerId, expectedStatus) => {
+      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f4605555', HTTP_STATUS.NOT_FOUND],
+      ['63f354c2255f21a3f46xxxxf', '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
+      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f46xxxxf', HTTP_STATUS.INVALID],
+      [0, '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
+      ['a', '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
+      ['63f354c2255f21a3f4605fff', 0, HTTP_STATUS.INVALID],
+      ['63f354c2255f21a3f4605fff', 'a', HTTP_STATUS.INVALID]
+    ])(`Testing ADD PLAYER to RESERVATION route with invalid id, should respond with a ${HTTP_STATUS.INVALID}/${HTTP_STATUS.NOT_FOUND} status code to CANCEL one reservation`, (reservationId, playerId, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
         const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
         const token = login.headers.authorization;
@@ -334,16 +335,16 @@ describe('Testing all RESERVATION routes', () => {
           });
       });
     });
-    test('Testing ADD PLAYER to RESERVATION route with valid id, should respond with a 200 status code to ADD PLAYER to reservation', async () => {
+    test(`Testing ADD PLAYER to RESERVATION route with valid id, should respond with a ${HTTP_STATUS.OK} status code to ADD PLAYER to reservation`, async () => {
       const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
       const token = login.headers.authorization;
       const reservationId = '63eb7dfe5f58194a262d8225';
       const playerId = '63eb788d339bb827e5fe77db';
       const response = await request(app).put(`/reservation/${reservationId}/add-player/${playerId}`)
         .set('Authorization', `${token}`);
-      expect(response.statusCode).toBe(200);
+      expect(response.statusCode).toBe(HTTP_STATUS.OK);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.body).toEqual(
         {
           success: expect.any(Boolean)
@@ -353,14 +354,14 @@ describe('Testing all RESERVATION routes', () => {
 
   describe('Testing WITHDRAW PLAYER RESERVATION route', () => {
     describe.each([
-      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f4605fff', 403],
-      ['63f354c2255f21a3f46xxxxf', '63f354c2255f21a3f4605fff', 400],
-      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f46xxxxf', 400],
-      [0, '63f354c2255f21a3f4605fff', 400],
-      ['a', '63f354c2255f21a3f4605fff', 400],
-      ['63f354c2255f21a3f4605fff', 0, 400],
-      ['63f354c2255f21a3f4605fff', 'a', 400]
-    ])('Testing WITHDRAW PLAYER from RESERVATION route with invalid id, should respond with a 400/404 status code to CANCEL one reservation', (reservationId, playerId, expectedStatus) => {
+      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f4605fff', HTTP_STATUS.FORBIDDEN],
+      ['63f354c2255f21a3f46xxxxf', '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
+      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f46xxxxf', HTTP_STATUS.INVALID],
+      [0, '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
+      ['a', '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
+      ['63f354c2255f21a3f4605fff', 0, HTTP_STATUS.INVALID],
+      ['63f354c2255f21a3f4605fff', 'a', HTTP_STATUS.INVALID]
+    ])(`Testing WITHDRAW PLAYER from RESERVATION route with invalid id, should respond with a ${HTTP_STATUS.INVALID}/${HTTP_STATUS.NOT_FOUND} status code to CANCEL one reservation`, (reservationId, playerId, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
         const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
         const token = login.headers.authorization;
@@ -374,16 +375,16 @@ describe('Testing all RESERVATION routes', () => {
           });
       });
     });
-    test('Testing WITHDRAW PLAYER from RESERVATION route with valid id, should respond with a 200 status code to WITHDRAW PLAYER from reservation', async () => {
+    test(`Testing WITHDRAW PLAYER from RESERVATION route with valid id, should respond with a ${HTTP_STATUS.OK} status code to WITHDRAW PLAYER from reservation`, async () => {
       const login = await request(app).post('/login').send({ email: 'iburazin@gmail.com', password: 'password' });
       const token = login.headers.authorization;
       const reservationId = '63eb7dfe5f58194a262d8225';
       const playerId = '63eb6abf9792291234cd6a77';
       const response = await request(app).put(`/reservation/${reservationId}/player-withdraw/${playerId}`)
         .set('Authorization', `${token}`);
-      expect(response.statusCode).toBe(200);
+      expect(response.statusCode).toBe(HTTP_STATUS.OK);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.body).toEqual(
         {
           success: expect.any(Boolean)
@@ -393,16 +394,17 @@ describe('Testing all RESERVATION routes', () => {
 
   describe('Testing FILTER RESERVATION route', () => {
     describe.each([
-      ['date=2023-03-27', 200],
-      ['dayOfWeek=7', 200],
-      ['hour=13', 200]
+      ['date=2023-03-27', HTTP_STATUS.OK],
+      ['dayOfWeek=7', HTTP_STATUS.OK],
+      ['hour=13', HTTP_STATUS.OK],
+      ['dayOfWeek=7&hour=13', HTTP_STATUS.OK],
     ])('Test FILTER request for /reservation/filter route with a valid query', (query, expectedStatus) => {
       test(`with valid query, should respond with a ${expectedStatus} status code`, async () => {
         const response = await request(app)
           .get(`/reservation/filter/?${query}`);
         expect(response.statusCode).toBe(expectedStatus);
         expect(response.headers['content-type']).toMatch(/json/);
-        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toEqual(expect.any(Object));
         expect(response.body).toEqual(
           {
             filteredReservation: expect.any(Array)
@@ -413,9 +415,9 @@ describe('Testing all RESERVATION routes', () => {
       const query = '63eb7dfe5f58194a262d8226';
       const response = await request(app)
         .get(`/reservation/filter/?${query}`);
-      expect(response.statusCode).toBe(400);
+      expect(response.statusCode).toBe(HTTP_STATUS.INVALID);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toBeInstanceOf(Object);
+      expect(response.body).toEqual(expect.any(Object));
       expect(response.body).toEqual(
         {
           message: expect.any(String)
