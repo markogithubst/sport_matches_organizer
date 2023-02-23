@@ -7,7 +7,6 @@ const { validateId, validateMatch } = require('../middleware/requestValidationHa
 const router = express.Router();
 
 router.get('/', callbackErrorHandler(matchController.viewAllMacthes));
-router.post('/', isLoggedIn, isAdmin, validateMatch, callbackErrorHandler(matchController.createMatch));
 router.get('/:id', validateId, callbackErrorHandler(matchController.viewSingleMatch));
 router.put('/:id', validateId, isLoggedIn, isAdmin, validateMatch, callbackErrorHandler(matchController.updateMatch));
 router.delete('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(matchController.deleteMatch));

@@ -1,9 +1,5 @@
-const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudController');
+const { getOne, getAll, deleteOne, updateOne } = require('./crudController');
 const Team = require('../models/Team');
-
-const createTeam = async (req, res) => {
-  await createOne(Team, req, res);
-};
 
 const viewAllTeams = async (req, res) => {
   await getAll(Team, req, res);
@@ -22,7 +18,6 @@ const deleteTeam = async (req, res) => {
 };
 
 module.exports = {
-  createTeam,
   viewAllTeams,
   viewSingleTeam,
   updateTeam,

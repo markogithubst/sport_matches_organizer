@@ -7,7 +7,6 @@ const { validateId, validateTeam } = require('../middleware/requestValidationHan
 const router = express.Router();
 
 router.get('/', callbackErrorHandler(teamController.viewAllTeams));
-router.post('/', isLoggedIn, isAdmin, validateTeam, callbackErrorHandler(teamController.createTeam));
 router.get('/:id', validateId, callbackErrorHandler(teamController.viewSingleTeam));
 router.put('/:id', validateId, isLoggedIn, isAdmin, validateTeam, callbackErrorHandler(teamController.updateTeam));
 router.delete('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(teamController.deleteTeam));

@@ -1,9 +1,5 @@
-const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudController');
+const { getOne, getAll, deleteOne, updateOne } = require('./crudController');
 const Match = require('../models/Match');
-
-const createMatch = async (req, res) => {
-  await createOne(Match, req, res);
-};
 
 const viewAllMacthes = async (req, res) => {
   await getAll(Match, req, res);
@@ -22,7 +18,6 @@ const deleteMatch = async (req, res) => {
 };
 
 module.exports = {
-  createMatch,
   viewAllMacthes,
   viewSingleMatch,
   updateMatch,
