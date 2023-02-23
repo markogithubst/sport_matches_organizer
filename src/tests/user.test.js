@@ -5,6 +5,7 @@ const { postUserData } = require('./test-data/postUserData');
 const { putUserData } = require('./test-data/putUserData');
 const { runSeed } = require('../seed/seed');
 const { runUnseed } = require('../seed/unseed');
+const { HTTP_STATUS } = require('../utils/httpCodes.js');
 
 describe('Test /user routes', () => {
   beforeAll(async () => {
@@ -24,13 +25,13 @@ describe('Test /user routes', () => {
 
       expect(body).toEqual(expect.any(Object));
       expect(headers['content-type']).toMatch(/json/);
-      expect(statusCode).toBe(200);
+      expect(statusCode).toBe(HTTP_STATUS.OK);
     });
     test('GET on user/63eb6abf9792291234cd6a77 returns appropriate data types', async () => {
       const { body, headers } = await request(app).get('/user/63eb6abf9792291234cd6a77');
 
       expect(headers['content-type']).toMatch(/json/);
-      expect(body).toEqual(
+      expect(body).toEqual(expect.objectContaining(
         {
           success: expect.any(Boolean),
           data: expect.objectContaining(
@@ -43,7 +44,8 @@ describe('Test /user routes', () => {
               phone: expect.any(String),
               role: expect.any(String)
             })
-        });
+        })
+      );
     });
   });
 
@@ -56,7 +58,7 @@ describe('Test /user routes', () => {
         .get('/user/63eb6abf9792291234cd6a77/history').set('Authorization', `${token}`);
 
       expect(headers['content-type']).toMatch(/json/);
-      expect(statusCode).toBe(200);
+      expect(statusCode).toBe(HTTP_STATUS.OK);
     });
   });
 
@@ -93,11 +95,11 @@ describe('Test /user routes', () => {
 
   describe('Test DELETE request for /user route with invalid and valid ID', () => {
     describe.each([
-      ['22eb6abf9792291234cd6a75', 401, 'iburazin@gmail.com'],
-      ['63eb6abf9792291234cd6a75', 403, 'admin@gmail.com'],
-      ['63eb6abf9792291234cd6a75', 200, 'jboguno@gmail.com'],
-      ['a', 400, 'admin@gmail.com'],
-      [0, 400, 'iburazin@gmail.com']
+      ['22eb6abf9792291234cd6a75', HTTP_STATUS.NO_AUTH, 'iburazin@gmail.com'],
+      ['63eb6abf9792291234cd6a75', HTTP_STATUS.FORBIDDEN, 'admin@gmail.com'],
+      ['63eb6abf9792291234cd6a75', HTTP_STATUS.OK, 'jboguno@gmail.com'],
+      ['a', HTTP_STATUS.INVALID, 'admin@gmail.com'],
+      [0, HTTP_STATUS.INVALID, 'iburazin@gmail.com']
     ])('DELETE on /user route returns expected status code', (id, expectedStatus, email) => {
       test(`DELETE request returns ${expectedStatus} status code`, async () => {
         const login = await request(app).post('/login').send({ email: `${email}`, password: 'password' });

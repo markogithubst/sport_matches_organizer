@@ -1,3 +1,5 @@
+const { HTTP_STATUS } = require('../../utils/httpCodes.js');
+
 module.exports.postUserData = [
   [{
     username: 'uniqueusr',
@@ -7,7 +9,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 201],
+  }, HTTP_STATUS.CREATED],
   [{
     name: 'Unique',
     surname: 'Usr',
@@ -15,7 +17,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'uniqueusr',
     surname: 'Usr',
@@ -23,7 +25,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'uniqueusr',
     name: 'Unique',
@@ -31,7 +33,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'uniqueusr',
     name: 'Unique',
@@ -39,7 +41,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'uniqueusr',
     name: 'Unique',
@@ -47,7 +49,7 @@ module.exports.postUserData = [
     email: 'uniqueusr@email.com',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'uniqueusr',
     name: 'Unique',
@@ -55,7 +57,7 @@ module.exports.postUserData = [
     email: 'uniqueusr@email.com',
     password: 'password',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'uniqueusr',
     name: 'Unique',
@@ -63,7 +65,7 @@ module.exports.postUserData = [
     email: 'uniqueusr@email.com',
     password: 'password',
     phone: '+385993404555'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'someuser',
     name: 'some',
@@ -81,7 +83,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'us',
     name: 'Unique',
@@ -90,7 +92,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'use',
     name: 'U',
@@ -99,7 +101,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'user1',
     name: 'Un',
@@ -108,7 +110,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'user1',
     name: 'Uni',
@@ -117,7 +119,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'user1',
     name: 'u',
@@ -126,7 +128,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'user1',
     name: 'user',
@@ -135,7 +137,7 @@ module.exports.postUserData = [
     password: 'password',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'user1',
     name: 'Unique',
@@ -144,7 +146,7 @@ module.exports.postUserData = [
     password: 'passwo',
     phone: '+385993404555',
     role: 'USER'
-  }, 400],
+  }, HTTP_STATUS.INVALID],
   [{
     username: 'user1',
     name: 'Unique',
@@ -153,5 +155,5 @@ module.exports.postUserData = [
     password: 'password',
     phone: '385993404555',
     role: 'USER'
-  }, 400]
+  }, HTTP_STATUS.INVALID]
 ];

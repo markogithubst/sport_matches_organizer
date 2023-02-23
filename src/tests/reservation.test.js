@@ -397,7 +397,7 @@ describe('Testing all RESERVATION routes', () => {
       ['date=2023-03-27', HTTP_STATUS.OK],
       ['dayOfWeek=7', HTTP_STATUS.OK],
       ['hour=13', HTTP_STATUS.OK],
-      ['dayOfWeek=7&hour=13', HTTP_STATUS.OK],
+      ['dayOfWeek=7&hour=13', HTTP_STATUS.OK]
     ])('Test FILTER request for /reservation/filter route with a valid query', (query, expectedStatus) => {
       test(`with valid query, should respond with a ${expectedStatus} status code`, async () => {
         const response = await request(app)
