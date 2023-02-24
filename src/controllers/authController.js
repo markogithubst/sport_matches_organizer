@@ -20,6 +20,13 @@ const loginUser = async (req, res) => {
   return res.status(200).json({ message: `User ${user.username} logged in successfully!` });
 };
 
+const logoutUser = async (req, res) => {
+  res.header('Authorization', ' ', { maxAge: 1 });
+
+  return res.status(200).json({ message: 'User logged out!' });
+};
+
 module.exports = {
-  loginUser
+  loginUser,
+  logoutUser
 };
