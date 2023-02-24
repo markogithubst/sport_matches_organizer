@@ -66,7 +66,7 @@ describe('Testing all RESERVATION routes', () => {
               time: expect.any(String),
               isCanceled: expect.any(Boolean),
               isFinished: expect.any(Boolean),
-              isFilled: expect.any(Boolean),
+              isScheduled: expect.any(Boolean),
               registeredPlayers: expect.any(Array)
             })
         });
@@ -95,7 +95,7 @@ describe('Testing all RESERVATION routes', () => {
         match: '63eb7f4a8bda2a035ce6454c',
         time: '2023-03-27T19:00:00Z',
         isCanceled: false,
-        isFilled: false,
+        isScheduled: false,
         registeredPlayers: [
           '63eb6abf9792291234cd6a75',
           '63eb6abf9792291234cd6a76',
@@ -121,7 +121,7 @@ describe('Testing all RESERVATION routes', () => {
         match: '63eb7f4a8bda2a035ce6454c',
         time: '2023-03-27T19:00:00Z',
         isCanceled: false,
-        isFilled: false,
+        isScheduled: false,
         registeredPlayers: [
           '63eb6abf9792291234cd6a75',
           '63eb6abf9792291234cd6a76',
@@ -164,7 +164,7 @@ describe('Testing all RESERVATION routes', () => {
           match: '63eb7f4a8bda2a035ce6454c',
           time: '2023-03-26T17:00:00Z',
           isCanceled: false,
-          isFilled: true,
+          isScheduled: true,
           registeredPlayers: [
             '63eb6abf9792291234cd6a75',
             '63eb6abf9792291234cd6a76',
@@ -193,7 +193,7 @@ describe('Testing all RESERVATION routes', () => {
           match: '63eb7f4a8bda2a035ce6454c',
           time: '2023-03-26T17:00:00Z',
           isCanceled: false,
-          isFilled: true,
+          isScheduled: true,
           registeredPlayers: [
             '63eb6abf9792291234cd6a75',
             '63eb6abf9792291234cd6a76',
@@ -257,7 +257,7 @@ describe('Testing all RESERVATION routes', () => {
               time: expect.any(String),
               isCanceled: expect.any(Boolean),
               isFinished: expect.any(Boolean),
-              isFilled: expect.any(Boolean),
+              isScheduled: expect.any(Boolean),
               registeredPlayers: expect.any(Array)
             })
         });
@@ -304,7 +304,7 @@ describe('Testing all RESERVATION routes', () => {
                 time: expect.any(String),
                 isCanceled: expect.any(Boolean),
                 isFinished: expect.any(Boolean),
-                isFilled: expect.any(Boolean),
+                isScheduled: expect.any(Boolean),
                 registeredPlayers: expect.any(Array)
               })
           });
@@ -394,11 +394,9 @@ describe('Testing all RESERVATION routes', () => {
 
   describe('Testing FILTER RESERVATION route', () => {
     describe.each([
-      ['date=2023-03-27', HTTP_STATUS.OK],
       ['dayOfWeek=7', HTTP_STATUS.OK],
-      ['hour=13', HTTP_STATUS.OK],
-      ['dayOfWeek=7&hour=13', HTTP_STATUS.OK]
-    ])('Test FILTER request for /reservation/filter route with a valid query', (query, expectedStatus) => {
+      ['hour=13', HTTP_STATUS.OK]
+    ])('Test FILTER request for /reservation/filter route with a valid query, data found', (query, expectedStatus) => {
       test(`with valid query, should respond with a ${expectedStatus} status code`, async () => {
         const response = await request(app)
           .get(`/reservation/filter/?${query}`);
@@ -410,6 +408,18 @@ describe('Testing all RESERVATION routes', () => {
             filteredReservation: expect.any(Array)
           });
       });
+    });
+    test('Test FILTER request for /reservation/filter route with a valid query, data not found', async () => {
+      const query = 'dayOfWeek=7&hour=13';
+      const response = await request(app)
+        .get(`/reservation/filter/?${query}`);
+      expect(response.statusCode).toBe(HTTP_STATUS.NOT_FOUND);
+      expect(response.headers['content-type']).toMatch(/json/);
+      expect(response.body).toEqual(expect.any(Object));
+      expect(response.body).toEqual(
+        {
+          message: expect.any(String)
+        });
     });
     test('Test FILTER request for /reservation/filter route with an invalid query', async () => {
       const query = '63eb7dfe5f58194a262d8226';

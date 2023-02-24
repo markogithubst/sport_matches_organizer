@@ -43,10 +43,12 @@ const deleteUser = async (req, res) => {
 
 const viewHistory = async (req, res) => {
   const { id } = req.params;
+  const exclude = '-registeredPlayers -isCanceled -isFinished -isFilled -num';
   const matches = await Reservation.find({
     registeredPlayers: { $in: [id] },
     isFinished: true
-  }).populate('match', 'result');
+  }, exclude)
+    .populate('match', 'result');
 
   if (!matches.length) throw new NotFoundError(ErrorMessages.dataNotFound);
 

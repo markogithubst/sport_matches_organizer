@@ -6,7 +6,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -20,7 +20,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -34,7 +34,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -47,7 +47,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -60,7 +60,7 @@ const postReservationData = [
     field: '63eb76f1c6a15537f1bbb5a0',
     match: '63eb7f4a8bda2a035ce6454c',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -74,7 +74,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '23645236574',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -88,7 +88,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: '234',
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -102,7 +102,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: 'hti',
+    isScheduled: 'hti',
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -116,7 +116,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -133,7 +133,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -147,7 +147,7 @@ const postReservationData = [
     match: 3,
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: [
       '63eb6abf9792291234cd6a75',
       '63eb6abf9792291234cd6a76',
@@ -161,7 +161,7 @@ const postReservationData = [
     match: '63eb7f4a8bda2a035ce6454c',
     time: '2023-03-27T19:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     registeredPlayers: {
       test: '32'
     }

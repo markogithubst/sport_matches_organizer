@@ -85,7 +85,7 @@ reservationSchema.method('createMatch', async function () {
 
 reservationSchema.pre('findOneAndUpdate', async function (next) {
   const doc = await this.model.findOne(this.getQuery());
-  if (doc.num === 6) throw new ValidationError(ErrorMessages.playerLimit);
+  if (doc && doc.num === 6) throw new ValidationError(ErrorMessages.playerLimit);
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

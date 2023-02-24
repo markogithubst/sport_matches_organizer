@@ -60,13 +60,13 @@ describe('Field', () => {
   describe('POST ', () => {
     const longString = '1234567890123456789012345678901123456789012345678901';
     describe.each([
-      [{ name: 'test repeat', address: 'address repeat' }, HTTP_STATUS.CREATED],
-      [{ name: 'test repeat', address: 'address not repeat' }, HTTP_STATUS.CONFLICT],
-      [{ name: 'test not repeat', address: 'address repeat' }, HTTP_STATUS.CONFLICT],
-      [{ name: 'four', address: 'four1234' }, HTTP_STATUS.INVALID],
-      [{ name: 'four1', address: 'seven12' }, HTTP_STATUS.INVALID],
-      [{ name: 'four1', address: longString }, HTTP_STATUS.INVALID],
-      [{ name: longString, address: 'test1242' }, HTTP_STATUS.INVALID]
+      [{ city: 'test', name: 'test repeat', address: 'address repeat' }, HTTP_STATUS.CREATED],
+      [{ city: 'test', name: 'test repeat', address: 'address not repeat' }, HTTP_STATUS.CONFLICT],
+      [{ city: 'test', name: 'test not repeat', address: 'address repeat' }, HTTP_STATUS.CONFLICT],
+      [{ city: 'test', name: 'four', address: 'four1234' }, HTTP_STATUS.INVALID],
+      [{ city: 'test', name: 'four1', address: 'seven12' }, HTTP_STATUS.INVALID],
+      [{ city: 'test', name: 'four1', address: longString }, HTTP_STATUS.INVALID],
+      [{ city: 'test', name: longString, address: 'test1242' }, HTTP_STATUS.INVALID]
 
     ])('Testing field creation with various paramaters', (fieldBody, expectedStatus) => {
       test(`Should respond with a ${expectedStatus} status code`, async () => {
@@ -80,6 +80,7 @@ describe('Field', () => {
     });
     test('when requested by a user role, should respond with 403', async () => {
       const body = {
+        city: 'blabla',
         name: 'blablabla',
         address: 'blablabla'
       };
@@ -113,17 +114,17 @@ describe('Field', () => {
     const longString = '1234567890123456789012345678901123456789012345678901';
 
     describe.each([
-      [id, { name: 'test repeat update', address: 'address repeat update' }, HTTP_STATUS.ACCEPTED],
-      [conflictId, { name: 'test repeat', address: 'address not repeat' }, HTTP_STATUS.SERVER_ERROR],
-      [conflictId, { name: 'test not repeat', address: 'address repeat' }, HTTP_STATUS.SERVER_ERROR],
-      [id, { name: 'four', address: 'four1234' }, HTTP_STATUS.INVALID],
-      [id, { name: 'four1', address: 'seven12' }, HTTP_STATUS.INVALID],
-      [id, { name: 'four1', address: longString }, HTTP_STATUS.INVALID],
-      [id, { name: longString, address: 'longString' }, HTTP_STATUS.INVALID],
-      ['id', { name: 'longString', address: 'test1242' }, HTTP_STATUS.INVALID],
-      ['id', { name: 'longString', address: 'test1242' }, HTTP_STATUS.INVALID],
-      [notExist, { name: 'longString', address: 'test1242' }, HTTP_STATUS.NOT_FOUND],
-      [notExist, { name: 'longString', address: 'test1242' }, HTTP_STATUS.NOT_FOUND]
+      [id, { city: 'test', name: 'test repeat update', address: 'address repeat update' }, HTTP_STATUS.ACCEPTED],
+      [conflictId, { city: 'test', name: 'test repeat', address: 'address not repeat' }, HTTP_STATUS.SERVER_ERROR],
+      [conflictId, { city: 'test', name: 'test not repeat', address: 'address repeat' }, HTTP_STATUS.SERVER_ERROR],
+      [id, { city: 'test', name: 'four', address: 'four1234' }, HTTP_STATUS.INVALID],
+      [id, { city: 'test', name: 'four1', address: 'seven12' }, HTTP_STATUS.INVALID],
+      [id, { city: 'test', name: 'four1', address: longString }, HTTP_STATUS.INVALID],
+      [id, { city: 'test', name: longString, address: 'longString' }, HTTP_STATUS.INVALID],
+      ['id', { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.INVALID],
+      ['id', { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.INVALID],
+      [notExist, { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.NOT_FOUND],
+      [notExist, { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.NOT_FOUND]
 
     ])('Testing field creation with various paramaters', (id, fieldBody, expectedStatus) => {
       test(`Should respond with a ${expectedStatus} status code`, async () => {
@@ -137,6 +138,7 @@ describe('Field', () => {
     });
     test('when requested by a user role, should respond with 403', async () => {
       const body = {
+        city: 'test',
         name: 'test repeat update user',
         address: 'address repeat update user'
       };
