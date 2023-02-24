@@ -7,7 +7,7 @@ const isLoggedIn = callbackErrorHandler(async (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token || jwt.TokenExpiredError) throw new AuthenticationError(ErrorMessages.notLoggedIn);
+  if (!token) throw new AuthenticationError(ErrorMessages.notLoggedIn);
 
   const decoded = jwt.verify(token, `${process.env.JWT_SECRET}`);
   req.user = decoded;
