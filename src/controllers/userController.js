@@ -32,7 +32,6 @@ const deleteUser = async (req, res) => {
     },
     {
       $inc: { num: -1 },
-      $set: { isFilled: false },
       $pull: { registeredPlayers: id }
     });
   } else {

@@ -7,6 +7,11 @@ const fieldSchema = mongoose.Schema({
     maxLength: 50,
     unique: true
   },
+  city: {
+    type: String,
+    minLength: 3,
+    maxLength: 50
+  },
   address: {
     type: String,
     minLength: 8,

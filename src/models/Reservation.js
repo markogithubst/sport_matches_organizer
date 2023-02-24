@@ -37,7 +37,7 @@ const reservationSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
-  isFilled: {
+  isScheduled: {
     type: Boolean,
     default: false
   },
@@ -76,25 +76,16 @@ reservationSchema.method('createMatch', async function () {
         : blackTeam.players.push(player);
     }
   });
-  Promise.all(blackTeam.save(), whiteTeam.save()).catch(err => console.log(err));
+  Promise.all([blackTeam.save(), whiteTeam.save()]).catch(err => console.log(err));
   const match = new Match({ blackTeam, whiteTeam });
   await match.save();
   this.match = match._id;
+  this.isScheduled = true;
 });
 
-reservationSchema.pre('updateOne', async function (next) {
+reservationSchema.pre('findOneAndUpdate', async function (next) {
   const doc = await this.model.findOne(this.getQuery());
   if (doc.num === 6) throw new ValidationError(ErrorMessages.playerLimit);
-});
-
-reservationSchema.post('updateOne', async function (doc) {
-  const updatedDoc = await this.model.findOne(this.getQuery());
-  if (updatedDoc.num === 6) {
-    updatedDoc.isFilled = true;
-    await updatedDoc.createMatch();
-  }
-
-  await updatedDoc.save();
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

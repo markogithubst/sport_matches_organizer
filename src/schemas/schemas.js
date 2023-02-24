@@ -20,7 +20,8 @@ const querySchema = Joi.object({
 
 const fieldSchema = Joi.object({
   name: Joi.string().min(5).max(50).required(),
-  address: Joi.string().min(8).max(50).required()
+  address: Joi.string().min(8).max(50).required(),
+  city: Joi.string().min(3).max(50).required()
 }).options({ abortEarly: false });
 
 const matchSchema = Joi.object({
@@ -35,7 +36,7 @@ const reservationSchema = Joi.object({
   match: Joi.string(),
   num: Joi.number(),
   isCanceled: Joi.boolean(),
-  isFilled: Joi.boolean(),
+  isScheduled: Joi.boolean(),
   registeredPlayers: Joi.array().items(Joi.string()).max(6)
 }).options({ abortEarly: false });
 

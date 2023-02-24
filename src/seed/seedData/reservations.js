@@ -9,7 +9,7 @@ module.exports = [
     match: new ObjectId('63eb7f4a8bda2a035ce6454c'),
     time: '2023-05-27T12:00:00Z',
     isCanceled: false,
-    isFilled: true,
+    isScheduled: true,
     isFinished: true,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
@@ -27,7 +27,7 @@ module.exports = [
     match: new ObjectId('63eb7f4a8bda2a035ce6454d'),
     time: '2023-05-25T13:00:00Z',
     isCanceled: false,
-    isFilled: true,
+    isScheduled: true,
     isFinished: true,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
@@ -44,7 +44,7 @@ module.exports = [
     field: new ObjectId('63eb76f1c6a15537f1bbb5a1'),
     time: '2023-05-28T10:00:00Z',
     isCanceled: false,
-    isFilled: false,
+    isScheduled: false,
     isFinished: false,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
@@ -60,7 +60,7 @@ module.exports = [
     match: new ObjectId('63eb7f4a8bda2a035ce6454e'),
     time: '2023-05-24T19:00:00Z',
     isCanceled: true,
-    isFilled: true,
+    isScheduled: true,
     isFinished: false,
     registeredPlayers: [
       new ObjectId('63eb6abf9792291234cd6a75'),
@@ -78,7 +78,7 @@ module.exports = [
     match: new ObjectId('63eb7f4a8bda2a035ce6454f'),
     time: '2023-05-23T12:00:00Z',
     isCanceled: false,
-    isFilled: true,
+    isScheduled: true,
     isFinished: false,
     registeredPlayers: [
       new ObjectId('63eb788d339bb827e5fe77da'),

@@ -5,7 +5,7 @@ const path = require('path');
 
 const { errorMiddleware } = require('./middleware/errorMiddlewareHandler');
 const routes = require('./routes/mainRouter');
-const cronSchedule = require('./utils/cronSchedule');
+const cronSchedule = require('./schedules/reservationSchedules');
 
 const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
