@@ -44,8 +44,33 @@ const deleteUser = async (req, res) => {
 
 const viewHistory = async (req, res) => {
   const { id } = req.params;
+  const exclude = '-num -isScheduled -isCanceled -isFinished -registeredPlayers';
 
-  const userHistory = await userHistoryAggregate(id);
+  // eslint-disable-next-line max-len
+  const userHistory = await Reservation.find({ registeredPlayers: { $in: [id] } }, exclude)
+    .populate('field ', 'name')
+    .populate({
+      path: 'match',
+      populate: {
+        path: 'whiteTeam',
+        select: 'players ',
+        populate: {
+          path: 'players',
+          select: 'username'
+        }
+      }
+    })
+    .populate({
+      path: 'match',
+      populate: {
+        path: 'blackTeam',
+        select: 'players',
+        populate: {
+          path: 'players',
+          select: 'username'
+        }
+      }
+    });
 
   if (!userHistory.length) throw new NotFoundError(ErrorMessages.dataNotFound);
 

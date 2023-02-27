@@ -5,18 +5,19 @@ const matchSchema = mongoose.Schema({
 
   whiteTeam: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Team',
-    autopopulate: true
+    ref: 'Team'
+
   },
   blackTeam: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Team',
-    autopopulate: true
+    ref: 'Team'
+
   },
   result: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Result',
     autopopulate: true
+
   }
 }, {
   timestamps: true,
