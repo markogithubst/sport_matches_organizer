@@ -10,10 +10,12 @@ const reservationSchema = mongoose.Schema({
   field: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Field',
+    autopopulate: true,
     required: true
   },
   match: {
     type: mongoose.Schema.Types.ObjectId,
+    autopopulate: true,
     ref: 'Match'
   },
   num: {
@@ -43,8 +45,8 @@ const reservationSchema = mongoose.Schema({
   },
   registeredPlayers: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-
+    ref: 'User',
+    autopopulate: true
   }]
 
 },

@@ -69,7 +69,7 @@ describe('Result', () => {
 
     ])('Testing result creation with various paramaters', (fieldBody, expectedStatus) => {
       test(`Should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const { headers, statusCode } =
           await request(app).post('/result').set('Authorization', `${token}`).send(fieldBody);
@@ -82,7 +82,7 @@ describe('Result', () => {
         whiteTeamScore: 3,
         blackTeamScore: 3
       };
-      const login = await request(app).post('/login').send({ email: 'jboguno@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'jboguno@test.com', password: 'password' });
       const token = login.headers.authorization;
       const { headers, statusCode } = await request(app)
         .post('/result').set('Authorization', `${token}`).send(body);
@@ -114,7 +114,7 @@ describe('Result', () => {
 
     ])('Testing result creation with various paramaters', (id, fieldBody, expectedStatus) => {
       test(`Should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const { headers, statusCode } =
           await request(app).put(`/result/${id}`).set('Authorization', `${token}`).send(fieldBody);
@@ -127,7 +127,7 @@ describe('Result', () => {
         name: 'test repeat update user',
         address: 'address repeat update user'
       };
-      const login = await request(app).post('/login').send({ email: 'jboguno@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'jboguno@test.com', password: 'password' });
       const token = login.headers.authorization;
       const { headers, statusCode } = await request(app)
         .put('/result/63eb76f1c6a15537f1bbb59f').set('Authorization', `${token}`).send(body);
@@ -150,7 +150,7 @@ describe('Result', () => {
   });
   describe('DELETE', () => {
     test('when requested by admin role, should respond with 200', async () => {
-      const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
       const token = login.headers.authorization;
       const { headers, statusCode } = await request(app)
         .delete('/result/63eb7dfe5f58194a262d8276').set('Authorization', `${token}`);
@@ -159,7 +159,7 @@ describe('Result', () => {
       expect(statusCode).toBe(HTTP_STATUS.OK);
     });
     test('when requested by user role, should respond with 403', async () => {
-      const login = await request(app).post('/login').send({ email: 'jboguno@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'jboguno@test.com', password: 'password' });
       const token = login.headers.authorization;
       const { headers, statusCode } = await request(app)
         .delete('/result/63eb76f1c6a15537f1bbb59f').set('Authorization', `${token}`);
@@ -175,7 +175,7 @@ describe('Result', () => {
       expect(statusCode).toBe(HTTP_STATUS.NO_AUTH);
     });
     test('when the result id doesnt exist, should respond with 404', async () => {
-      const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
       const token = login.headers.authorization;
       const { headers, statusCode } = await request(app)
         .delete('/result/63eb21f1c6a15537f1bbb59f').set('Authorization', `${token}`);
@@ -184,7 +184,7 @@ describe('Result', () => {
       expect(statusCode).toBe(HTTP_STATUS.NOT_FOUND);
     });
     test('when the param id isnt valid, should respond with a 400 status code', async () => {
-      const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
       const token = login.headers.authorization;
       const { headers, statusCode } = await request(app)
         .delete('/result/63eb21fb59f').set('Authorization', `${token}`);

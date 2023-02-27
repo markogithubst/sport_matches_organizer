@@ -4,7 +4,7 @@ module.exports.putUserData = [
   ['63eb6abf9792291234cd6a77', {
     username: 'updusr',
     surname: 'Success',
-    email: 'iburazin@gmail.com',
+    email: 'iburazin@test.com',
     password: 'password',
     phone: '+385993404888',
     role: 'USER'
@@ -12,7 +12,7 @@ module.exports.putUserData = [
   ['63eb6abf9792291234cd6a77', {
     name: 'Update',
     surname: 'Success',
-    email: 'iburazin@gmail.com',
+    email: 'iburazin@test.com',
     password: 'password',
     phone: '+385993404888',
     role: 'USER'
@@ -21,7 +21,7 @@ module.exports.putUserData = [
     username: 'User',
     name: 'Update',
     surname: 'Success',
-    email: 'iburazin@gmail.com',
+    email: 'iburazin@test.com',
     password: 'password',
     phone: '+385993404888',
     role: 'USER'

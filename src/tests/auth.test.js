@@ -19,10 +19,10 @@ describe('Testing all auth validations', () => {
 
   describe('Testing login route', () => {
     describe.each([
-      [{ email: 'iburazin@gmail.com', password: 'password' }, HTTP_STATUS.OK],
-      [{ email: 'mvukusic@gmail.com', password: 'password' }, HTTP_STATUS.OK],
+      [{ email: 'iburazin@test.com', password: 'password' }, HTTP_STATUS.OK],
+      [{ email: 'mvukusic@test.com', password: 'password' }, HTTP_STATUS.OK],
       [{ email: 'iburazin@example.com', password: 'password' }, HTTP_STATUS.NOT_FOUND],
-      [{ email: 'iburazin@gmail.com', password: 'test124' }, HTTP_STATUS.INVALID]
+      [{ email: 'iburazin@test.com', password: 'test124' }, HTTP_STATUS.INVALID]
     ])('Testing login route with valid and invalid credentials', (userBody, expectedStatus) => {
       test(`Should respond with a ${expectedStatus} status code`, async () => {
         const response = await request(app).post('/login').send(userBody);

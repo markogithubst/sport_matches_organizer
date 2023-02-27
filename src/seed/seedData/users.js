@@ -7,7 +7,7 @@ module.exports = [
     username: 'jops12',
     name: 'Josip',
     surname: 'Bogunovic',
-    email: 'jboguno@gmail.com',
+    email: 'jboguno@test.com',
     password: 'password',
     phone: '+385993222575',
     role: 'USER'
@@ -17,7 +17,7 @@ module.exports = [
     username: 'marks',
     name: 'Marko',
     surname: 'Vukusic',
-    email: 'mvukusic@gmail.com',
+    email: 'mvukusic@test.com',
     password: 'password',
     phone: '+385993404576',
     role: 'USER'
@@ -27,7 +27,7 @@ module.exports = [
     username: 'ivks3',
     name: 'Ivana',
     surname: 'Burazin',
-    email: 'iburazin@gmail.com',
+    email: 'iburazin@test.com',
     password: 'password',
     phone: '+1993444577',
     role: 'USER'
@@ -37,7 +37,7 @@ module.exports = [
     username: 'franks',
     name: 'Frane',
     surname: 'Kalebic',
-    email: 'fkalebic@gmail.com',
+    email: 'fkalebic@test.com',
     password: 'password',
     phone: '+385993555544',
     role: 'USER'
@@ -47,7 +47,7 @@ module.exports = [
     username: 'lovrks',
     name: 'Lobre',
     surname: 'Begovic',
-    email: 'lbegovic@gmail.com',
+    email: 'lbegovic@test.com',
     password: 'password',
     phone: '+385993666576',
     role: 'USER'
@@ -57,7 +57,7 @@ module.exports = [
     username: 'karlks',
     name: 'Karlo',
     surname: 'Dujmic',
-    email: 'kdujemic@gmail.com',
+    email: 'kdujemic@test.com',
     password: 'password',
     phone: '+1993277757',
     role: 'USER'
@@ -67,7 +67,7 @@ module.exports = [
     username: 'user1',
     name: 'user1',
     surname: 'user1',
-    email: 'user1@gmail.com',
+    email: 'user1@test.com',
     password: 'password',
     phone: '+1993288858',
     role: 'USER'
@@ -77,7 +77,7 @@ module.exports = [
     username: 'user2',
     name: 'user2',
     surname: 'user2',
-    email: 'user2@gmail.com',
+    email: 'user2@test.com',
     password: 'password',
     phone: '+199399958',
     role: 'USER'
@@ -87,7 +87,7 @@ module.exports = [
     username: 'user3',
     name: 'user3',
     surname: 'user3',
-    email: 'user3@gmail.com',
+    email: 'user3@test.com',
     password: 'password',
     phone: '+1993122458',
     role: 'USER'
@@ -97,7 +97,7 @@ module.exports = [
     username: 'user4',
     name: 'user4',
     surname: 'user4',
-    email: 'user4@gmail.com',
+    email: 'user4@test.com',
     password: 'password',
     phone: '+1996761458',
     role: 'USER'
@@ -107,7 +107,7 @@ module.exports = [
     username: 'user5',
     name: 'user5',
     surname: 'user5',
-    email: 'user5@gmail.com',
+    email: 'user5@test.com',
     password: 'password',
     phone: '+1998771458',
     role: 'USER'
@@ -117,7 +117,7 @@ module.exports = [
     username: 'user6',
     name: 'user6',
     surname: 'user6',
-    email: 'user6@gmail.com',
+    email: 'user6@test.com',
     password: 'password',
     phone: '+1993441458',
     role: 'USER'
@@ -127,7 +127,7 @@ module.exports = [
     username: 'user7',
     name: 'user7',
     surname: 'user7',
-    email: 'user7@gmail.com',
+    email: 'user7@test.com',
     password: 'password',
     phone: '+1993231416',
     role: 'USER'
@@ -137,7 +137,7 @@ module.exports = [
     username: 'user8',
     name: 'user8',
     surname: 'user8',
-    email: 'user8@gmail.com',
+    email: 'user8@test.com',
     password: 'password',
     phone: '+1996543258',
     role: 'USER'
@@ -147,7 +147,7 @@ module.exports = [
     username: 'user9',
     name: 'user9',
     surname: 'user9',
-    email: 'user9@gmail.com',
+    email: 'user9@test.com',
     password: 'password',
     phone: '+1993333458',
     role: 'USER'
@@ -157,7 +157,7 @@ module.exports = [
     username: 'user10',
     name: 'user10',
     surname: 'user10',
-    email: 'user10@gmail.com',
+    email: 'user10@test.com',
     password: 'password',
     phone: '+1997777458',
     role: 'USER'
@@ -167,7 +167,7 @@ module.exports = [
     username: 'user11',
     name: 'user11',
     surname: 'user11',
-    email: 'user11@gmail.com',
+    email: 'user11@test.com',
     password: 'password',
     phone: '+1993888858',
     role: 'USER'
@@ -177,7 +177,7 @@ module.exports = [
     username: 'user12',
     name: 'user12',
     surname: 'user12',
-    email: 'user12@gmail.com',
+    email: 'user12@test.com',
     password: 'password',
     phone: '+1993200008',
     role: 'USER'
@@ -187,7 +187,7 @@ module.exports = [
     username: 'user13',
     name: 'user13',
     surname: 'user13',
-    email: 'user13@gmail.com',
+    email: 'user13@test.com',
     password: 'password',
     phone: '+1922231458',
     role: 'USER'
@@ -197,7 +197,7 @@ module.exports = [
     username: 'user14',
     name: 'user14',
     surname: 'user14',
-    email: 'user14@gmail.com',
+    email: 'user14@test.com',
     password: 'password',
     phone: '+1933231458',
     role: 'USER'
@@ -207,7 +207,7 @@ module.exports = [
     username: 'admin',
     name: 'admin',
     surname: 'admin',
-    email: 'admin@gmail.com',
+    email: 'admin@test.com',
     password: 'password',
     phone: '+1944231456',
     role: 'ADMIN'

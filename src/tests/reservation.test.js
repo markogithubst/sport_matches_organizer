@@ -76,7 +76,7 @@ describe('Testing all RESERVATION routes', () => {
   describe('Testing POST RESERVATION route', () => {
     describe.each(postReservationData)('Testing POST RESERVATION route ADMIN role', (newReservation, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const response = await request(app)
           .post('/reservation')
@@ -88,7 +88,7 @@ describe('Testing all RESERVATION routes', () => {
       });
     });
     test(`Testing POST RESERVATION route with USER role. Should respond with a ${HTTP_STATUS.FORBIDDEN} status code to POST reservation`, async () => {
-      const login = await request(app).post('/login').send({ email: 'user9@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'user9@test.com', password: 'password' });
       const token = login.headers.authorization;
       const newReservation = {
         field: '63eb76f1c6a15537f1bbb5a0',
@@ -145,7 +145,7 @@ describe('Testing all RESERVATION routes', () => {
   describe('Testing PUT RESERVATION route', () => {
     describe.each(putReservationData)('Testing PUT RESERVATION route ADMIN role', (reservationId, updatedReservation, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const response = await request(app)
           .put(`/reservation/${reservationId}`)
@@ -156,7 +156,7 @@ describe('Testing all RESERVATION routes', () => {
         expect(response.headers['content-type']).toMatch(/json/);
       });
       test(`Testing PUT RESERVATION route with USER role. Should respond with a ${HTTP_STATUS.FORBIDDEN} status code to PUT reservation`, async () => {
-        const login = await request(app).post('/login').send({ email: 'user9@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'user9@test.com', password: 'password' });
         const token = login.headers.authorization;
         const reservationId = '63eb7dfe5f58194a262d8224';
         const updatedReservation = {
@@ -221,7 +221,7 @@ describe('Testing all RESERVATION routes', () => {
       ['a', HTTP_STATUS.INVALID]
     ])('Test DELETE request for /reservation route with invalid and valid ID', (id, expectedStatus) => {
       test(`with invalid ID, should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const response = await request(app)
           .delete(`/reservation/${id}`)
@@ -236,7 +236,7 @@ describe('Testing all RESERVATION routes', () => {
       });
     });
     test(`with valid ID, should respond with a ${HTTP_STATUS.OK} status code`, async () => {
-      const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
       const token = login.headers.authorization;
       const id = '63eb7dfe5f58194a262d8226';
       const response = await request(app)
@@ -272,7 +272,7 @@ describe('Testing all RESERVATION routes', () => {
       ['a', HTTP_STATUS.INVALID]
     ])(`Testing CANCEL ONE RESERVATION route with invalid reservation id, should respond with a ${HTTP_STATUS.INVALID}/${HTTP_STATUS.NOT_FOUND} status code to CANCEL one reservation`, (reservationId, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const response = await request(app).put(`/reservation/cancel/${reservationId}`)
           .set('Authorization', `${token}`);
@@ -284,7 +284,7 @@ describe('Testing all RESERVATION routes', () => {
           });
       });
       test(`Testing CANCEL ONE RESERVATION route, should respond with a ${HTTP_STATUS.OK} status code to CANCEL one reservation`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         reservationId = '63eb7dfe5f58194a262d8224';
         const response = await request(app).put(`/reservation/cancel/${reservationId}`)
@@ -323,7 +323,7 @@ describe('Testing all RESERVATION routes', () => {
       ['63f354c2255f21a3f4605fff', 'a', HTTP_STATUS.INVALID]
     ])(`Testing ADD PLAYER to RESERVATION route with invalid id, should respond with a ${HTTP_STATUS.INVALID}/${HTTP_STATUS.NOT_FOUND} status code to CANCEL one reservation`, (reservationId, playerId, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const response = await request(app).put(`/reservation/${reservationId}/add-player/${playerId}`)
           .set('Authorization', `${token}`);
@@ -336,7 +336,7 @@ describe('Testing all RESERVATION routes', () => {
       });
     });
     test(`Testing ADD PLAYER to RESERVATION route with valid id, should respond with a ${HTTP_STATUS.OK} status code to ADD PLAYER to reservation`, async () => {
-      const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
       const token = login.headers.authorization;
       const reservationId = '63eb7dfe5f58194a262d8225';
       const playerId = '63eb788d339bb827e5fe77db';
@@ -363,7 +363,7 @@ describe('Testing all RESERVATION routes', () => {
       ['63f354c2255f21a3f4605fff', 'a', HTTP_STATUS.INVALID]
     ])(`Testing WITHDRAW PLAYER from RESERVATION route with invalid id, should respond with a ${HTTP_STATUS.INVALID}/${HTTP_STATUS.NOT_FOUND} status code to CANCEL one reservation`, (reservationId, playerId, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
-        const login = await request(app).post('/login').send({ email: 'admin@gmail.com', password: 'password' });
+        const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
         const token = login.headers.authorization;
         const response = await request(app).put(`/reservation/${reservationId}/player-withdraw/${playerId}`)
           .set('Authorization', `${token}`);
@@ -376,7 +376,7 @@ describe('Testing all RESERVATION routes', () => {
       });
     });
     test(`Testing WITHDRAW PLAYER from RESERVATION route with valid id, should respond with a ${HTTP_STATUS.OK} status code to WITHDRAW PLAYER from reservation`, async () => {
-      const login = await request(app).post('/login').send({ email: 'iburazin@gmail.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'iburazin@test.com', password: 'password' });
       const token = login.headers.authorization;
       const reservationId = '63eb7dfe5f58194a262d8225';
       const playerId = '63eb6abf9792291234cd6a77';
