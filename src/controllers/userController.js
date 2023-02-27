@@ -4,7 +4,6 @@ const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
 const { HTTP_STATUS } = require('../utils/httpCodes.js');
-const { userHistoryAggregate } = require('../utils/userHistoryAggregate');
 
 const registerUser = async (req, res) => {
   await createOne(User, req, res);
