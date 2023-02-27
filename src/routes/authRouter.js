@@ -4,7 +4,11 @@ const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler')
 
 const router = express.Router();
 
-router.post('/login', callbackErrorHandler(authController.loginUser));
-router.get('/logout', callbackErrorHandler(authController.logoutUser));
+router.post('/login',
+/* #swagger.tags = ['Login'] */
+  callbackErrorHandler(authController.loginUser));
+router.get('/logout',
+/* #swagger.tags = ['Logout'] */
+  callbackErrorHandler(authController.logoutUser));
 
 module.exports = router;

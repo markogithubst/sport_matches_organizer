@@ -7,13 +7,31 @@ const { isLoggedIn, isAdmin } = require('../middleware/authorizationHandler');
 
 const router = express.Router();
 
-router.get('/', callbackErrorHandler(reservationController.viewAllReservations));
-router.post('/', isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.createReservation));
-router.get('/filter', validateQuery, callbackErrorHandler(reservationController.filterReservation));
-router.get('/:id', validateId, callbackErrorHandler(reservationController.viewSingleReservation));
-router.put('/:id', validateId, isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.updateReservation));
-router.put('/:id/add-player/:playerId', validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.addPlayerToReservation));
-router.put('/:id/player-withdraw/:playerId', validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.removePlayerFromReservation));
-router.delete('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.deleteReservation));
-router.put('/cancel/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.cancelReservation));
+router.get('/',
+/* #swagger.tags = ['Reservation'] */
+  callbackErrorHandler(reservationController.viewAllReservations));
+router.post('/',
+/* #swagger.tags = ['Reservation'] */
+  isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.createReservation));
+router.get('/filter',
+/* #swagger.tags = ['Reservation'] */
+  validateQuery, callbackErrorHandler(reservationController.filterReservation));
+router.get('/:id',
+/* #swagger.tags = ['Reservation'] */
+  validateId, callbackErrorHandler(reservationController.viewSingleReservation));
+router.put('/:id',
+/* #swagger.tags = ['Reservation'] */
+  validateId, isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.updateReservation));
+router.put('/:id/add-player/:playerId',
+/* #swagger.tags = ['Reservation'] */
+  validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.addPlayerToReservation));
+router.put('/:id/player-withdraw/:playerId',
+/* #swagger.tags = ['Reservation'] */
+  validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.removePlayerFromReservation));
+router.delete('/:id',
+/* #swagger.tags = ['Reservation'] */
+  validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.deleteReservation));
+router.put('/cancel/:id',
+/* #swagger.tags = ['Reservation'] */
+  validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.cancelReservation));
 module.exports = router;

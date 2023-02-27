@@ -2,6 +2,7 @@
   "scripts": {
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
+    "generate-swagger": "node swagger.js",
     "start": "node server.js",
     "dev": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.development",
     "stage": "nodemon -r dotenv/config src/server.js dotenv_config_path=.env.stage",

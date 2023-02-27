@@ -7,11 +7,23 @@ const { isProfileOwner, isLoggedIn } = require('../middleware/authorizationHandl
 
 const router = express.Router();
 
-router.get('/', callbackErrorHandler(userController.viewAllUsers));
-router.get('/:id/history', validateId, isLoggedIn, isProfileOwner, callbackErrorHandler(userController.viewHistory));
-router.post('/', validateUser, callbackErrorHandler(userController.registerUser));
-router.get('/:id', validateId, callbackErrorHandler(userController.viewSingleUser));
-router.put('/:id', validateId, isLoggedIn, isProfileOwner, validateUser, callbackErrorHandler(userController.updateUser));
-router.delete('/:id', validateId, isLoggedIn, isProfileOwner, callbackErrorHandler(userController.deleteUser));
+router.get('/',
+/* #swagger.tags = ['User'] */
+  callbackErrorHandler(userController.viewAllUsers));
+router.get('/:id/history',
+/* #swagger.tags = ['User'] */
+  validateId, isLoggedIn, isProfileOwner, callbackErrorHandler(userController.viewHistory));
+router.post('/',
+/* #swagger.tags = ['User'] */
+  validateUser, callbackErrorHandler(userController.registerUser));
+router.get('/:id',
+/* #swagger.tags = ['User'] */
+  validateId, callbackErrorHandler(userController.viewSingleUser));
+router.put('/:id',
+/* #swagger.tags = ['User'] */
+  validateId, isLoggedIn, isProfileOwner, validateUser, callbackErrorHandler(userController.updateUser));
+router.delete('/:id',
+/* #swagger.tags = ['User'] */
+  validateId, isLoggedIn, isProfileOwner, callbackErrorHandler(userController.deleteUser));
 
 module.exports = router;

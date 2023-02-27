@@ -7,10 +7,20 @@ const { isLoggedIn, isAdmin } = require('../middleware/authorizationHandler');
 
 const router = express.Router();
 
-router.get('/', callbackErrorHandler(resultController.viewAllResluts));
-router.post('/', isLoggedIn, isAdmin, validateResult, callbackErrorHandler(resultController.createResult));
-router.get('/:id', validateId, callbackErrorHandler(resultController.viewSingleResult));
-router.put('/:id', validateId, isLoggedIn, isAdmin, validateResult, callbackErrorHandler(resultController.updateResult));
-router.delete('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(resultController.deleteResult));
+router.get('/',
+/* #swagger.tags = ['Result'] */
+  callbackErrorHandler(resultController.viewAllResluts));
+router.post('/',
+/* #swagger.tags = ['Result'] */
+  isLoggedIn, isAdmin, validateResult, callbackErrorHandler(resultController.createResult));
+router.get('/:id',
+/* #swagger.tags = ['Result'] */
+  validateId, callbackErrorHandler(resultController.viewSingleResult));
+router.put('/:id',
+/* #swagger.tags = ['Result'] */
+  validateId, isLoggedIn, isAdmin, validateResult, callbackErrorHandler(resultController.updateResult));
+router.delete('/:id',
+/* #swagger.tags = ['Result'] */
+  validateId, isLoggedIn, isAdmin, callbackErrorHandler(resultController.deleteResult));
 
 module.exports = router;

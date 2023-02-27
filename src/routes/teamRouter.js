@@ -6,9 +6,17 @@ const { validateId, validateTeam } = require('../middleware/requestValidationHan
 
 const router = express.Router();
 
-router.get('/', isLoggedIn, isAdmin, callbackErrorHandler(teamController.viewAllTeams));
-router.get('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(teamController.viewSingleTeam));
-router.put('/:id', validateId, isLoggedIn, isAdmin, validateTeam, callbackErrorHandler(teamController.updateTeam));
-router.delete('/:id', validateId, isLoggedIn, isAdmin, callbackErrorHandler(teamController.deleteTeam));
+router.get('/',
+/* #swagger.tags = ['Team'] */
+  isLoggedIn, isAdmin, callbackErrorHandler(teamController.viewAllTeams));
+router.get('/:id',
+/* #swagger.tags = ['Team'] */
+  validateId, isLoggedIn, isAdmin, callbackErrorHandler(teamController.viewSingleTeam));
+router.put('/:id',
+/* #swagger.tags = ['Team'] */
+  validateId, isLoggedIn, isAdmin, validateTeam, callbackErrorHandler(teamController.updateTeam));
+router.delete('/:id',
+/* #swagger.tags = ['Team'] */
+  validateId, isLoggedIn, isAdmin, callbackErrorHandler(teamController.deleteTeam));
 
 module.exports = router;
