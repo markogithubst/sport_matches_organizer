@@ -4,6 +4,7 @@ const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
 const { HTTP_STATUS } = require('../utils/httpCodes.js');
+const { userHistoryAggregate } = require('../utils/userHistoryAggregate');
 
 const registerUser = async (req, res) => {
   await createOne(User, req, res);
@@ -43,16 +44,12 @@ const deleteUser = async (req, res) => {
 
 const viewHistory = async (req, res) => {
   const { id } = req.params;
-  const exclude = '-registeredPlayers -isCanceled -isFinished -isFilled -num';
-  const matches = await Reservation.find({
-    registeredPlayers: { $in: [id] },
-    isFinished: true
-  }, exclude)
-    .populate('match', 'result');
 
-  if (!matches.length) throw new NotFoundError(ErrorMessages.dataNotFound);
+  const userHistory = await userHistoryAggregate(id);
 
-  res.status(200).json(matches);
+  if (!userHistory.length) throw new NotFoundError(ErrorMessages.dataNotFound);
+
+  res.status(200).json(userHistory);
 };
 
 module.exports = {
