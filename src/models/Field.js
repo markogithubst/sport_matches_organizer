@@ -18,6 +18,15 @@ const fieldSchema = mongoose.Schema({
     maxLength: 50,
     unique: true
 
+  },
+  maxPlayers: {
+    type: Number,
+    default: 0,
+    validate: {
+      validator: function () {
+        return this.maxPlayers % 2 === 0;
+      }
+    }
   }
 
 }, {

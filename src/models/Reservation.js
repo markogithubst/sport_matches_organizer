@@ -65,15 +65,15 @@ const reservationSchema = mongoose.Schema({
 reservationSchema.method('createMatch', async function () {
   const blackTeam = new Team({ color: 'black' });
   const whiteTeam = new Team({ color: 'white' });
-
+  if (this.registeredPlayers.length % 2 !== 0) throw new ValidationError(ErrorMessages.oddNumber);
   this.registeredPlayers.forEach(player => {
     const selector = Math.round(Math.random());
-    if (selector === 0 && blackTeam.players.length < 3) {
+    if (selector === 0 && blackTeam.players.length < this.field.maxPlayers / 2) {
       blackTeam.players.push(player);
-    } else if (selector === 1 && blackTeam.players.length < 3) {
+    } else if (selector === 1 && blackTeam.players.length < this.field.maxPlayers / 2) {
       whiteTeam.players.push(player);
     } else {
-      blackTeam.players.length === 3
+      blackTeam.players.length === this.field.maxPlayers / 2
         ? whiteTeam.players.push(player)
         : blackTeam.players.push(player);
     }
@@ -86,8 +86,8 @@ reservationSchema.method('createMatch', async function () {
 });
 
 reservationSchema.pre('findOneAndUpdate', async function (next) {
-  const doc = await this.model.findOne(this.getQuery());
-  if (doc && doc.num === 6) throw new ValidationError(ErrorMessages.playerLimit);
+  const reservation = await this.model.findOne(this.getQuery()).populate('field');
+  if (reservation && reservation.registeredPlayers.length > reservation.field.maxPlayers) throw new ValidationError(ErrorMessages.playerLimit);
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

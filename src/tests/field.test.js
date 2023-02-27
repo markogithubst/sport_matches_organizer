@@ -60,13 +60,14 @@ describe('Field', () => {
   describe('POST ', () => {
     const longString = '1234567890123456789012345678901123456789012345678901';
     describe.each([
-      [{ city: 'test', name: 'test repeat', address: 'address repeat' }, HTTP_STATUS.CREATED],
-      [{ city: 'test', name: 'test repeat', address: 'address not repeat' }, HTTP_STATUS.CONFLICT],
-      [{ city: 'test', name: 'test not repeat', address: 'address repeat' }, HTTP_STATUS.CONFLICT],
-      [{ city: 'test', name: 'four', address: 'four1234' }, HTTP_STATUS.INVALID],
-      [{ city: 'test', name: 'four1', address: 'seven12' }, HTTP_STATUS.INVALID],
-      [{ city: 'test', name: 'four1', address: longString }, HTTP_STATUS.INVALID],
-      [{ city: 'test', name: longString, address: 'test1242' }, HTTP_STATUS.INVALID]
+      [{ city: 'test', name: 'test repeat', address: 'address repeat', maxPlayers: 10 }, HTTP_STATUS.CREATED],
+      [{ city: 'test', name: 'test repeat', address: 'address not repeat', maxPlayers: 10 }, HTTP_STATUS.CONFLICT],
+      [{ city: 'test', name: 'test not repeat', address: 'address repeat', maxPlayers: 10 }, HTTP_STATUS.CONFLICT],
+      [{ city: 'test', name: 'four', address: 'four1234', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [{ city: 'test', name: 'four1', address: 'seven12', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [{ city: 'test', name: 'four1', address: longString, maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [{ city: 'test', name: longString, address: 'test1242', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [{ city: 'test', name: 'test repeat', address: 'address repeat' }, HTTP_STATUS.INVALID]
 
     ])('Testing field creation with various paramaters', (fieldBody, expectedStatus) => {
       test(`Should respond with a ${expectedStatus} status code`, async () => {
@@ -82,7 +83,8 @@ describe('Field', () => {
       const body = {
         city: 'blabla',
         name: 'blablabla',
-        address: 'blablabla'
+        address: 'blablabla',
+        maxPlayers: 10
       };
       const login = await request(app).post('/login').send({ email: 'jboguno@test.com', password: 'password' });
       const token = login.headers.authorization;
@@ -114,17 +116,18 @@ describe('Field', () => {
     const longString = '1234567890123456789012345678901123456789012345678901';
 
     describe.each([
-      [id, { city: 'test', name: 'test repeat update', address: 'address repeat update' }, HTTP_STATUS.ACCEPTED],
-      [conflictId, { city: 'test', name: 'test repeat', address: 'address not repeat' }, HTTP_STATUS.SERVER_ERROR],
-      [conflictId, { city: 'test', name: 'test not repeat', address: 'address repeat' }, HTTP_STATUS.SERVER_ERROR],
-      [id, { city: 'test', name: 'four', address: 'four1234' }, HTTP_STATUS.INVALID],
-      [id, { city: 'test', name: 'four1', address: 'seven12' }, HTTP_STATUS.INVALID],
-      [id, { city: 'test', name: 'four1', address: longString }, HTTP_STATUS.INVALID],
-      [id, { city: 'test', name: longString, address: 'longString' }, HTTP_STATUS.INVALID],
-      ['id', { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.INVALID],
-      ['id', { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.INVALID],
-      [notExist, { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.NOT_FOUND],
-      [notExist, { city: 'test', name: 'longString', address: 'test1242' }, HTTP_STATUS.NOT_FOUND]
+      [id, { city: 'test', name: 'test repeat update', address: 'address repeat update', maxPlayers: 10 }, HTTP_STATUS.ACCEPTED],
+      [conflictId, { city: 'test', name: 'test repeat', address: 'address not repeat', maxPlayers: 10 }, HTTP_STATUS.SERVER_ERROR],
+      [conflictId, { city: 'test', name: 'test not repeat', address: 'address repeat', maxPlayers: 10 }, HTTP_STATUS.SERVER_ERROR],
+      [id, { city: 'test', name: 'four', address: 'four1234', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [id, { city: 'test', name: 'four1', address: 'seven12', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [id, { city: 'test', name: 'four1', address: longString, maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [id, { city: 'test', name: longString, address: 'longString', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      ['id', { city: 'test', name: 'longString', address: 'test1242', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      ['id', { city: 'test', name: 'longString', address: 'test1242', maxPlayers: 10 }, HTTP_STATUS.INVALID],
+      [notExist, { city: 'test', name: 'longString', address: 'test1242', maxPlayers: 10 }, HTTP_STATUS.NOT_FOUND],
+      [notExist, { city: 'test', name: 'longString', address: 'test1242', maxPlayers: 10 }, HTTP_STATUS.NOT_FOUND],
+      [id, { city: 'test', name: 'test repeat update', address: 'address repeat update' }, HTTP_STATUS.INVALID]
 
     ])('Testing field creation with various paramaters', (id, fieldBody, expectedStatus) => {
       test(`Should respond with a ${expectedStatus} status code`, async () => {

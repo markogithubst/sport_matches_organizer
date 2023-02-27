@@ -5,7 +5,8 @@ const ErrorMessages = {
   notLoggedIn: 'You must be logged in to view this page!',
   unauthorized: 'You are not authorized to view this page!',
   playerLimit: 'Your request violates the maximum allowed players per reservation!',
-  invalidQuery: 'Invalid query!'
+  invalidQuery: 'Invalid query!',
+  oddNumber: 'Number of Registered Players should be an even number'
 };
 
 module.exports = {
