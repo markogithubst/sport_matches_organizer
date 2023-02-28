@@ -54,8 +54,41 @@ const doc = {
       data: [
         {
           _id: '63eb7f4a8bda2a035ce6454c',
-          whiteTeam: '63eb7aa9dda73e59e84aa443',
-          blackTeam: '63eb7aa9dda73e59e84aa444',
+          whiteTeam: {
+            _id: '63eb7aa9dda73e59e84aa443',
+            players: [
+              {
+                _id: '63eb6abf9792291234cd6a75',
+                username: 'jops12'
+              },
+              {
+                _id: '63eb6abf9792291234cd6a76',
+                username: 'marks'
+              },
+              {
+                _id: '63eb6abf9792291234cd6a77',
+                username: 'ivks3'
+              }
+            ]
+          },
+          blackTeam: {
+            _id: '63eb7aa9dda73e59e84aa444',
+            players: [
+              {
+                _id: '63eb788d339bb827e5fe77d2',
+                username: 'franks'
+              },
+              {
+                _id: '63eb788d339bb827e5fe77d3',
+                username: 'lovrks'
+              },
+              {
+                _id: '63eb788d339bb827e5fe77d4',
+                username: 'karlks'
+              }
+            ],
+            color: 'black'
+          },
           result: {
             _id: '63eb7dfe5f58194a262d8276',
             whiteTeamScore: 5,
@@ -63,6 +96,78 @@ const doc = {
           }
         }
       ]
+    },
+    MatchResponse: {
+      success: true,
+      data: {
+        _id: '63eb7f4a8bda2a035ce6454c',
+        whiteTeam: {
+          _id: '63eb7aa9dda73e59e84aa443',
+          players: [
+            {
+              _id: '63eb6abf9792291234cd6a75',
+              username: 'jops12'
+            },
+            {
+              _id: '63eb6abf9792291234cd6a76',
+              username: 'marks'
+            },
+            {
+              _id: '63eb6abf9792291234cd6a77',
+              username: 'ivks3'
+            }
+          ]
+        },
+        blackTeam: {
+          _id: '63eb7aa9dda73e59e84aa444',
+          players: [
+            {
+              _id: '63eb788d339bb827e5fe77d2',
+              username: 'franks'
+            },
+            {
+              _id: '63eb788d339bb827e5fe77d3',
+              username: 'lovrks'
+            },
+            {
+              _id: '63eb788d339bb827e5fe77d4',
+              username: 'karlks'
+            }
+          ],
+          color: 'black'
+        },
+        result: {
+          _id: '63eb7dfe5f58194a262d8276',
+          whiteTeamScore: 5,
+          blackTeamScore: 3
+        }
+      }
+    },
+    MatchBody: {
+      success: true,
+      data: {
+        _id: '63eb7f4a8bda2a035ce6454c',
+        whiteTeam: {
+          _id: '63eb7aa9dda73e59e84aa443',
+          players: [
+            '63eb6abf9792291234cd6a75',
+            '63eb6abf9792291234cd6a76',
+            '63eb6abf9792291234cd6a77'
+          ]
+        },
+        blackTeam: {
+          _id: '63eb7aa9dda73e59e84aa444',
+          players: [
+            '63eb788d339bb827e5fe77d2',
+            '63eb788d339bb827e5fe77d3',
+            '63eb788d339bb827e5fe77d4'
+          ],
+          color: 'black'
+        },
+        result: {
+          _id: '63eb7dfe5f58194a262d8276'
+        }
+      }
     },
     ResultList: {
       success: true,
@@ -85,22 +190,46 @@ const doc = {
         {
           _id: '63eb7aa9dda73e59e84aa443',
           players: [
-            '63eb6abf9792291234cd6a75',
-            '63eb6abf9792291234cd6a76',
-            '63eb6abf9792291234cd6a77'
+            { _id: '63eb6abf9792291234cd6a75', username: 'Username1' },
+            { _id: '63eb6abf9792291234cd6a76', username: 'Username2' },
+            { _id: '63eb6abf9792291234cd6a77', username: 'Username3' }
           ],
           color: 'white'
         },
         {
           _id: '63eb7aa9dda73e59e84aa444',
           players: [
-            '63eb788d339bb827e5fe77d2',
-            '63eb788d339bb827e5fe77d3',
-            '63eb788d339bb827e5fe77d4'
+            { _id: '63eb788d339bb827e5fe77d2', username: 'Username4' },
+            { _id: '63eb788d339bb827e5fe77d3', username: 'Username5' },
+            { _id: '63eb788d339bb827e5fe77d4', username: 'Username6' }
           ],
           color: 'black'
         }
       ]
+    },
+    TeamResponse: {
+      success: true,
+      data:
+        {
+          _id: '63eb7aa9dda73e59e84aa443',
+          players: [
+            { _id: '63eb6abf9792291234cd6a75', username: 'Username1' },
+            { _id: '63eb6abf9792291234cd6a76', username: 'Username2' },
+            { _id: '63eb6abf9792291234cd6a77', username: 'Username3' }
+          ],
+          color: 'white'
+        }
+
+    },
+    TeamBody: {
+      _id: '63eb7aa9dda73e59e84aa443',
+      players: [
+        '63eb6abf9792291234cd6a75',
+        '63eb6abf9792291234cd6a76',
+        '63eb6abf9792291234cd6a77'
+      ],
+      color: 'white'
+
     },
     UserList: {
       success: true,
@@ -227,7 +356,24 @@ const doc = {
     },
 
     InvalidField: {
-      message: '\"name\" length must be at least 5 characters long. \"maxPlayers\" is required. \"city\" is required'
+      message: [
+        '"name" length must be at least 5 characters long',
+        '"address" is required',
+        '"maxPlayers" is required',
+        '"city" is required'
+      ]
+    },
+    InvalidTeam: {
+      message: [
+        '"color" must be one of [white, black]'
+      ]
+    },
+    InvalidMatch: {
+      message: [
+        '"whiteTeam" must be a string',
+        '"blackTeam" must be a string',
+        '"result" is required'
+      ]
     },
     InvalidUser: {
       message: [

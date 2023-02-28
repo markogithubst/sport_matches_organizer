@@ -19,16 +19,6 @@ router.get('/',
             }
 
         }
-  #swagger.responses[400] = {
-  description: 'Responds with invalid request error message',
-  content: {
-      'application/json': {
-          schema: {
-            $ref: '#/definitions/InvalidField'}
-        }
-    }
-  }
-
   #swagger.responses[404] = {
     description: 'Responds with not found error message',
     content: {
@@ -49,22 +39,29 @@ router.get('/',
       }
     }
   }
-
 */
   callbackErrorHandler(fieldController.viewAllFields));
 router.post('/',
 /* #swagger.tags = ['Field']
   #swagger.summary = 'Add a new Field'
-      #swagger.responses[201] = {
-            description: 'Responds with success flag and posted data',
-            content: {
-                'application/json': {
-                    schema: {
-                      $ref: '#/definitions/FieldResponse'
-                    }
+  #swagger.requestBody = {
+      required: true,
+      content: {
+        'application.json': {
+          schema: { $ref: '#/definitions/FieldBody' }
+        }
+      }
+    }
+  #swagger.responses[201] = {
+        description: 'Responds with success flag and posted data',
+        content: {
+            'application/json': {
+                schema: {
+                  $ref: '#/definitions/FieldResponse'
                 }
             }
         }
+    }
   #swagger.responses[400] = {
     description: 'Responds with invalid request error message',
     content: {
@@ -156,16 +153,24 @@ router.get('/:id',
 router.put('/:id',
 /* #swagger.tags = ['Field']
   #swagger.summary = 'Update an existig field'
-      #swagger.responses[202] = {
-            description: 'Responds with success flag and updated data',
-            content: {
-                'application/json': {
-                    schema: {
-                      $ref: '#/definitions/FieldResponse'
-                    }
-                }
-            }
-        }
+  #swagger.requestBody = {
+    required: true,
+    content: {
+      'application.json': {
+        schema: { $ref: '#/definitions/FieldBody' }
+      }
+    }
+  }
+  #swagger.responses[202] = {
+          description: 'Responds with success flag and updated data',
+          content: {
+              'application/json': {
+                  schema: {
+                    $ref: '#/definitions/FieldResponse'
+                  }
+              }
+          }
+      }
   #swagger.responses[400] = {
     description: 'Responds with invalid request error message',
     content: {
@@ -192,6 +197,16 @@ router.put('/:id',
         'application/json': {
             schema: {
               $ref: '#/definitions/httpUnauthorized'
+            }
+        }
+    }
+  }
+    #swagger.responses[404] = {
+    description: 'Responds with notFound error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpNotFound'
             }
         }
     }

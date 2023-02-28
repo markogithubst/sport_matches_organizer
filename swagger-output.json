@@ -30,16 +30,6 @@
               }
             }
           },
-          "400": {
-            "description": "Responds with invalid request error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvalidField"
-                }
-              }
-            }
-          },
           "404": {
             "description": "Responds with not found error message",
             "content": {
@@ -126,6 +116,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/httpInternalError"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldBody"
               }
             }
           }
@@ -257,6 +257,16 @@
               }
             }
           },
+          "404": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
           "500": {
             "description": "Responds with error message",
             "content": {
@@ -264,6 +274,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/httpInternalError"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/FieldBody"
               }
             }
           }
@@ -351,9 +371,41 @@
         "tags": [
           "Match"
         ],
+        "summary": "Retrieve a list of matches",
         "description": "",
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "Displaying a list of matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
         "security": []
       }
     },
@@ -362,6 +414,7 @@
         "tags": [
           "Match"
         ],
+        "summary": "Retrieve a single Match",
         "description": "",
         "parameters": [
           {
@@ -374,8 +427,45 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Displaying a list of matches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidMatch"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         },
         "security": []
@@ -384,6 +474,7 @@
         "tags": [
           "Match"
         ],
+        "summary": "Update a single Match",
         "description": "",
         "parameters": [
           {
@@ -403,8 +494,75 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Responds with success flag and updated data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidMatch"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchBody"
+              }
+            }
           }
         }
       },
@@ -412,6 +570,7 @@
         "tags": [
           "Match"
         ],
+        "summary": "Delete a single Match",
         "description": "",
         "parameters": [
           {
@@ -431,8 +590,75 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag and deleted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchBody"
+              }
+            }
           }
         }
       }
@@ -777,6 +1003,7 @@
         "tags": [
           "Team"
         ],
+        "summary": "Retrieve a list of teams",
         "description": "",
         "parameters": [
           {
@@ -787,7 +1014,58 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Responds with success flag and requested data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/team/{id}": {
@@ -795,6 +1073,7 @@
         "tags": [
           "Team"
         ],
+        "summary": "Retrieve a single team",
         "description": "",
         "parameters": [
           {
@@ -814,8 +1093,58 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with a success flag and requested data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       },
@@ -823,6 +1152,7 @@
         "tags": [
           "Team"
         ],
+        "summary": "Update a single Team",
         "description": "",
         "parameters": [
           {
@@ -842,8 +1172,75 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Responds with updated team and success flag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidTeam"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeamBody"
+              }
+            }
           }
         }
       },
@@ -851,6 +1248,7 @@
         "tags": [
           "Team"
         ],
+        "summary": "Delete a single Team",
         "description": "",
         "parameters": [
           {
@@ -870,8 +1268,58 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with a success flag and delete data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -1425,12 +1873,58 @@
                   "example": "63eb7f4a8bda2a035ce6454c"
                 },
                 "whiteTeam": {
-                  "type": "string",
-                  "example": "63eb7aa9dda73e59e84aa443"
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63eb7aa9dda73e59e84aa443"
+                    },
+                    "players": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "63eb6abf9792291234cd6a77"
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "ivks3"
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 "blackTeam": {
-                  "type": "string",
-                  "example": "63eb7aa9dda73e59e84aa444"
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63eb7aa9dda73e59e84aa444"
+                    },
+                    "players": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "63eb788d339bb827e5fe77d4"
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "karlks"
+                          }
+                        }
+                      }
+                    },
+                    "color": {
+                      "type": "string",
+                      "example": "black"
+                    }
+                  }
                 },
                 "result": {
                   "type": "object",
@@ -1447,6 +1941,166 @@
                       "type": "number",
                       "example": 3
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "MatchResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "63eb7f4a8bda2a035ce6454c"
+              },
+              "whiteTeam": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "63eb7aa9dda73e59e84aa443"
+                  },
+                  "players": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "63eb6abf9792291234cd6a77"
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "ivks3"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "blackTeam": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "63eb7aa9dda73e59e84aa444"
+                  },
+                  "players": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "63eb788d339bb827e5fe77d4"
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "karlks"
+                        }
+                      }
+                    }
+                  },
+                  "color": {
+                    "type": "string",
+                    "example": "black"
+                  }
+                }
+              },
+              "result": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "63eb7dfe5f58194a262d8276"
+                  },
+                  "whiteTeamScore": {
+                    "type": "number",
+                    "example": 5
+                  },
+                  "blackTeamScore": {
+                    "type": "number",
+                    "example": 3
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "MatchBody": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "63eb7f4a8bda2a035ce6454c"
+              },
+              "whiteTeam": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "63eb7aa9dda73e59e84aa443"
+                  },
+                  "players": {
+                    "type": "array",
+                    "example": [
+                      "63eb6abf9792291234cd6a75",
+                      "63eb6abf9792291234cd6a76",
+                      "63eb6abf9792291234cd6a77"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "blackTeam": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "63eb7aa9dda73e59e84aa444"
+                  },
+                  "players": {
+                    "type": "array",
+                    "example": [
+                      "63eb788d339bb827e5fe77d2",
+                      "63eb788d339bb827e5fe77d3",
+                      "63eb788d339bb827e5fe77d4"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "color": {
+                    "type": "string",
+                    "example": "black"
+                  }
+                }
+              },
+              "result": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "63eb7dfe5f58194a262d8276"
                   }
                 }
               }
@@ -1501,13 +2155,18 @@
                 },
                 "players": {
                   "type": "array",
-                  "example": [
-                    "63eb788d339bb827e5fe77d2",
-                    "63eb788d339bb827e5fe77d3",
-                    "63eb788d339bb827e5fe77d4"
-                  ],
                   "items": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "63eb788d339bb827e5fe77d4"
+                      },
+                      "username": {
+                        "type": "string",
+                        "example": "Username6"
+                      }
+                    }
                   }
                 },
                 "color": {
@@ -1516,6 +2175,68 @@
                 }
               }
             }
+          }
+        }
+      },
+      "TeamResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "63eb7aa9dda73e59e84aa443"
+              },
+              "players": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63eb6abf9792291234cd6a77"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "Username3"
+                    }
+                  }
+                }
+              },
+              "color": {
+                "type": "string",
+                "example": "white"
+              }
+            }
+          }
+        }
+      },
+      "TeamBody": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "63eb7aa9dda73e59e84aa443"
+          },
+          "players": {
+            "type": "array",
+            "example": [
+              "63eb6abf9792291234cd6a75",
+              "63eb6abf9792291234cd6a76",
+              "63eb6abf9792291234cd6a77"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "color": {
+            "type": "string",
+            "example": "white"
           }
         }
       },
@@ -1868,8 +2589,46 @@
         "type": "object",
         "properties": {
           "message": {
-            "type": "string",
-            "example": "\"name\" length must be at least 5 characters long. \"maxPlayers\" is required. \"city\" is required"
+            "type": "array",
+            "example": [
+              "\"name\" length must be at least 5 characters long",
+              "\"address\" is required",
+              "\"maxPlayers\" is required",
+              "\"city\" is required"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "InvalidTeam": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"color\" must be one of [white, black]"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "InvalidMatch": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"whiteTeam\" must be a string",
+              "\"blackTeam\" must be a string",
+              "\"result\" is required"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },

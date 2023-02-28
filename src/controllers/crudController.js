@@ -2,16 +2,18 @@ const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
 const { HTTP_STATUS } = require('../utils/httpCodes');
 
+const exclude = '-updatedAt -createdAt -password -role';
+
 const getOne = async (model, req, res) => {
   const { id } = req.params;
-  const dataFound = await model.findById(id);
+  const dataFound = await model.findById(id, exclude).lean();
   if (!dataFound) throw new NotFoundError(ErrorMessages.dataNotFound);
 
   res.status(HTTP_STATUS.OK).json({ success: true, data: dataFound });
 };
 
 const getAll = async (model, req, res) => {
-  const dataFound = await model.find();
+  const dataFound = await model.find({}, exclude).lean();
   res.status(HTTP_STATUS.OK).json({ success: true, data: dataFound });
 };
 

@@ -15,8 +15,7 @@ const matchSchema = mongoose.Schema({
   },
   result: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Result',
-    autopopulate: true
+    ref: 'Result'
 
   }
 }, {
@@ -31,6 +30,9 @@ const matchSchema = mongoose.Schema({
   }
 });
 
-matchSchema.plugin(require('mongoose-autopopulate'));
+matchSchema.pre('find', function () {
+  const exclude = '-createdAt -updatedAt';
+  this.populate('result', exclude).populate('whiteTeam', exclude).populate('blackTeam', exclude);
+});
 
 module.exports = mongoose.model('Match', matchSchema);

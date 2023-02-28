@@ -4,6 +4,7 @@ const teamSchema = mongoose.Schema({
   players: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+
   }],
   color: {
     type: String,
@@ -19,6 +20,13 @@ const teamSchema = mongoose.Schema({
       delete ret.updatedAt;
     }
   }
+});
+teamSchema.pre('find', async function () {
+  this.populate({
+    path: 'players',
+    model: 'User',
+    select: 'username'
+  });
 });
 
 module.exports = mongoose.model('Team', teamSchema);
