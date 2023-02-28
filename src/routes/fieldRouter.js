@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/',
 /* #swagger.tags = ['Field']
+  #swagger.security = []
   #swagger.summary = 'Retrieve a list of fields'
     #swagger.responses[200] = {
             description: 'Displaying a list of fields',
@@ -16,6 +17,7 @@ router.get('/',
                     schema: { $ref: '#/definitions/FieldList' }
                 }
             }
+
         }
   #swagger.responses[400] = {
   description: 'Responds with invalid request error message',
@@ -107,6 +109,7 @@ router.post('/',
   isLoggedIn, isAdmin, validateField, callbackErrorHandler(fieldController.createField));
 router.get('/:id',
   /* #swagger.tags = ['Field']
+  #swagger.security = []
   #swagger.summary = 'Get a single Field'
     #swagger.responses[200] = {
             description: 'Displaying a list of fields',

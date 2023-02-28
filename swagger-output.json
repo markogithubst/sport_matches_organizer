@@ -60,7 +60,8 @@
               }
             }
           }
-        }
+        },
+        "security": []
       },
       "post": {
         "tags": [
@@ -189,7 +190,8 @@
               }
             }
           }
-        }
+        },
+        "security": []
       },
       "put": {
         "tags": [
@@ -351,7 +353,8 @@
         ],
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": []
       }
     },
     "/match/{id}": {
@@ -374,7 +377,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": []
       },
       "put": {
         "tags": [
@@ -440,7 +444,8 @@
         ],
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": []
       },
       "post": {
         "tags": [
@@ -470,7 +475,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": []
       }
     },
     "/reservation/{id}": {
@@ -493,7 +499,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": []
       },
       "put": {
         "tags": [
@@ -665,7 +672,8 @@
         ],
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": []
       },
       "post": {
         "tags": [
@@ -704,7 +712,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": []
       },
       "put": {
         "tags": [
@@ -874,7 +883,8 @@
         ],
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": []
       },
       "post": {
         "tags": [
@@ -882,7 +892,8 @@
         ],
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": []
       }
     },
     "/user/{id}/history": {
@@ -935,7 +946,8 @@
           "400": {
             "description": "Bad Request"
           }
-        }
+        },
+        "security": []
       },
       "put": {
         "tags": [
@@ -1001,7 +1013,8 @@
         ],
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": []
       }
     },
     "/logout": {
@@ -1011,17 +1024,12 @@
         ],
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": []
       }
     }
   },
   "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
-    },
     "schemas": {
       "FieldList": {
         "type": "object",
@@ -1438,6 +1446,12 @@
             "example": "\"name\" length must be at least 5 characters long. \"maxPlayers\" is required. \"city\" is required"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   },

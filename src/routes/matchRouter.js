@@ -7,10 +7,14 @@ const { validateId, validateMatch } = require('../middleware/requestValidationHa
 const router = express.Router();
 
 router.get('/',
-/* #swagger.tags = ['Match'] */
+/* #swagger.tags = ['Match']
+  #swagger.security = []
+*/
   callbackErrorHandler(matchController.viewAllMacthes));
 router.get('/:id',
-/* #swagger.tags = ['Match'] */
+/* #swagger.tags = ['Match']
+  #swagger.security = []
+*/
   validateId, callbackErrorHandler(matchController.viewSingleMatch));
 router.put('/:id',
 /* #swagger.tags = ['Match'] */

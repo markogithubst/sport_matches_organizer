@@ -13,15 +13,13 @@ const doc = {
     description: 'Simple API overview'
   },
   host: `localhost:${process.env.PORT}`,
-  schemes: ['http'],
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer'
-      }
+  securityDefinitions: {
+    bearerAuth: {
+      type: 'http',
+      scheme: 'bearer'
     }
   },
+  schemes: ['http'],
   definitions: {
     FieldList: {
       success: true,

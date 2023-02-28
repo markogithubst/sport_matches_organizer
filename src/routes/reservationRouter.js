@@ -8,16 +8,22 @@ const { isLoggedIn, isAdmin, isProfileOwner } = require('../middleware/authoriza
 const router = express.Router();
 
 router.get('/',
-/* #swagger.tags = ['Reservation'] */
+/* #swagger.tags = ['Reservation']
+  #swagger.security = []
+*/
   callbackErrorHandler(reservationController.viewAllReservations));
 router.post('/',
 /* #swagger.tags = ['Reservation'] */
   isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.createReservation));
 router.get('/filter',
-/* #swagger.tags = ['Reservation'] */
+/* #swagger.tags = ['Reservation']
+  #swagger.security = []
+*/
   validateQuery, callbackErrorHandler(reservationController.filterReservation));
 router.get('/:id',
-/* #swagger.tags = ['Reservation'] */
+/* #swagger.tags = ['Reservation']
+#swagger.security = []
+*/
   validateId, callbackErrorHandler(reservationController.viewSingleReservation));
 router.put('/:id',
 /* #swagger.tags = ['Reservation'] */

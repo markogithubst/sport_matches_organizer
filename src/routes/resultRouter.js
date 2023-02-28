@@ -8,13 +8,17 @@ const { isLoggedIn, isAdmin } = require('../middleware/authorizationHandler');
 const router = express.Router();
 
 router.get('/',
-/* #swagger.tags = ['Result'] */
+/* #swagger.tags = ['Result']
+  #swagger.security = []
+*/
   callbackErrorHandler(resultController.viewAllResluts));
 router.post('/',
 /* #swagger.tags = ['Result'] */
   isLoggedIn, isAdmin, validateResult, callbackErrorHandler(resultController.createResult));
 router.get('/:id',
-/* #swagger.tags = ['Result'] */
+/* #swagger.tags = ['Result']
+  #swagger.security = []
+*/
   validateId, callbackErrorHandler(resultController.viewSingleResult));
 router.put('/:id',
 /* #swagger.tags = ['Result'] */
