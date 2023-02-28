@@ -3,7 +3,7 @@ const express = require('express');
 const reservationController = require('../controllers/reservationController');
 const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
 const { validateId, validateDoubleId, validateQuery, validateReservation } = require('../middleware/requestValidationHandler');
-const { isLoggedIn, isAdmin } = require('../middleware/authorizationHandler');
+const { isLoggedIn, isAdmin, isProfileOwner } = require('../middleware/authorizationHandler');
 
 const router = express.Router();
 
@@ -24,10 +24,10 @@ router.put('/:id',
   validateId, isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.updateReservation));
 router.put('/:id/add-player/:playerId',
 /* #swagger.tags = ['Reservation'] */
-  validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.addPlayerToReservation));
+  validateDoubleId, isLoggedIn, isProfileOwner, callbackErrorHandler(reservationController.addPlayerToReservation));
 router.put('/:id/player-withdraw/:playerId',
 /* #swagger.tags = ['Reservation'] */
-  validateDoubleId, isLoggedIn, callbackErrorHandler(reservationController.removePlayerFromReservation));
+  validateDoubleId, isLoggedIn, isProfileOwner, callbackErrorHandler(reservationController.removePlayerFromReservation));
 router.delete('/:id',
 /* #swagger.tags = ['Reservation'] */
   validateId, isLoggedIn, isAdmin, callbackErrorHandler(reservationController.deleteReservation));

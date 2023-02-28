@@ -16,9 +16,21 @@
         "tags": [
           "Field"
         ],
+        "summary": "Retrieve a list of fields",
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Displaying a list of fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldList"
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
         "tags": [
@@ -792,6 +804,333 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "FieldList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb76f1c6a15537f1bbb59f"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Test Field 1"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Split"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Test Address 1"
+                },
+                "maxPlayers": {
+                  "type": "number",
+                  "example": 10
+                }
+              }
+            }
+          }
+        }
+      },
+      "FieldBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Test Field 1"
+          },
+          "city": {
+            "type": "string",
+            "example": "Split"
+          },
+          "address": {
+            "type": "string",
+            "example": "Test Address 1"
+          },
+          "maxPlayers": {
+            "type": "number",
+            "example": 10
+          }
+        },
+        "required": [
+          "name",
+          "city",
+          "address",
+          "maxPlayers"
+        ]
+      },
+      "MatchList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb7f4a8bda2a035ce6454c"
+                },
+                "whiteTeam": {
+                  "type": "string",
+                  "example": "63eb7aa9dda73e59e84aa443"
+                },
+                "blackTeam": {
+                  "type": "string",
+                  "example": "63eb7aa9dda73e59e84aa444"
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63eb7dfe5f58194a262d8276"
+                    },
+                    "whiteTeamScore": {
+                      "type": "number",
+                      "example": 5
+                    },
+                    "blackTeamScore": {
+                      "type": "number",
+                      "example": 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ResultList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb7dfe5f58194a262d8277"
+                },
+                "whiteTeamScore": {
+                  "type": "number",
+                  "example": 5
+                },
+                "blackTeamScore": {
+                  "type": "number",
+                  "example": 4
+                }
+              }
+            }
+          }
+        }
+      },
+      "TeamList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb7aa9dda73e59e84aa444"
+                },
+                "players": {
+                  "type": "array",
+                  "example": [
+                    "63eb788d339bb827e5fe77d2",
+                    "63eb788d339bb827e5fe77d3",
+                    "63eb788d339bb827e5fe77d4"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "color": {
+                  "type": "string",
+                  "example": "black"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UserList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb788d339bb827e5fe72d5"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "user1"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "user1"
+                },
+                "surname": {
+                  "type": "string",
+                  "example": "user"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "user1@test.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "+1993288858"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "USER"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UserBody": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "name": {
+            "type": "string",
+            "example": "user1"
+          },
+          "surname": {
+            "type": "string",
+            "example": "user"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          },
+          "email": {
+            "type": "string",
+            "example": "user1@test.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1993288858"
+          },
+          "role": {
+            "type": "string",
+            "example": "USER"
+          }
+        },
+        "required": [
+          "username",
+          "name",
+          "surname",
+          "password",
+          "email",
+          "phone",
+          "role"
+        ]
+      },
+      "ReservationList": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb7dfe5f58194a262d8222"
+                },
+                "field": {
+                  "type": "string",
+                  "example": "63eb76f1c6a15537f1bbb59f"
+                },
+                "match": {
+                  "type": "string",
+                  "example": "63eb7f4a8bda2a035ce6454c"
+                },
+                "num": {
+                  "type": "number",
+                  "example": 0
+                },
+                "time": {
+                  "type": "string",
+                  "example": "2023-05-27T12:00:00.000Z"
+                },
+                "isCanceled": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "isFinished": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "isScheduled": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "registeredPlayers": {
+                  "type": "array",
+                  "example": [
+                    "63eb6abf9792291234cd6a75",
+                    "63eb6abf9792291234cd6a76",
+                    "63eb6abf9792291234cd6a77",
+                    "63eb788d339bb827e5fe77d2",
+                    "63eb788d339bb827e5fe77d3",
+                    "63eb788d339bb827e5fe77d4"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },

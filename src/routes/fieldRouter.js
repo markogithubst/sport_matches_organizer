@@ -7,7 +7,18 @@ const { validateId, validateField } = require('../middleware/requestValidationHa
 const router = express.Router();
 
 router.get('/',
-/* #swagger.tags = ['Field'] */
+/* #swagger.tags = ['Field']
+  #swagger.summary = 'Retrieve a list of fields'
+    #swagger.responses[200] = {
+            description: 'Displaying a list of fields',
+            content: {
+                'application/json': {
+                    schema: { $ref: '#/definitions/FieldList' }
+                }
+            }
+        }
+
+*/
   callbackErrorHandler(fieldController.viewAllFields));
 router.post('/',
 /* #swagger.tags = ['Field'] */
