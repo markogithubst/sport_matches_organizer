@@ -10,5 +10,11 @@ services:
     volumes:
       - mongodb_data_container:/data/db
 
+  maildev_container:
+    image: maildev/maildev
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+
 volumes:
-  mongodb_data_container: 
+  mongodb_data_container:

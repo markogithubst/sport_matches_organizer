@@ -143,6 +143,63 @@ describe('Testing all RESERVATION routes', () => {
   });
 
   describe('Testing PUT RESERVATION route', () => {
+    test(`Testing PUT RESERVATION route, not logged in. Should respond with a ${HTTP_STATUS.NO_AUTH} status code to PUT reservation`, async () => {
+      const reservationId = '63eb7dfe5f58194a262d8224';
+      const updatedReservation = {
+        field: '63eb76f1c6a15537f1bbb59f',
+        match: '63eb7f4a8bda2a035ce6454c',
+        time: '2023-03-26T17:00:00Z',
+        isCanceled: false,
+        isScheduled: true,
+        registeredPlayers: [
+          '63eb6abf9792291234cd6a75',
+          '63eb6abf9792291234cd6a76',
+          '63eb6abf9792291234cd6a77',
+          '63eb788d339bb827e5fe77d2',
+          '63eb788d339bb827e5fe77d3',
+          '63eb788d339bb827e5fe77d4'
+        ]
+      };
+      const response = await request(app)
+        .put(`/reservation/${reservationId}`)
+        .send(updatedReservation);
+      expect(response.statusCode).toBe(HTTP_STATUS.NO_AUTH);
+      expect(response.body).toEqual(expect.any(Object));
+      expect(response.headers['content-type']).toMatch(/json/);
+    });
+
+    test(`Testing PUT RESERVATION route with USER role. Should respond with a ${HTTP_STATUS.FORBIDDEN} status code to PUT reservation`, async () => {
+      const login = await request(app).post('/login').send({ email: 'user9@test.com', password: 'password' });
+      const token = login.headers.authorization;
+      const reservationId = '63eb7dfe5f58194a262d8224';
+      const updatedReservation = {
+        field: '63eb76f1c6a15537f1bbb59f',
+        match: '63eb7f4a8bda2a035ce6454c',
+        time: '2023-03-26T17:00:00Z',
+        isCanceled: false,
+        isScheduled: true,
+        registeredPlayers: [
+          '63eb6abf9792291234cd6a75',
+          '63eb6abf9792291234cd6a76',
+          '63eb6abf9792291234cd6a77',
+          '63eb788d339bb827e5fe77d2',
+          '63eb788d339bb827e5fe77d3',
+          '63eb788d339bb827e5fe77d4'
+        ]
+      };
+      const response = await request(app)
+        .put(`/reservation/${reservationId}`)
+        .set('Authorization', `${token}`)
+        .send(updatedReservation);
+      expect(response.statusCode).toBe(HTTP_STATUS.FORBIDDEN);
+      expect(response.body).toEqual(expect.any(Object));
+      expect(response.headers['content-type']).toMatch(/json/);
+      expect(response.body).toEqual(
+        {
+          message: expect.any(String)
+        });
+    });
+
     describe.each(putReservationData)('Testing PUT RESERVATION route ADMIN role', (reservationId, updatedReservation, expectedStatus) => {
       test(`should respond with a ${expectedStatus} status code`, async () => {
         const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
@@ -152,61 +209,6 @@ describe('Testing all RESERVATION routes', () => {
           .set('Authorization', `${token}`)
           .send(updatedReservation);
         expect(response.statusCode).toBe(expectedStatus);
-        expect(response.body).toEqual(expect.any(Object));
-        expect(response.headers['content-type']).toMatch(/json/);
-      });
-      test(`Testing PUT RESERVATION route with USER role. Should respond with a ${HTTP_STATUS.FORBIDDEN} status code to PUT reservation`, async () => {
-        const login = await request(app).post('/login').send({ email: 'user9@test.com', password: 'password' });
-        const token = login.headers.authorization;
-        const reservationId = '63eb7dfe5f58194a262d8224';
-        const updatedReservation = {
-          field: '63eb76f1c6a15537f1bbb59f',
-          match: '63eb7f4a8bda2a035ce6454c',
-          time: '2023-03-26T17:00:00Z',
-          isCanceled: false,
-          isScheduled: true,
-          registeredPlayers: [
-            '63eb6abf9792291234cd6a75',
-            '63eb6abf9792291234cd6a76',
-            '63eb6abf9792291234cd6a77',
-            '63eb788d339bb827e5fe77d2',
-            '63eb788d339bb827e5fe77d3',
-            '63eb788d339bb827e5fe77d4'
-          ]
-        };
-        const response = await request(app)
-          .put(`/reservation/${reservationId}`)
-          .set('Authorization', `${token}`)
-          .send(updatedReservation);
-        expect(response.statusCode).toBe(HTTP_STATUS.FORBIDDEN);
-        expect(response.body).toEqual(expect.any(Object));
-        expect(response.headers['content-type']).toMatch(/json/);
-        expect(response.body).toEqual(
-          {
-            message: expect.any(String)
-          });
-      });
-      test(`Testing PUT RESERVATION route, not logged in. Should respond with a ${HTTP_STATUS.NO_AUTH} status code to PUT reservation`, async () => {
-        const reservationId = '63eb7dfe5f58194a262d8224';
-        const updatedReservation = {
-          field: '63eb76f1c6a15537f1bbb59f',
-          match: '63eb7f4a8bda2a035ce6454c',
-          time: '2023-03-26T17:00:00Z',
-          isCanceled: false,
-          isScheduled: true,
-          registeredPlayers: [
-            '63eb6abf9792291234cd6a75',
-            '63eb6abf9792291234cd6a76',
-            '63eb6abf9792291234cd6a77',
-            '63eb788d339bb827e5fe77d2',
-            '63eb788d339bb827e5fe77d3',
-            '63eb788d339bb827e5fe77d4'
-          ]
-        };
-        const response = await request(app)
-          .put(`/reservation/${reservationId}`)
-          .send(updatedReservation);
-        expect(response.statusCode).toBe(HTTP_STATUS.NO_AUTH);
         expect(response.body).toEqual(expect.any(Object));
         expect(response.headers['content-type']).toMatch(/json/);
       });

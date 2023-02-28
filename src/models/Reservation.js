@@ -4,6 +4,7 @@ const { ErrorMessages } = require('../errors/ErrorMessages');
 
 const Team = require('./Team');
 const Match = require('./Match');
+const Field = require('./Field');
 
 const reservationSchema = mongoose.Schema({
 
@@ -87,7 +88,17 @@ reservationSchema.method('createMatch', async function () {
 
 reservationSchema.pre('findOneAndUpdate', async function (next) {
   const reservation = await this.model.findOne(this.getQuery()).populate('field');
-  if (reservation && reservation.registeredPlayers.length > reservation.field.maxPlayers) throw new ValidationError(ErrorMessages.playerLimit);
+  if (this._update.registeredPlayers) {
+    const playersLengthFromPut = this._update.registeredPlayers.length;
+    if (reservation && playersLengthFromPut > reservation.field.maxPlayers) throw new ValidationError(ErrorMessages.playerLimit);
+  }
+  if (reservation && reservation.registeredPlayers.length === reservation.field.maxPlayers) throw new ValidationError(ErrorMessages.playerLimit);
+});
+
+reservationSchema.pre('save', async function (next) {
+  const field = await Field.findById(this.field);
+  const maxPlayers = field.maxPlayers;
+  if (this.registeredPlayers.length > maxPlayers) throw new ValidationError(ErrorMessages.playerLimit);
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

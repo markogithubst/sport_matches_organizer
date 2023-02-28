@@ -47,7 +47,7 @@ const viewHistory = async (req, res) => {
 
   // eslint-disable-next-line max-len
   const userHistory = await Reservation.find({ registeredPlayers: { $in: [id] } }, exclude)
-    .populate('field ', 'name')
+    .populate('field', 'name')
     .populate({
       path: 'match',
       populate: {

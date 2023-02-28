@@ -124,7 +124,9 @@ const postReservationData = [
       '63eb788d339bb827e5fe77d2',
       '63eb6abf9792291234cd6a76',
       '63eb6abf9792291234cd6a77',
-      '63eb788d339bb827e5fe77d2'
+      '63eb788d339bb827e5fe77d2',
+      '63eb788d339bb827e5fe77d3',
+      '63eb788d339bb827e5fe77d4'
     ]
   },
   HTTP_STATUS.INVALID],
