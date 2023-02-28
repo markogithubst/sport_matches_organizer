@@ -124,6 +124,71 @@ const doc = {
       $phone: '+1993288858',
       $role: 'USER'
     },
+    UserResponse: {
+      success: true,
+      data: {
+        _id: '63eb788d339bb827e5fe72d5',
+        username: 'user1',
+        name: 'user1',
+        surname: 'user',
+        email: 'user1@test.com',
+        phone: '+1993288858',
+        role: 'USER'
+      }
+    },
+    UserHistory:
+      [
+        {
+          _id: '63eb7dfe5f58194a262d8222',
+          field: {
+            _id: '63eb76f1c6a15537f1bbb59f',
+            name: 'Test Field 1'
+          },
+          match: {
+            _id: '63eb7f4a8bda2a035ce6454c',
+            whiteTeam: {
+              _id: '63eb7aa9dda73e59e84aa443',
+              players: [
+                {
+                  _id: '63eb6abf9792291234cd6a75',
+                  username: 'jops'
+                },
+                {
+                  _id: '63eb6abf9792291234cd6a76',
+                  username: 'marks'
+                },
+                {
+                  _id: '63eb6abf9792291234cd6a77',
+                  username: 'ivks3'
+                }
+              ]
+            },
+            blackTeam: {
+              _id: '63eb7aa9dda73e59e84aa444',
+              players: [
+                {
+                  _id: '63eb788d339bb827e5fe77d2',
+                  username: 'franks'
+                },
+                {
+                  _id: '63eb788d339bb827e5fe77d3',
+                  username: 'lovrks'
+                },
+                {
+                  _id: '63eb788d339bb827e5fe77d4',
+                  username: 'karlks'
+                }
+              ]
+            },
+            result: {
+              _id: '63eb7dfe5f58194a262d8276',
+              whiteTeamScore: 5,
+              blackTeamScore: 3
+            }
+          },
+          time: '2023-05-27T12:00:00.000Z'
+        }
+      ],
     ReservationList: {
       success: true,
       data: [{
@@ -163,6 +228,18 @@ const doc = {
 
     InvalidField: {
       message: '\"name\" length must be at least 5 characters long. \"maxPlayers\" is required. \"city\" is required'
+    },
+    InvalidUser: {
+      message: [
+        '\"username\" is required',
+        '\"name\" is required',
+        '\"email\" must be a valid email',
+        '\"password\" length must be at least 8 characters long',
+        '\"phone\" with value \"385993404575\" fails to match the required pattern: /^\\+(?:\\d\\s?){6,14}\\d$/'
+      ]
+    },
+    InvalidId: {
+      message: '\"id\" length must be at least 24 characters long'
     }
 
   },

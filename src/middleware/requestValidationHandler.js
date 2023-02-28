@@ -21,7 +21,7 @@ const validateDoubleId = (req, res, next) => {
 const validateQuery = (req, res, next) => {
   const { error } = querySchema.validate(req.query);
   if (error) {
-    return res.status(400).json({ message: error.message || error.details.map(err => err.message) });
+    return res.status(400).json({ message: error.details.map(err => err.message) });
   }
   next();
 };

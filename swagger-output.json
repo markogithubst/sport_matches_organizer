@@ -881,19 +881,113 @@
         "tags": [
           "User"
         ],
+        "summary": "Retrieve a list of users",
         "description": "",
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "Displaying a list of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
         "security": []
       },
       "post": {
         "tags": [
           "User"
         ],
+        "summary": "Add a new User",
         "description": "",
         "parameters": [],
-        "responses": {},
-        "security": []
+        "responses": {
+          "201": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBody"
+              }
+            }
+          }
+        }
       }
     },
     "/user/{id}/history": {
@@ -901,6 +995,7 @@
         "tags": [
           "User"
         ],
+        "summary": "View history of user",
         "description": "",
         "parameters": [
           {
@@ -910,18 +1005,58 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with history data for user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHistory"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -931,6 +1066,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Retrieve a single user",
         "description": "",
         "parameters": [
           {
@@ -943,8 +1079,45 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Displaying a single user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         },
         "security": []
@@ -953,6 +1126,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Update User",
         "description": "",
         "parameters": [
           {
@@ -972,8 +1146,65 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserBody"
+              }
+            }
           }
         }
       },
@@ -981,6 +1212,7 @@
         "tags": [
           "User"
         ],
+        "summary": "Delete one User",
         "description": "",
         "parameters": [
           {
@@ -1000,8 +1232,55 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag and deleted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -1327,6 +1606,153 @@
           "role"
         ]
       },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "63eb788d339bb827e5fe72d5"
+              },
+              "username": {
+                "type": "string",
+                "example": "user1"
+              },
+              "name": {
+                "type": "string",
+                "example": "user1"
+              },
+              "surname": {
+                "type": "string",
+                "example": "user"
+              },
+              "email": {
+                "type": "string",
+                "example": "user1@test.com"
+              },
+              "phone": {
+                "type": "string",
+                "example": "+1993288858"
+              },
+              "role": {
+                "type": "string",
+                "example": "USER"
+              }
+            }
+          }
+        }
+      },
+      "UserHistory": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "63eb7dfe5f58194a262d8222"
+            },
+            "field": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb76f1c6a15537f1bbb59f"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Test Field 1"
+                }
+              }
+            },
+            "match": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb7f4a8bda2a035ce6454c"
+                },
+                "whiteTeam": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63eb7aa9dda73e59e84aa443"
+                    },
+                    "players": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "63eb6abf9792291234cd6a77"
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "ivks3"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "blackTeam": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63eb7aa9dda73e59e84aa444"
+                    },
+                    "players": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "63eb788d339bb827e5fe77d4"
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "karlks"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "63eb7dfe5f58194a262d8276"
+                    },
+                    "whiteTeamScore": {
+                      "type": "number",
+                      "example": 5
+                    },
+                    "blackTeamScore": {
+                      "type": "number",
+                      "example": 3
+                    }
+                  }
+                }
+              }
+            },
+            "time": {
+              "type": "string",
+              "example": "2023-05-27T12:00:00.000Z"
+            }
+          }
+        }
+      },
       "ReservationList": {
         "type": "object",
         "properties": {
@@ -1444,6 +1870,33 @@
           "message": {
             "type": "string",
             "example": "\"name\" length must be at least 5 characters long. \"maxPlayers\" is required. \"city\" is required"
+          }
+        }
+      },
+      "InvalidUser": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"username\" is required",
+              "\"name\" is required",
+              "\"email\" must be a valid email",
+              "\"password\" length must be at least 8 characters long",
+              "\"phone\" with value \"385993404575\" fails to match the required pattern: /^\\+(?:\\d\\s?){6,14}\\d$/"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "InvalidId": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "\"id\" length must be at least 24 characters long"
           }
         }
       }
