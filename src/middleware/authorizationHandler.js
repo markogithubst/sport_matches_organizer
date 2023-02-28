@@ -22,9 +22,9 @@ const isAdmin = callbackErrorHandler(async (req, res, next) => {
 });
 
 const isProfileOwner = callbackErrorHandler(async (req, res, next) => {
-  const { playerId, id } = req.params;
+  const id = req.params.playerId ? req.params.playerId : req.params.id;
 
-  if ((playerId || id !== req.user.id)) throw new AuthorizationError(ErrorMessages.unauthorized);
+  if ((id !== req.user.id)) throw new AuthorizationError(ErrorMessages.unauthorized);
 
   return next();
 });

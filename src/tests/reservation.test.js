@@ -316,7 +316,7 @@ describe('Testing all RESERVATION routes', () => {
 
   describe('Testing ADD PLAYER RESERVATION route', () => {
     describe.each([
-      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f4605555', HTTP_STATUS.NOT_FOUND],
+      ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f4605555', HTTP_STATUS.FORBIDDEN],
       ['63f354c2255f21a3f46xxxxf', '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
       ['63f354c2255f21a3f4605fff', '63f354c2255f21a3f46xxxxf', HTTP_STATUS.INVALID],
       [0, '63f354c2255f21a3f4605fff', HTTP_STATUS.INVALID],
@@ -338,10 +338,10 @@ describe('Testing all RESERVATION routes', () => {
       });
     });
     test(`Testing ADD PLAYER to RESERVATION route with valid id, should respond with a ${HTTP_STATUS.OK} status code to ADD PLAYER to reservation`, async () => {
-      const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
+      const login = await request(app).post('/login').send({ email: 'kdujemic@test.com', password: 'password' });
       const token = login.headers.authorization;
-      const reservationId = '63eb7dfe5f58194a262d8225';
-      const playerId = '63eb788d339bb827e5fe77db';
+      const reservationId = '63eb7dfe5f58194a262d8223';
+      const playerId = '63eb788d339bb827e5fe77d4';
       const response = await request(app).put(`/reservation/${reservationId}/add-player/${playerId}`)
         .set('Authorization', `${token}`);
       expect(response.statusCode).toBe(HTTP_STATUS.OK);
