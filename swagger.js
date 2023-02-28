@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const dotenv = require('dotenv');
 dotenv.config();
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
@@ -39,6 +40,16 @@ const doc = {
       $city: 'Split',
       $address: 'Test Address 1',
       $maxPlayers: 10
+    },
+    FieldResponse: {
+      success: true,
+      data: {
+        _id: '63e37f4a8bda2a935ce6454c',
+        name: 'Test Field 1',
+        city: 'Split',
+        address: 'Test Address 1',
+        maxPlayers: 10
+      }
     },
     MatchList: {
       success: true,
@@ -135,6 +146,25 @@ const doc = {
           '63eb788d339bb827e5fe77d4'
         ]
       }]
+    },
+    httpNotFound: {
+      success: false,
+      message: 'Data not found'
+    },
+    httpInternalError: {
+      message: 'Something went wrong!'
+    },
+    httpUnauthenticated: {
+      success: false,
+      message: 'You must be logged in to view this page!'
+    },
+    httpUnauthorized: {
+      success: false,
+      message: 'You are not authorized to view this page!'
+    },
+
+    InvalidField: {
+      message: '\"name\" length must be at least 5 characters long. \"maxPlayers\" is required. \"city\" is required'
     }
 
   },

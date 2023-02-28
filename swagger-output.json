@@ -29,6 +29,36 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidField"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       },
@@ -36,6 +66,7 @@
         "tags": [
           "Field"
         ],
+        "summary": "Add a new Field",
         "description": "",
         "parameters": [
           {
@@ -46,7 +77,58 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidField"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/field/{id}": {
@@ -54,6 +136,7 @@
         "tags": [
           "Field"
         ],
+        "summary": "Get a single Field",
         "description": "",
         "parameters": [
           {
@@ -66,8 +149,45 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Displaying a list of fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidField"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       },
@@ -75,6 +195,7 @@
         "tags": [
           "Field"
         ],
+        "summary": "Update an existig field",
         "description": "",
         "parameters": [
           {
@@ -94,8 +215,55 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Responds with success flag and updated data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidField"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       },
@@ -103,6 +271,7 @@
         "tags": [
           "Field"
         ],
+        "summary": "Delete one Field",
         "description": "",
         "parameters": [
           {
@@ -122,8 +291,55 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag and deleted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidField"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -871,6 +1087,40 @@
           "maxPlayers"
         ]
       },
+      "FieldResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "63e37f4a8bda2a935ce6454c"
+              },
+              "name": {
+                "type": "string",
+                "example": "Test Field 1"
+              },
+              "city": {
+                "type": "string",
+                "example": "Split"
+              },
+              "address": {
+                "type": "string",
+                "example": "Test Address 1"
+              },
+              "maxPlayers": {
+                "type": "number",
+                "example": 10
+              }
+            }
+          }
+        }
+      },
       "MatchList": {
         "type": "object",
         "properties": {
@@ -1129,6 +1379,63 @@
                 }
               }
             }
+          }
+        }
+      },
+      "httpNotFound": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "Data not found"
+          }
+        }
+      },
+      "httpInternalError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Something went wrong!"
+          }
+        }
+      },
+      "httpUnauthenticated": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "You must be logged in to view this page!"
+          }
+        }
+      },
+      "httpUnauthorized": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "You are not authorized to view this page!"
+          }
+        }
+      },
+      "InvalidField": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "\"name\" length must be at least 5 characters long. \"maxPlayers\" is required. \"city\" is required"
           }
         }
       }
