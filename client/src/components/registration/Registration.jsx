@@ -1,8 +1,8 @@
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 
-export default function Login() {
-  return (
-    <div>
+const Registration = () =>{
+    return(
+      <div>
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={8} lg={6} xs={12}>
@@ -11,9 +11,30 @@ export default function Login() {
             <Card className="shadow">
               <Card.Body>
                 <div className="mb-5 mt-md-4">
-                <h2 className="fw-bold mb-5 text-center">Welcome</h2>
+                <h2 className="fw-bold mb-5 text-center">Register</h2>
                   <div className="mb-3">
                     <Form>
+                      <Form.Group className="mb-3" controlId="formBasicUsername">
+                        <Form.Label className="text-center">
+                          Username
+                        </Form.Label>
+                        <Form.Control type="text" placeholder="Enter username" />
+                      </Form.Group>
+
+                      <Form.Group className="mb-3" controlId="formBasicFirstName">
+                        <Form.Label className="text-center">
+                          First Name
+                        </Form.Label>
+                        <Form.Control type="text" placeholder="Enter first name" />
+                      </Form.Group>
+
+                      <Form.Group className="mb-3" controlId="formBasicLastName">
+                        <Form.Label className="text-center">
+                          Last Name
+                        </Form.Label>
+                        <Form.Control type="text" placeholder="Enter last name" />
+                      </Form.Group>
+
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label className="text-center">
                           Email address
@@ -28,15 +49,13 @@ export default function Login() {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" />
                       </Form.Group>
+
                       <Form.Group
                         className="mb-3"
-                        controlId="formBasicCheckbox"
+                        controlId="formBasicPhone"
                       >
-                        <p className="small">
-                          <a className="text-primary" href="#!">
-                            Forgot password?
-                          </a>
-                        </p>
+                        <Form.Label>Phone Number</Form.Label>
+                        <Form.Control type="tel" placeholder="Enter phone number" />
                       </Form.Group>
                       <div className="d-grid">
                         <Button variant="primary" type="submit">
@@ -44,14 +63,6 @@ export default function Login() {
                         </Button>
                       </div>
                     </Form>
-                    <div className="mt-3">
-                      <p className="mb-0  text-center">
-                        Don't have an account?{" "}
-                        <a href="/register" className="text-primary fw-bold">
-                          Sign Up
-                        </a>
-                      </p>
-                    </div>
                   </div>
                 </div>
               </Card.Body>
@@ -60,5 +71,7 @@ export default function Login() {
         </Row>
       </Container>
     </div>
-  );
-}
+    )
+  }
+  
+  export default Registration
