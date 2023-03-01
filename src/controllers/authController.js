@@ -17,13 +17,13 @@ const loginUser = async (req, res) => {
 
   res.header('Authorization', 'Bearer ' + token);
 
-  return res.status(200).json({ message: `User ${user.username} logged in successfully!` });
+  return res.status(200).json({ success: true, message: `User ${user.username} logged in successfully!` });
 };
 
 const logoutUser = async (req, res) => {
   res.header('Authorization', '');
 
-  return res.status(200).json({ message: 'User logged out!' });
+  return res.status(200).json({ success: true, message: 'User logged out!' });
 };
 
 module.exports = {

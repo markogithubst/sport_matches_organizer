@@ -21,6 +21,18 @@ const doc = {
   },
   schemes: ['http'],
   definitions: {
+    LoginBody: {
+      $email: 'admin@gmail.com',
+      $password: 'password'
+    },
+    LoginResponse: {
+      success: true,
+      message: 'User admin logged in successfully!'
+    },
+    LogoutResponse: {
+      success: true,
+      message: 'User logged out!'
+    },
     FieldList: {
       success: true,
       data: [
@@ -386,6 +398,9 @@ const doc = {
     },
     InvalidId: {
       message: '\"id\" length must be at least 24 characters long'
+    },
+    InvalidPassword: {
+      message: 'Incorrect password!'
     }
 
   },

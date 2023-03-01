@@ -258,7 +258,7 @@
             }
           },
           "404": {
-            "description": "Responds with unauthorized error message",
+            "description": "Responds with notFound error message",
             "content": {
               "application/json": {
                 "schema": {
@@ -438,7 +438,7 @@
             }
           },
           "400": {
-            "description": "Responds with not found error message",
+            "description": "Responds with invalid request error message",
             "content": {
               "application/json": {
                 "schema": {
@@ -535,7 +535,7 @@
             }
           },
           "404": {
-            "description": "Responds with unauthorized error message",
+            "description": "Responds with not found error message",
             "content": {
               "application/json": {
                 "schema": {
@@ -631,7 +631,7 @@
             }
           },
           "404": {
-            "description": "Responds with unauthorized error message",
+            "description": "Responds with not found error message",
             "content": {
               "application/json": {
                 "schema": {
@@ -1183,7 +1183,7 @@
             }
           },
           "400": {
-            "description": "Responds with unauthenticated error message",
+            "description": "Responds with invalid request error message",
             "content": {
               "application/json": {
                 "schema": {
@@ -1450,6 +1450,13 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "schema": {
               "type": "string"
             }
@@ -1738,10 +1745,62 @@
         "tags": [
           "Login"
         ],
+        "summary": "User logged in",
         "description": "",
         "parameters": [],
-        "responses": {},
-        "security": []
+        "responses": {
+          "200": {
+            "description": "Responds with success flag and successful login message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidPassword"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginBody"
+              }
+            }
+          }
+        }
       }
     },
     "/logout": {
@@ -1749,15 +1808,79 @@
         "tags": [
           "Logout"
         ],
+        "summary": "User logged out",
         "description": "",
         "parameters": [],
-        "responses": {},
-        "security": []
+        "responses": {
+          "200": {
+            "description": "Responds with success flag and successful logout message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
   "components": {
     "schemas": {
+      "LoginBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "admin@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "User admin logged in successfully!"
+          }
+        }
+      },
+      "LogoutResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "User logged out!"
+          }
+        }
+      },
       "FieldList": {
         "type": "object",
         "properties": {
@@ -2656,6 +2779,15 @@
           "message": {
             "type": "string",
             "example": "\"id\" length must be at least 24 characters long"
+          }
+        }
+      },
+      "InvalidPassword": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Incorrect password!"
           }
         }
       }

@@ -98,7 +98,7 @@ router.get('/:id/history',
     }
   }
 */
-  validateId, callbackErrorHandler(userController.viewHistory));
+  validateId, isLoggedIn, isProfileOwner, callbackErrorHandler(userController.viewHistory));
 router.post('/',
 /* #swagger.tags = ['User']
   #swagger.security = []
