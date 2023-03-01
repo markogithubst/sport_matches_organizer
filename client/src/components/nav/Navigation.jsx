@@ -20,7 +20,6 @@ function Navigation() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Outlet />
     </>
   );
 }
