@@ -351,6 +351,52 @@ const doc = {
         ]
       }]
     },
+    ReservationFilteredList: {
+      filteredReservation: [
+        {
+          _id: '63eb7dfe5f58194a262d8225',
+          field: '63eb76f1c6a15537f1bbb5a0',
+          match: '63eb7f4a8bda2a035ce6454e',
+          time: '2023-05-24T19:00:00.000Z',
+          isCanceled: true,
+          isFinished: false,
+          isScheduled: true
+        }
+      ]
+    },
+    ReservationResponse: {
+      success: true,
+      data: {
+        _id: '63eb7dfe5f58194a262d8226',
+        field: '63eb76f1c6a15537f1bbb5a0',
+        match: '63eb7f4a8bda2a035ce6454f',
+        num: 0,
+        time: '2023-05-23T12:00:00.000Z',
+        isCanceled: false,
+        isFinished: false,
+        isScheduled: true,
+        registeredPlayers: [
+          '63eb788d339bb827e5fe77da',
+          '63eb788d339bb827e5fe77db',
+          '63eb788d339bb827e5fe77dc',
+          '63eb788d339bb827e5fe77dd',
+          '63eb788d339bb827e5fe77de',
+          '63eb788d339bb827e5fe77df'
+        ]
+      }
+    },
+    ReservationPlayerResponse: {
+      success: true
+    },
+    ReservationBody: {
+      $field: '63eb76f1c6a15537f1bbb59f',
+      $match: '63eb7f4a8bda2a035ce6454c',
+      $time: '2023-05-27T12:00:00.000+00:00',
+      $isCanceled: false,
+      $isFinished: true,
+      $isScheduled: true,
+      $registeredPlayers: ['63eb6abf9792291234cd6a75']
+    },
     httpNotFound: {
       success: false,
       message: 'Data not found'
@@ -398,6 +444,29 @@ const doc = {
     },
     InvalidId: {
       message: '\"id\" length must be at least 24 characters long'
+    },
+    InvalidReservation: {
+      message: [
+        '"field" length must be at least 24 characters long',
+        '"time" must be in iso format',
+        '"match" must be a string',
+        '"isCanceled" must be a boolean',
+        '"isScheduled" must be a boolean',
+        '"isFinished" is not allowed'
+      ]
+    },
+    InvalidDoubleId: {
+      message: [
+        '"id" length must be at least 24 characters long',
+        '"playerId" length must be at least 24 characters long'
+      ]
+    },
+    InvalidFilterQuery: {
+      message: [
+        '"hour" must be less than or equal to 24',
+        '"dayOfWeek" must be less than or equal to 7',
+        '"date" must be in YYYY-MM-DD format'
+      ]
     },
     InvalidPassword: {
       message: 'Incorrect password!'

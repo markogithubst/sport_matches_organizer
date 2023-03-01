@@ -668,15 +668,48 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Retrieve a list of reservations",
         "description": "",
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "Displaying a list of reservations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
         "security": []
       },
       "post": {
         "tags": [
           "Reservation"
         ],
+        "summary": "Add a new Reservation",
         "description": "",
         "parameters": [
           {
@@ -687,7 +720,68 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidReservation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationBody"
+              }
+            }
+          }
+        }
       }
     },
     "/reservation/filter": {
@@ -695,11 +789,74 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Filter reservations by date/hour/day of the week",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "hour",
+            "in": "query",
+            "description": "filter by hour",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Filter by date",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dayOfWeek",
+            "in": "query",
+            "description": "Filter by day of the week",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
+          "200": {
+            "description": "Displaying a list of filtered reservations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationFilteredList"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidFilterQuery"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         },
         "security": []
@@ -710,6 +867,7 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Retrieve a single Reservation",
         "description": "",
         "parameters": [
           {
@@ -722,8 +880,45 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Displaying a single Reservation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         },
         "security": []
@@ -732,6 +927,7 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Update Reservation",
         "description": "",
         "parameters": [
           {
@@ -751,8 +947,65 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidReservation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationBody"
+              }
+            }
           }
         }
       },
@@ -760,6 +1013,7 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Delete one Reservation",
         "description": "",
         "parameters": [
           {
@@ -779,8 +1033,55 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag and deleted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -790,6 +1091,7 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Add a Player to a Reservation",
         "description": "",
         "parameters": [
           {
@@ -817,8 +1119,55 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationPlayerResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidDoubleId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -828,6 +1177,7 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Withdraw a Player from Reservation",
         "description": "",
         "parameters": [
           {
@@ -855,8 +1205,55 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationPlayerResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidDoubleId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -866,6 +1263,7 @@
         "tags": [
           "Reservation"
         ],
+        "summary": "Cancel one Reservation",
         "description": "",
         "parameters": [
           {
@@ -885,8 +1283,55 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag and deleted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -2660,6 +3105,163 @@
           }
         }
       },
+      "ReservationFilteredList": {
+        "type": "object",
+        "properties": {
+          "filteredReservation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "63eb7dfe5f58194a262d8225"
+                },
+                "field": {
+                  "type": "string",
+                  "example": "63eb76f1c6a15537f1bbb5a0"
+                },
+                "match": {
+                  "type": "string",
+                  "example": "63eb7f4a8bda2a035ce6454e"
+                },
+                "time": {
+                  "type": "string",
+                  "example": "2023-05-24T19:00:00.000Z"
+                },
+                "isCanceled": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "isFinished": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "isScheduled": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "ReservationResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "63eb7dfe5f58194a262d8226"
+              },
+              "field": {
+                "type": "string",
+                "example": "63eb76f1c6a15537f1bbb5a0"
+              },
+              "match": {
+                "type": "string",
+                "example": "63eb7f4a8bda2a035ce6454f"
+              },
+              "num": {
+                "type": "number",
+                "example": 0
+              },
+              "time": {
+                "type": "string",
+                "example": "2023-05-23T12:00:00.000Z"
+              },
+              "isCanceled": {
+                "type": "boolean",
+                "example": false
+              },
+              "isFinished": {
+                "type": "boolean",
+                "example": false
+              },
+              "isScheduled": {
+                "type": "boolean",
+                "example": true
+              },
+              "registeredPlayers": {
+                "type": "array",
+                "example": [
+                  "63eb788d339bb827e5fe77da",
+                  "63eb788d339bb827e5fe77db",
+                  "63eb788d339bb827e5fe77dc",
+                  "63eb788d339bb827e5fe77dd",
+                  "63eb788d339bb827e5fe77de",
+                  "63eb788d339bb827e5fe77df"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ReservationPlayerResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "ReservationBody": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "example": "63eb76f1c6a15537f1bbb59f"
+          },
+          "match": {
+            "type": "string",
+            "example": "63eb7f4a8bda2a035ce6454c"
+          },
+          "time": {
+            "type": "string",
+            "example": "2023-05-27T12:00:00.000+00:00"
+          },
+          "isCanceled": {
+            "type": "boolean",
+            "example": false
+          },
+          "isFinished": {
+            "type": "boolean",
+            "example": true
+          },
+          "isScheduled": {
+            "type": "boolean",
+            "example": true
+          },
+          "registeredPlayers": {
+            "type": "array",
+            "example": [
+              "63eb6abf9792291234cd6a75"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "field",
+          "match",
+          "time",
+          "isCanceled",
+          "isFinished",
+          "isScheduled",
+          "registeredPlayers"
+        ]
+      },
       "httpNotFound": {
         "type": "object",
         "properties": {
@@ -2779,6 +3381,56 @@
           "message": {
             "type": "string",
             "example": "\"id\" length must be at least 24 characters long"
+          }
+        }
+      },
+      "InvalidReservation": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"field\" length must be at least 24 characters long",
+              "\"time\" must be in iso format",
+              "\"match\" must be a string",
+              "\"isCanceled\" must be a boolean",
+              "\"isScheduled\" must be a boolean",
+              "\"isFinished\" is not allowed"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "InvalidDoubleId": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"id\" length must be at least 24 characters long",
+              "\"playerId\" length must be at least 24 characters long"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "InvalidFilterQuery": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"hour\" must be less than or equal to 24",
+              "\"dayOfWeek\" must be less than or equal to 7",
+              "\"date\" must be in YYYY-MM-DD format"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       },

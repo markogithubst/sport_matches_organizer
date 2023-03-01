@@ -10,7 +10,7 @@ const idSchema = Joi.object({
 const doubleIdSchema = Joi.object({
   id: Joi.string().min(24).max(24).hex().required(),
   playerId: Joi.string().min(24).max(24).hex().required()
-});
+}).options({ abortEarly: false });
 
 const querySchema = Joi.object({
   hour: Joi.number().min(0).max(24),

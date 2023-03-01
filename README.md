@@ -72,7 +72,7 @@ Once the match has been finished, a user with admin access is expected to input 
 
 <br>
 
-## Additional packages used in project as dependencies:
+### Additional packages used in project as dependencies:
  - supertest (for endpoint integration tests) 
  - node-cron (for scheduling tasks) 
  - nodemailer (for sending email notifications)
