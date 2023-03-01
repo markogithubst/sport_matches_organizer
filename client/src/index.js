@@ -4,6 +4,7 @@ import "./index.css";
 import Navigation from "./components/nav/Navigation";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Login from './components/login/Login'
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <h1>Log in</h1>,
+        element: <Login/>,
       },
       {
         path: "register",
