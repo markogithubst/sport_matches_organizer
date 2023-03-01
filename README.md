@@ -45,7 +45,7 @@ The application allows users to:
 
 A user with admin access can create, view, update and delete fields, reservations and results. Teams and matches are created automatically once there are enough players registered for a match and the weather conditions allow for the match to be played at the planned time. Both team and match can be updated and deleted by admin user.
 
-Cron jobs are used to perform checks on reservations every day at 9AM. 
+Cron job is used to perform checks on reservations every day at 9AM. 
 - First check is to see if there are enough players registered for the match on that day. 6 players need to be registered so that they could be arranged into two teams. 
 - If there aren't enough players, the match is canceled. 
 - If there are 6 players then the next action is an API call to an external API (OpenWeather API) to check if the weather conditions are suitable for a match to be played. 
@@ -71,6 +71,19 @@ Once the match has been finished, a user with admin access is expected to input 
 * [Mongoose](https://www.mongoosejs.com/)
 
 <br>
+
+## Additional packages used in project as dependencies:
+ - supertest (for endpoint integration tests) 
+ - node-cron (for scheduling tasks) 
+ - nodemailer (for sending email notifications)
+ - axios (for makin calls to an external API)
+ - morgan (for logging HTTP requests)
+ - joi (for request validation)
+ - eslint (to make the code more consistent and to detect problematic code patterns that could lead to bugs)
+ - swagger-autogen (for generating description from the API code) 
+ - swagger-ui-express (for adding Swagger UI to the API)
+
+ <br>
 
 ### Prerequisites
 What software you need to use the application, and how to install it:
@@ -108,6 +121,9 @@ What software you need to use the application, and how to install it:
     JWT_EXPIRATION=expirationtime
     PORT=port
     API_KEY=weatherapikey
+    MAILER_HOST=localhost
+    MAILER_PORT=1025
+    MAIL_SENDER=somevalidemail
 ```
 
 **Note:**
@@ -138,6 +154,17 @@ Run unit and integration tests
 ```sh
 npm run jest
 ```
+
+### Swagger UI Visualization
+
+To visualize and interact with the API’s resources without having any of the implementation logic in place use one of the following methods:
+
+- Go to [Swagger UI online editor](https://editor.swagger.io/) and import the swagger-output.json file
+
+- Get the server up and running on port 4000 and go to the [Swagger UI site](http://localhost:8000/api-docs/#/) in your browser
+
+**Note:**
+After running the "npm run dev" command the server will be running on port 8000 by default. This port is also defined to be the host in the swagger.js file. 
 
 
 
