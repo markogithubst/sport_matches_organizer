@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
+const { callbackErrorHandler } = require('./errorMiddlewareHandler');
 const { ErrorMessages } = require('../errors/ErrorMessages');
 const { AuthenticationError, AuthorizationError } = require('../errors/Errors');
 
