@@ -16,6 +16,7 @@ const loginUser = async (req, res) => {
   const token = createJWT(user);
 
   res.header('Authorization', 'Bearer ' + token);
+  res.set('Access-Control-Expose-Headers', 'Authorization');
 
   return res.status(200).json({ success: true, message: `User ${user.username} logged in successfully!` });
 };

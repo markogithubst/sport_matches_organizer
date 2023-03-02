@@ -1,6 +1,48 @@
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
+import { useState } from 'react'
+import { useNavigate } from "react-router-dom"
+import axios from 'axios'
 
 export default function Login() {
+    const[formData, setFormData] = useState({})
+    const navigate = useNavigate()
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
+      try{
+        const request = {email: formData.email, password:formData.password}
+        const response = await axios.post('http://localhost:8000/login',
+          request
+        )
+        
+        localStorage.setItem("token", response.headers.authorization)
+        
+        navigate("/")
+      }
+      catch(err)
+      {
+        if(err.response && err.response.status === 400)
+        {
+          setErrorMessage(err.response.data.message)
+        }
+        else{
+          console.log(err)
+          setErrorMessage("Oops something went wrong...")
+        }
+      }
+      }
+
+      const handleChange = (e) => {
+        const value = e.target.value
+        const name = e.target.name
+    
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]:value
+        }))
+      }
+
   return (
     <div>
       <Container>
@@ -13,12 +55,12 @@ export default function Login() {
                 <div className="mb-5 mt-md-4">
                 <h2 className="fw-bold mb-5 text-center">Welcome</h2>
                   <div className="mb-3">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label className="text-center">
                           Email address
                         </Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="email" name="email" onChange={handleChange} placeholder="Enter email" />
                       </Form.Group>
 
                       <Form.Group
@@ -26,7 +68,7 @@ export default function Login() {
                         controlId="formBasicPassword"
                       >
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" name="password" onChange={handleChange} placeholder="Password" />
                       </Form.Group>
                       <Form.Group
                         className="mb-3"
@@ -44,6 +86,7 @@ export default function Login() {
                         </Button>
                       </div>
                     </Form>
+                    {errorMessage && <div className="error"> {errorMessage} </div>}
                     <div className="mt-3">
                       <p className="mb-0  text-center">
                         Don't have an account?{" "}
