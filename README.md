@@ -46,9 +46,9 @@ The application allows users to:
 A user with admin access can create, view, update and delete fields, reservations and results. Teams and matches are created automatically once there are enough players registered for a match and the weather conditions allow for the match to be played at the planned time. Both team and match can be updated and deleted by admin user.
 
 Cron job is used to perform checks on reservations every day at 9AM. 
-- First check is to see if there are enough players registered for the match on that day. 6 players need to be registered so that they could be arranged into two teams. 
+- First check is to see if there are enough players registered for the match on that day. The number of players that need to be registered is defined in the instances of the field model. The number must be an even number so that the players could be arranged into two teams. 
 - If there aren't enough players, the match is canceled. 
-- If there are 6 players then the next action is an API call to an external API (OpenWeather API) to check if the weather conditions are suitable for a match to be played. 
+- If there are enough players then the next action is an API call to an external API (OpenWeather API) to check if the weather conditions are suitable for a match to be played. 
 - The following is considered a reason for cancelation: rain, humidity above 89%, temperature below 4 celsius, snow, strong wind above 80 km/h, high temperatures over 33°C.
 - If the match is canceled, the registered users will be notified via email. 
 - After checking the conditions if the match is scheduled, the registered users will be notified via email.
