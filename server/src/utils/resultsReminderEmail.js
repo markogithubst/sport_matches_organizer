@@ -14,7 +14,7 @@ const checkFinishedMatchResults = async () => {
         const subject = 'Pending match results';
         const text = `${admin.username}, please fill in the results for the match with the ID: ${game.match}.`;
 
-        sendEmail(recipient, subject, text);
+        await sendEmail(recipient, subject, text);
       }
     }
   }
