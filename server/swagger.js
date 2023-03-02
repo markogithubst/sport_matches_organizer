@@ -196,6 +196,18 @@ const doc = {
         }
       ]
     },
+    ResultResponse: {
+      success: true,
+      data: {
+        whiteTeamScore: 5,
+        blackTeamScore: 4,
+        _id: '64006e682fca7ee5155cae3c'
+      }
+    },
+    ResultBody: {
+      $whiteTeamScore: 5,
+      $blackTeamScore: 3
+    },
     TeamList: {
       success: true,
       data: [
@@ -470,6 +482,12 @@ const doc = {
     },
     InvalidPassword: {
       message: 'Incorrect password!'
+    },
+    InvalidResult: {
+      message: [
+        '"whiteTeamScore" must be a number',
+        '"blackTeamScore" must be less than or equal to 30'
+      ]
     }
 
   },

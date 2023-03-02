@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
 const Registration = () =>{
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     name: "",
@@ -14,18 +17,25 @@ const Registration = () =>{
     role: "USER"
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event)=>{
     event.preventDefault();
-    console.log(formData);
-    axios
-      .post("http://localhost:8000/user", formData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  try{
+    const request = {...formData}
+    await axios.post('http://localhost:8000/user',request);
+    navigate("/login")
+  }
+  catch(err)
+  {
+    if(err.response)
+    {
+      setErrorMessage(err.response.data.message)
+    }
+    else{
+      console.log(err)
+      setErrorMessage("Oops something went wrong...")
+    }
+  }
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -94,6 +104,7 @@ const Registration = () =>{
                         </Button>
                       </div>
                     </Form>
+                    {errorMessage && <div className="error"> {errorMessage} </div>}
                   </div>
                 </div>
               </Card.Body>

@@ -1341,15 +1341,48 @@
         "tags": [
           "Result"
         ],
+        "summary": "Retrieve a list of results",
         "description": "",
         "parameters": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "Displaying a list of results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
         "security": []
       },
       "post": {
         "tags": [
           "Result"
         ],
+        "summary": "Add a new Result",
         "description": "",
         "parameters": [
           {
@@ -1360,7 +1393,68 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultBody"
+              }
+            }
+          }
+        }
       }
     },
     "/result/{id}": {
@@ -1368,6 +1462,7 @@
         "tags": [
           "Result"
         ],
+        "summary": "Retrieve a single Result",
         "description": "",
         "parameters": [
           {
@@ -1380,8 +1475,45 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Displaying a single Result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         },
         "security": []
@@ -1390,6 +1522,7 @@
         "tags": [
           "Result"
         ],
+        "summary": "Update Result",
         "description": "",
         "parameters": [
           {
@@ -1409,8 +1542,65 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultBody"
+              }
+            }
           }
         }
       },
@@ -1418,6 +1608,7 @@
         "tags": [
           "Result"
         ],
+        "summary": "Delete one Result",
         "description": "",
         "parameters": [
           {
@@ -1437,8 +1628,55 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Responds with success flag and deleted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
           }
         }
       }
@@ -2705,6 +2943,49 @@
           }
         }
       },
+      "ResultResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "whiteTeamScore": {
+                "type": "number",
+                "example": 5
+              },
+              "blackTeamScore": {
+                "type": "number",
+                "example": 4
+              },
+              "_id": {
+                "type": "string",
+                "example": "64006e682fca7ee5155cae3c"
+              }
+            }
+          }
+        }
+      },
+      "ResultBody": {
+        "type": "object",
+        "properties": {
+          "whiteTeamScore": {
+            "type": "number",
+            "example": 5
+          },
+          "blackTeamScore": {
+            "type": "number",
+            "example": 3
+          }
+        },
+        "required": [
+          "whiteTeamScore",
+          "blackTeamScore"
+        ]
+      },
       "TeamList": {
         "type": "object",
         "properties": {
@@ -3440,6 +3721,21 @@
           "message": {
             "type": "string",
             "example": "Incorrect password!"
+          }
+        }
+      },
+      "InvalidResult": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"whiteTeamScore\" must be a number",
+              "\"blackTeamScore\" must be less than or equal to 30"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

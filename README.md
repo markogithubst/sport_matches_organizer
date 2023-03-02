@@ -161,7 +161,7 @@ To visualize and interact with the API’s resources without having any of the i
 
 - Go to [Swagger UI online editor](https://editor.swagger.io/) and import the swagger-output.json file
 
-- Get the server up and running on port 4000 and go to the [Swagger UI site](http://localhost:8000/api-docs/#/) in your browser
+- Get the server up and running on port 8000 and go to the [Swagger UI site](http://localhost:8000/api-docs/#/) in your browser
 
 **Note:**
 After running the "npm run dev" command the server will be running on port 8000 by default. This port is also defined to be the host in the swagger.js file. 
