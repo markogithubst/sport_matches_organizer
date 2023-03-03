@@ -1,29 +1,30 @@
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import { useState } from 'react'
+import { useState} from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
-export default function Login() {
-    const[formData, setFormData] = useState({})
-    const navigate = useNavigate()
-    const [errorMessage, setErrorMessage] = useState('')
 
-    const handleSubmit = async (e)=>{
-        e.preventDefault()
+export default function Login() {
+  const navigate = useNavigate();
+  const[formData, setFormData] = useState({})
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const handleSubmit = async (e) => {
+      e.preventDefault()
       try{
         const request = {email: formData.email, password:formData.password}
-        const response = await axios.post('http://localhost:8000/login',
+        const response = await axios.postc('http://localhost:8000/login',
           request
         )
         
-        localStorage.setItem("token", response.headers.authorization)
-        
+        localStorage.setItem("token", response.headers.authorization);
+        localStorage.setItem("role", response.headers.role);
+
         navigate("/")
       }
       catch(err)
       {
-        if(err.response && err.response.status === 400)
-        {
+        if(err.response){
           setErrorMessage(err.response.data.message)
         }
         else{
@@ -31,11 +32,11 @@ export default function Login() {
           setErrorMessage("Oops something went wrong...")
         }
       }
-      }
+    }
 
       const handleChange = (e) => {
-        const value = e.target.value
-        const name = e.target.name
+        const value = e.target.value;
+        const name = e.target.name;
     
         setFormData((prevState) => ({
           ...prevState,

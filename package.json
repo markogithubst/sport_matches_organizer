@@ -1,0 +1,23 @@
+{
+  "name": "sport_matches_organizer",
+  "version": "1.0.0",
+  "description": "<a name=\"readme-top\"></a>",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "server":"npm run dev --prefix server",
+    "client":"npm start --prefix client",
+    "app": "npm run server & npm run client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agilathon/sport_matches_organizer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agilathon/sport_matches_organizer/issues"
+  },
+  "homepage": "https://github.com/agilathon/sport_matches_organizer#readme"
+}
