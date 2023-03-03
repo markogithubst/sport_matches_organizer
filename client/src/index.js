@@ -8,6 +8,8 @@ import Registration from './components/registration/Registration';
 import { Home } from './components/home/Home';
 import ResetPass from './components/reset-password/ResetPass';
 import EmailForm from './components/reset-password/EmailForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppLayout = () => {
   return (
@@ -51,5 +53,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"/>
   </React.StrictMode>
 );

@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { isLoggedIn } from '../../utils/isLoggedIn';
 import axios from 'axios';
+import { useToastify } from '../../hooks/useToastify';
 
 function Navigation () {
   const navigate = useNavigate();
@@ -20,12 +21,7 @@ function Navigation () {
 
       navigate('/');
     } catch (err) {
-      if (err.response) {
-        // TODO ERROR MODAL
-      } else {
-        console.log(err);
-        // TODO ERROR MODAL
-      }
+      useToastify(err);
     }
   };
 

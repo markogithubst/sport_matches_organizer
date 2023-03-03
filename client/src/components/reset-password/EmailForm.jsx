@@ -1,45 +1,42 @@
-import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import { useState } from 'react'
-import { useNavigate } from "react-router-dom"
-import axios from 'axios'
+/* eslint-disable react/no-unescaped-entities */
+import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { useState, React } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export default function EmailForm() {
-    const[formData, setFormData] = useState({})
-    const navigate = useNavigate()
-    const [errorMessage, setErrorMessage] = useState('')
+export default function EmailForm () {
+  const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = async (e)=>{
-        e.preventDefault()
-      try{
-        const request = {emai: formData.password}
-        await axios.post('http://localhost:8000/reset-password',
-          request
-        )
-        
-        navigate("/login")
-      }
-      catch(err)
-      {
-        if(err.response)
-        {
-          setErrorMessage(err.response.data.message)
-        }
-        else{
-          console.log(err)
-          setErrorMessage("Oops something went wrong...")
-        }
-      }
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const request = { emai: formData.password };
+      await axios.post('http://localhost:8000/reset-password',
+        request
+      );
 
-      const handleChange = (e) => {
-        const value = e.target.value
-        const name = e.target.name
-    
-        setFormData((prevState) => ({
-          ...prevState,
-          [name]:value
-        }))
+      navigate('/login');
+    } catch (err) {
+      if (err.response) {
+        setErrorMessage(err.response.data.message);
+      } else {
+        console.log(err);
+        setErrorMessage('Oops something went wrong...');
       }
+    }
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
   return (
     <div>
@@ -51,7 +48,7 @@ export default function EmailForm() {
             <Card className="shadow">
               <Card.Body>
                 <div className="mb-5 mt-md-4">
-                <h2 className="fw-bold mb-5 text-center">Forgot your password?</h2>
+                  <h2 className="fw-bold mb-5 text-center">Forgot your password?</h2>
                   <div className="mb-3">
                     <Form onSubmit={handleSubmit}>
                       <Form.Group
@@ -70,7 +67,7 @@ export default function EmailForm() {
                     {errorMessage && <div className="error"> {errorMessage} </div>}
                     <div className="mt-3">
                       <p className="mb-0  text-center">
-                        Don't have an account?{" "}
+                        Don't have an account?{' '}
                         <a href="/register" className="text-primary fw-bold">
                           Sign Up
                         </a>

@@ -1,9 +1,9 @@
 import { useState, React } from 'react';
-
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RegForm } from './RegForm';
 import axios from 'axios';
 import { isLoggedIn } from '../../utils/isLoggedIn';
+import { useToastify } from '../../hooks/useToastify';
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -28,12 +28,7 @@ const Registration = () => {
       await axios.post('http://localhost:8000/user', request);
       navigate('/login');
     } catch (err) {
-      if (err.response) {
-      // TODO ERROR FLASH
-      } else {
-        console.log(err);
-      // TODO ERROR FLASH
-      }
+      useToastify(err);
     }
   };
 

@@ -3,11 +3,11 @@ import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useState, React } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useToastify } from '../../hooks/useToastify';
 
 export default function Login () {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,12 +22,7 @@ export default function Login () {
 
       navigate('/');
     } catch (err) {
-      if (err.response) {
-        setErrorMessage(err.response.data.message);
-      } else {
-        console.log(err);
-        setErrorMessage('Oops something went wrong...');
-      }
+      useToastify(err);
     }
   };
 
@@ -84,7 +79,6 @@ export default function Login () {
                         </Button>
                       </div>
                     </Form>
-                    {errorMessage && <div className="error"> {errorMessage} </div>}
                     <div className="mt-3">
                       <p className="mb-0  text-center">
                         Don't have an account?{' '}
