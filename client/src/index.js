@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
-import { AuthContextProvider } from "./context/AuthContext";
 import { Home } from "./components/home/Home";
 
 
@@ -15,11 +14,10 @@ const AppLayout = () => {
   return (
     <>
       <Navigation />
-      <Outlet context={ AuthContextProvider} />
+      <Outlet />
     </>
   );
 };
-
 
 const router = createBrowserRouter([
   {
@@ -49,8 +47,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
      <RouterProvider router={router} />
-    </AuthContextProvider>
   </React.StrictMode>
 );

@@ -13,7 +13,7 @@ export default function Login() {
       e.preventDefault()
       try{
         const request = {email: formData.email, password:formData.password}
-        const response = await axios.postc('http://localhost:8000/login',
+        const response = await axios.post('http://localhost:8000/login',
           request
         )
         
