@@ -8,6 +8,8 @@ import Registration from './components/registration/Registration';
 import { Home } from "./components/home/Home";
 
 
+import ResetPass from './components/reset-password/ResetPass';
+import EmailForm from './components/reset-password/EmailForm';
 
 const AppLayout = () => {
   
@@ -37,8 +39,12 @@ const router = createBrowserRouter([
         element: <Registration/>,
       },
       {
-        path: "admin/register",
-        element: <Registration/>,
+        path: "forgotten-password",
+        element: <EmailForm/>,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPass/>,
       },
     ],
   },

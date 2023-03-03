@@ -92,4 +92,5 @@ router.get('/logout',
 */
   callbackErrorHandler(authController.logoutUser));
 
+router.get('/reset-password');
 module.exports = router;

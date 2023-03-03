@@ -1,30 +1,27 @@
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import { useState} from 'react'
+import { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
+export default function ResetPassword() {
+    const[formData, setFormData] = useState({})
+    const navigate = useNavigate()
+    const [errorMessage, setErrorMessage] = useState('')
 
-export default function Login() {
-  const navigate = useNavigate();
-  const[formData, setFormData] = useState({})
-  const [errorMessage, setErrorMessage] = useState('')
-
-  const handleSubmit = async (e) => {
-      e.preventDefault()
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
       try{
-        const request = {email: formData.email, password:formData.password}
-        const response = await axios.post('http://localhost:8000/login',
+        const request = {password:formData.password}
+        await axios.post('http://localhost:8000/reset-password',
           request
         )
         
-        localStorage.setItem("token", response.headers.authorization);
-        localStorage.setItem("role", response.headers.role);
-
-        navigate("/")
+        navigate("/login")
       }
       catch(err)
       {
-        if(err.response){
+        if(err.response)
+        {
           setErrorMessage(err.response.data.message)
         }
         else{
@@ -32,11 +29,11 @@ export default function Login() {
           setErrorMessage("Oops something went wrong...")
         }
       }
-    }
+      }
 
       const handleChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
+        const value = e.target.value
+        const name = e.target.name
     
         setFormData((prevState) => ({
           ...prevState,
@@ -54,16 +51,9 @@ export default function Login() {
             <Card className="shadow">
               <Card.Body>
                 <div className="mb-5 mt-md-4">
-                <h2 className="fw-bold mb-5 text-center">Welcome</h2>
+                <h2 className="fw-bold mb-5 text-center">Reset Password</h2>
                   <div className="mb-3">
                     <Form onSubmit={handleSubmit}>
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label className="text-center">
-                          Email address
-                        </Form.Label>
-                        <Form.Control type="email" name="email" onChange={handleChange} placeholder="Enter email" />
-                      </Form.Group>
-
                       <Form.Group
                         className="mb-3"
                         controlId="formBasicPassword"
@@ -73,17 +63,14 @@ export default function Login() {
                       </Form.Group>
                       <Form.Group
                         className="mb-3"
-                        controlId="formBasicCheckbox"
+                        controlId="formBasicPassword"
                       >
-                        <p className="small">
-                          <a className="text-primary" href="/forgotten-password">
-                            Forgot password?
-                          </a>
-                        </p>
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control type="password" name="confirm-password" onChange={handleChange} placeholder="Re-enter Password" />
                       </Form.Group>
                       <div className="d-grid">
                         <Button variant="primary" type="submit">
-                          Login
+                          Reset Password
                         </Button>
                       </div>
                     </Form>
