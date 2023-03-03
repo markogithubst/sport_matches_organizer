@@ -36,6 +36,7 @@ function Navigation () {
               <Nav.Link href="/">Home</Nav.Link>
               {!isLoggedIn() && <Nav.Link href="/login">Log In</Nav.Link>}
               {!isLoggedIn() && <Nav.Link href="/register">Register</Nav.Link>}
+              {isLoggedIn() && <Nav.Link href="/user">My Profile</Nav.Link>}
               {isLoggedIn() && <Nav.Link onClick={onLogoutHandler} href="/">Logout</Nav.Link>}
             </Nav>
           </Navbar.Collapse>

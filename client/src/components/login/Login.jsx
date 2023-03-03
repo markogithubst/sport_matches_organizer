@@ -19,6 +19,7 @@ export default function Login () {
 
       localStorage.setItem('token', response.headers.authorization);
       localStorage.setItem('role', response.headers.role);
+      localStorage.setItem('userid', response.headers.userid);
 
       navigate('/');
     } catch (err) {

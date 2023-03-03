@@ -6,10 +6,11 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import { Home } from './components/home/Home';
+import { UserProfile } from './components/user/UserProfile';
 import ResetPass from './components/reset-password/ResetPass';
-import EmailForm from './components/reset-password/EmailForm';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EmailForm from './components/reset-password/EmailForm';
 
 const AppLayout = () => {
   return (
@@ -42,8 +43,16 @@ const router = createBrowserRouter([
         element: <EmailForm/>
       },
       {
+        path: 'admin/register',
+        element: <Registration/>
+      },
+      {
         path: 'reset-password',
         element: <ResetPass/>
+      },
+      {
+        path: 'user',
+        element: <UserProfile />
       }
     ]
   }

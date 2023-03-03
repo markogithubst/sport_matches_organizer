@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
-import { useState, React } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -74,7 +73,7 @@ export default function ResetPassword () {
                     {errorMessage && <div className="error"> {errorMessage} </div>}
                     <div className="mt-3">
                       <p className="mb-0  text-center">
-                        Don't have an account?{' '}
+                        Don&apos;t have an account?{' '}
                         <a href="/register" className="text-primary fw-bold">
                           Sign Up
                         </a>

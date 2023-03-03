@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
-import { useState, React } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -55,7 +54,7 @@ export default function EmailForm () {
                         className="mb-5"
                         controlId="formBasicEmail"
                       >
-                        <Form.Label>Enter your email and we'll send you a link to reset your password.</Form.Label>
+                        <Form.Label>Enter your email and we&apos;ll send you a link to reset your password.</Form.Label>
                         <Form.Control type="email" name="email" onChange={handleChange} placeholder="Account Email" />
                       </Form.Group>
                       <div className="d-grid">
@@ -67,7 +66,7 @@ export default function EmailForm () {
                     {errorMessage && <div className="error"> {errorMessage} </div>}
                     <div className="mt-3">
                       <p className="mb-0  text-center">
-                        Don't have an account?{' '}
+                        Don&apos;t have an account?{' '}
                         <a href="/register" className="text-primary fw-bold">
                           Sign Up
                         </a>

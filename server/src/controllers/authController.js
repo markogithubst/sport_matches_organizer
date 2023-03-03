@@ -21,7 +21,8 @@ const loginUser = async (req, res) => {
 
   res.header('Authorization', 'Bearer ' + token);
   res.header('Role', user.role);
-  res.set('Access-Control-Expose-Headers', ['Authorization', 'Role']);
+  res.header('UserId', user._id);
+  res.set('Access-Control-Expose-Headers', ['Authorization', 'Role', 'UserId']);
 
   return res.status(200).json({ success: true, message: `User ${user.username} logged in successfully!` });
 };
