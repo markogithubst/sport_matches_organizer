@@ -1,37 +1,33 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { useNavigate } from "react-router-dom";
-import { isLoggedIn } from "../../utils/isLoggedIn";
-import axios from "axios";
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { useNavigate } from 'react-router-dom';
+import { isLoggedIn } from '../../utils/isLoggedIn';
+import axios from 'axios';
 
-
-function Navigation() {
+function Navigation () {
   const navigate = useNavigate();
   const onLogoutHandler = async (e) => {
-    try{
+    try {
       e.preventDefault();
-      
-      const response = await axios.get('http://localhost:8000/logout')
-      console.log(response)
 
-      localStorage.removeItem("role");
-      localStorage.removeItem("token");
+      const response = await axios.get('http://localhost:8000/logout');
+      console.log(response);
 
-      navigate("/")
-    }
-    catch(err)
-    {
-      if(err.response){
+      localStorage.removeItem('role');
+      localStorage.removeItem('token');
+
+      navigate('/');
+    } catch (err) {
+      if (err.response) {
         // TODO ERROR MODAL
-      }
-      else{
-        console.log(err)
+      } else {
+        console.log(err);
         // TODO ERROR MODAL
       }
     }
-    
-  }
+  };
 
   return (
     <>

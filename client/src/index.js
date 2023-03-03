@@ -1,18 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Navigation from "./components/nav/Navigation";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Navigation from './components/nav/Navigation';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
-import { Home } from "./components/home/Home";
-
-
+import { Home } from './components/home/Home';
 import ResetPass from './components/reset-password/ResetPass';
 import EmailForm from './components/reset-password/EmailForm';
 
 const AppLayout = () => {
-  
   return (
     <>
       <Navigation />
@@ -27,32 +24,32 @@ const router = createBrowserRouter([
     errorElement: <h1>Something went wrong</h1>,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home/>
       },
       {
-        path: "login",
-        element: <Login/>,
+        path: 'login',
+        element: <Login/>
       },
       {
-        path: "register",
-        element: <Registration/>,
+        path: 'register',
+        element: <Registration/>
       },
       {
-        path: "forgotten-password",
-        element: <EmailForm/>,
+        path: 'forgotten-password',
+        element: <EmailForm/>
       },
       {
-        path: "reset-password",
-        element: <ResetPass/>,
-      },
-    ],
-  },
+        path: 'reset-password',
+        element: <ResetPass/>
+      }
+    ]
+  }
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-     <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
