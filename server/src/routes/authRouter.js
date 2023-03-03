@@ -1,6 +1,8 @@
 const express = require('express');
 const authController = require('../controllers/authController');
+const { isLoggedIn, isProfileOwner } = require('../middleware/authorizationHandler');
 const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
+const { validateId, validateEmail, validatePassword, validateResetParams } = require('../middleware/requestValidationHandler');
 
 const router = express.Router();
 
@@ -92,5 +94,7 @@ router.get('/logout',
 */
   callbackErrorHandler(authController.logoutUser));
 
-router.get('/reset-password');
+router.post('/forgotten-password', validateEmail, callbackErrorHandler(authController.forgottenPassword));
+router.patch('/reset-password/:id/:emailToken', validateResetParams, validatePassword, callbackErrorHandler(authController.resetPasswordWithLink));
+router.patch('/:id/reset-password', validateId, isLoggedIn, isProfileOwner, validatePassword, callbackErrorHandler(authController.resetPassword));
 module.exports = router;

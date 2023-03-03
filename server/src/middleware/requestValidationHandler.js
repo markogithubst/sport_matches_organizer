@@ -1,17 +1,10 @@
 // eslint-disable-next-line max-len
-const { idSchema, doubleIdSchema, fieldSchema, matchSchema, reservationSchema, resultSchema, teamSchema, userSchema, querySchema } = require('../schemas/schemas');
+const { idSchema, passwordSchema, emailSchema, resetParamsSchema, doubleIdSchema, fieldSchema, matchSchema, reservationSchema, resultSchema, teamSchema, userSchema, querySchema } = require('../schemas/schemas');
 const { validateSchema } = require('../schemas/validateSchema');
 
-const validateId = (req, res, next) => {
-  const { error } = idSchema.validate(req.params);
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
-  }
-  next();
-};
+const validateParams = (schema) => (req, res, next) => {
+  const { error } = schema.validate(req.params);
 
-const validateDoubleId = (req, res, next) => {
-  const { error } = doubleIdSchema.validate(req.params);
   if (error) {
     return res.status(400).json({ message: error.details.map(err => err.message) });
   }
@@ -26,7 +19,17 @@ const validateQuery = (req, res, next) => {
   next();
 };
 
+const validateId = validateParams(idSchema);
+
+const validateResetParams = validateParams(resetParamsSchema);
+
+const validateDoubleId = validateParams(doubleIdSchema);
+
 const validateField = validateSchema(fieldSchema);
+
+const validatePassword = validateSchema(passwordSchema);
+
+const validateEmail = validateSchema(emailSchema);
 
 const validateMatch = validateSchema(matchSchema);
 
@@ -40,6 +43,9 @@ const validateUser = validateSchema(userSchema);
 
 module.exports = {
   validateId,
+  validateResetParams,
+  validatePassword,
+  validateEmail,
   validateField,
   validateMatch,
   validateReservation,

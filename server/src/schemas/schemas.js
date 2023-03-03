@@ -7,6 +7,19 @@ const idSchema = Joi.object({
   id: Joi.string().min(24).max(24).hex().required()
 });
 
+const passwordSchema = Joi.object({
+  password: Joi.string().min(8).max(20).required()
+});
+
+const emailSchema = Joi.object({
+  email: Joi.string().min(3).max(50).email({ minDomainSegments: 2 }).required()
+});
+
+const resetParamsSchema = Joi.object({
+  id: Joi.string().min(24).max(24).hex().required(),
+  emailToken: Joi.string().min(128).max(128).hex().required()
+});
+
 const doubleIdSchema = Joi.object({
   id: Joi.string().min(24).max(24).hex().required(),
   playerId: Joi.string().min(24).max(24).hex().required()
@@ -64,6 +77,9 @@ const userSchema = Joi.object({
 
 module.exports = {
   idSchema,
+  passwordSchema,
+  emailSchema,
+  resetParamsSchema,
   querySchema,
   fieldSchema,
   matchSchema,
