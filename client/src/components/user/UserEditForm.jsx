@@ -19,7 +19,6 @@ export const EditForm = (PropTypes) => {
   };
 
   return <>
-    <h2 className='text-primary mt-3 fs-3 muted'>User information </h2>
     <Form onSubmit={submitHandler}>
 
       <Form.Group onChange={changeHandler} as={Row} className="mb-1" controlId="formPlaintextEmail">

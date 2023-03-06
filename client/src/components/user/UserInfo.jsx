@@ -1,13 +1,16 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 import { EditForm } from './UserEditForm';
 
 export const UserInfo = (PropTypes) => {
   return (
-    <Row>
-      <Container xs={ 5 } className="mt-5 mb-3 border border-2 rounded box-shadow">
-        <EditForm user={ PropTypes.user } editUser={PropTypes.editUser} />
-      </Container>
-    </Row>
+    <Container>
+      <h1 className="my-3">User information</h1>
+      <Card className="shadow">
+        <Card.Body>
+          <EditForm user={ PropTypes.user } editUser={PropTypes.editUser} />
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };

@@ -11,6 +11,7 @@ import ResetPass from './components/reset-password/ResetPass';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EmailForm from './components/reset-password/EmailForm';
+import './styles.css';
 
 const AppLayout = () => {
   return (
