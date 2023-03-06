@@ -1,6 +1,6 @@
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import React, { useState } from 'react';
-
+// TODO reset user data fields to proper values after failed update
 export const EditForm = (PropTypes) => {
   const [isEdit, setIsEdit] = useState(false);
   const [user, setUser] = useState({ ...PropTypes.user });

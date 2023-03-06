@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner, Container, Row } from 'react-bootstrap';
 import { httpGetUser, httpUpdateUser } from '../../hooks/hooks';
+import { useToastify } from '../../hooks/useToastify';
 import { UserInfo } from './UserInfo';
 
 export const UserProfile = () => {
@@ -9,8 +10,13 @@ export const UserProfile = () => {
   const [user, setUser] = useState();
 
   const editUser = async (editedUser) => {
-    const { data } = await httpUpdateUser(localStorage.getItem('userid'), editedUser);
-    setUser({ ...data.data });
+    try {
+      const { data } = await httpUpdateUser(localStorage.getItem('userid'), editedUser);
+      setUser({ ...data.data });
+    } catch (err) {
+      useToastify(err);
+      setUser(prev => { return { ...prev }; });
+    }
   };
 
   useEffect(() => {
