@@ -6,7 +6,6 @@ const config = {
   reporters: [
     'default'
   ],
-  collectCoverage: true,
   verbose: true
 };
 

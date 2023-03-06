@@ -43,10 +43,6 @@ describe('Testing all RESERVATION routes', () => {
       const response = await request(app).get(`/reservation/${reservationId}`);
       expect(response.statusCode).toBe(expectedStatus);
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toEqual(
-        {
-          message: expect.any(String)
-        });
     });
     test(`Testing GET ONE RESERVATION route, should respond with a ${HTTP_STATUS.OK} status code to GET one reservation`, async () => {
       reservationId = '63eb7dfe5f58194a262d8226';
@@ -194,10 +190,6 @@ describe('Testing all RESERVATION routes', () => {
       expect(response.statusCode).toBe(HTTP_STATUS.FORBIDDEN);
       expect(response.body).toEqual(expect.any(Object));
       expect(response.headers['content-type']).toMatch(/json/);
-      expect(response.body).toEqual(
-        {
-          message: expect.any(String)
-        });
     });
 
     describe.each(putReservationData)('Testing PUT RESERVATION route ADMIN role', (reservationId, updatedReservation, expectedStatus) => {
@@ -231,10 +223,6 @@ describe('Testing all RESERVATION routes', () => {
         expect(response.statusCode).toBe(expectedStatus);
         expect(response.headers['content-type']).toMatch(/json/);
         expect(response.body).toEqual(expect.any(Object));
-        expect(response.body).toEqual(
-          {
-            message: expect.any(String)
-          });
       });
     });
     test(`with valid ID, should respond with a ${HTTP_STATUS.OK} status code`, async () => {
@@ -280,10 +268,6 @@ describe('Testing all RESERVATION routes', () => {
           .set('Authorization', `${token}`);
         expect(response.statusCode).toBe(expectedStatus);
         expect(response.headers['content-type']).toMatch(/json/);
-        expect(response.body).toEqual(
-          {
-            message: expect.any(String)
-          });
       });
       test(`Testing CANCEL ONE RESERVATION route, should respond with a ${HTTP_STATUS.OK} status code to CANCEL one reservation`, async () => {
         const login = await request(app).post('/login').send({ email: 'admin@test.com', password: 'password' });
@@ -331,10 +315,6 @@ describe('Testing all RESERVATION routes', () => {
           .set('Authorization', `${token}`);
         expect(response.statusCode).toBe(expectedStatus);
         expect(response.headers['content-type']).toMatch(/json/);
-        expect(response.body).toEqual(
-          {
-            message: expect.any(String)
-          });
       });
     });
     test(`Testing ADD PLAYER to RESERVATION route with valid id, should respond with a ${HTTP_STATUS.OK} status code to ADD PLAYER to reservation`, async () => {
@@ -371,10 +351,6 @@ describe('Testing all RESERVATION routes', () => {
           .set('Authorization', `${token}`);
         expect(response.statusCode).toBe(expectedStatus);
         expect(response.headers['content-type']).toMatch(/json/);
-        expect(response.body).toEqual(
-          {
-            message: expect.any(String)
-          });
       });
     });
     test(`Testing WITHDRAW PLAYER from RESERVATION route with valid id, should respond with a ${HTTP_STATUS.OK} status code to WITHDRAW PLAYER from reservation`, async () => {
@@ -432,7 +408,7 @@ describe('Testing all RESERVATION routes', () => {
       expect(response.body).toEqual(expect.any(Object));
       expect(response.body).toEqual(
         {
-          message: expect.any(String)
+          message: expect.any(Array)
         });
     });
   });

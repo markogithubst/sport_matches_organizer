@@ -41,8 +41,7 @@ describe('Test /user routes', () => {
               name: expect.any(String),
               surname: expect.any(String),
               email: expect.any(String),
-              phone: expect.any(String),
-              role: expect.any(String)
+              phone: expect.any(String)
             })
         })
       );

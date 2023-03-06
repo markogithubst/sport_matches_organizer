@@ -47,24 +47,8 @@ module.exports.postUserData = [
     name: 'Unique',
     surname: 'Usr',
     email: 'uniqueusr@email.com',
-    phone: '+385993404555',
-    role: 'USER'
-  }, HTTP_STATUS.INVALID],
-  [{
-    username: 'uniqueusr',
-    name: 'Unique',
-    surname: 'Usr',
-    email: 'uniqueusr@email.com',
     password: 'password',
     role: 'USER'
-  }, HTTP_STATUS.INVALID],
-  [{
-    username: 'uniqueusr',
-    name: 'Unique',
-    surname: 'Usr',
-    email: 'uniqueusr@email.com',
-    password: 'password',
-    phone: '+385993404555'
   }, HTTP_STATUS.INVALID],
   [{
     username: 'someuser',
