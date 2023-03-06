@@ -5,7 +5,7 @@ import axios from 'axios';
 import { isLoggedIn } from '../../utils/isLoggedIn';
 import { useToastify } from '../../hooks/useToastify';
 
-const Registration = () => {
+export const Registration = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

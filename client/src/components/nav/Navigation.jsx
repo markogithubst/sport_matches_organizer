@@ -7,7 +7,7 @@ import { isLoggedIn } from '../../utils/isLoggedIn';
 import axios from 'axios';
 import { useToastify } from '../../hooks/useToastify';
 
-function Navigation () {
+export const Navigation = () => {
   const navigate = useNavigate();
   const onLogoutHandler = async (e) => {
     try {
@@ -27,12 +27,12 @@ function Navigation () {
 
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" fixed='top'>
         <Container>
           <Navbar.Brand href="#home">Sports Matches Organizer</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+          <Navbar.Collapse className='d-flex flex-row-reverse' id="basic-navbar-nav" >
+            <Nav className='d-flex flex-row-reverse'>
               <Nav.Link href="/">Home</Nav.Link>
               {!isLoggedIn() && <Nav.Link href="/login">Log In</Nav.Link>}
               {!isLoggedIn() && <Nav.Link href="/register">Register</Nav.Link>}
@@ -44,6 +44,6 @@ function Navigation () {
       </Navbar>
     </>
   );
-}
+};
 
 export default Navigation;

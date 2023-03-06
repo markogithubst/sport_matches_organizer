@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useToastify } from '../../hooks/useToastify';
 
-export default function Login () {
+export const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
@@ -97,4 +97,4 @@ export default function Login () {
       </Container>
     </div>
   );
-}
+};

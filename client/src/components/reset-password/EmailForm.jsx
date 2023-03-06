@@ -1,40 +1,33 @@
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useToastify } from '../../hooks/useToastify';
 import axios from 'axios';
 
-export default function EmailForm () {
-  const [formData, setFormData] = useState({});
-  const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState('');
+export const EmailForm = () => {
+  const [formData, setFormData] = useState();
+  const [data, setData] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const request = { emai: formData.password };
-      await axios.post('http://localhost:8000/reset-password',
+      const request = { email: formData.email };
+      const response = await axios.post('http://localhost:8000/forgotten-password',
         request
       );
 
-      navigate('/login');
+      setData(response.data);
+      e.target.reset();
     } catch (err) {
-      if (err.response) {
-        setErrorMessage(err.response.data.message);
-      } else {
-        console.log(err);
-        setErrorMessage('Oops something went wrong...');
-      }
+      useToastify(err);
     }
   };
 
   const handleChange = (e) => {
     const value = e.target.value;
-    const name = e.target.name;
 
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
+    setFormData({
+      email: value
+    });
   };
 
   return (
@@ -48,6 +41,7 @@ export default function EmailForm () {
               <Card.Body>
                 <div className="mb-5 mt-md-4">
                   <h2 className="fw-bold mb-5 text-center">Forgot your password?</h2>
+                  {data && <div className='alert alert-success'>{data.message}</div>}
                   <div className="mb-3">
                     <Form onSubmit={handleSubmit}>
                       <Form.Group
@@ -63,7 +57,7 @@ export default function EmailForm () {
                         </Button>
                       </div>
                     </Form>
-                    {errorMessage && <div className="error"> {errorMessage} </div>}
+
                     <div className="mt-3">
                       <p className="mb-0  text-center">
                         Don&apos;t have an account?{' '}
@@ -81,4 +75,4 @@ export default function EmailForm () {
       </Container>
     </div>
   );
-}
+};

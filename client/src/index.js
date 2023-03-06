@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Navigation from './components/nav/Navigation';
+import { Navigation } from './components/nav/Navigation';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Login from './components/login/Login';
-import Registration from './components/registration/Registration';
+import { Login } from './components/login/Login';
+import { Registration } from './components/registration/Registration';
 import { Home } from './components/home/Home';
 import { UserProfile } from './components/user/UserProfile';
-import ResetPass from './components/reset-password/ResetPass';
+import { ResetPassword } from './components/reset-password/ResetPass';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EmailForm from './components/reset-password/EmailForm';
 import './styles.css';
+
 
 const AppLayout = () => {
   return (
@@ -48,8 +49,8 @@ const router = createBrowserRouter([
         element: <Registration/>
       },
       {
-        path: 'reset-password',
-        element: <ResetPass/>
+        path: 'reset-password/:id/:emailToken',
+        element: <ResetPassword/>
       },
       {
         path: 'user',

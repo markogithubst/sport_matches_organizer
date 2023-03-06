@@ -49,7 +49,7 @@ const forgottenPassword = async (req, res) => {
     await token.delete();
   }
 
-  const link = `${process.env.BASE_URL}/reset-password/${user.id}/${token.token}`;
+  const link = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
   await forgottenPasswordEmail(user, link);
 
   res.status(200).json({ success: true, message: 'Password reset link sent to your email account!' });
