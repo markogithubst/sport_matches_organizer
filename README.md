@@ -107,11 +107,11 @@ What software you need to use the application, and how to install it:
 
 3. Install the dependencies (NPM packages):
    ```sh
-   npm install
+   npm run install
    ```
 
 
-4. Create .env files so you can start the APP in different environments. Example below:
+4. Create .env files in server folder so you can start the APP in different environments. Example below:
 
 ```sh
     NODE_ENV=environment
@@ -132,17 +132,23 @@ Apart from the development .env, .env.test environment should also be defined in
 
 
 
-5. Seed the database:
+5. Seed the database (navigate to server folder):
 
    ```sh
    npm run seed
    ```
 
 
-6. Run development server with
+6. Run development server with (navigate to server folder)
    ```sh
    npm run dev
    ```
+
+
+  7. Run server and client  (root folder)
+  ```sh
+  npm run app
+  ```
 
 **Note:**
 A Postman collection is included in the project files and can be used to test the functionality of the application. 

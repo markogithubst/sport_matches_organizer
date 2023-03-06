@@ -5,6 +5,7 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
+    "install": "npm i --prefix server && npm i --prefix client",
     "server":"npm run dev --prefix server",
     "client":"npm start --prefix client",
     "app": "npm run server & npm run client"
