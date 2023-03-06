@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 const express = require('express');
 const reservationController = require('../controllers/reservationController');
 const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');

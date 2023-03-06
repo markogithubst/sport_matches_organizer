@@ -12,7 +12,8 @@ const checkFinishedMatchResults = async () => {
       for (const admin of adminUsers) {
         const recipient = admin.email;
         const subject = 'Pending match results';
-        const text = `${admin.username}, please fill in the results for the match with the ID: ${game.match}.`;
+        const link = `${process.env.BASE_URL}/match/${game.match}/result`;
+        const text = `<p>${admin.username}, please fill in the results for the following <a href=${link}>match</a>.</p>`;
 
         await sendEmail(recipient, subject, text);
       }

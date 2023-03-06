@@ -663,6 +663,264 @@
         }
       }
     },
+    "/match/{id}/result/{resId}": {
+      "put": {
+        "tags": [
+          "Match"
+        ],
+        "summary": "Update Result",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultBody"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Match"
+        ],
+        "summary": "Delete Result",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responds with success flag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/match/{id}/result": {
+      "put": {
+        "tags": [
+          "Match"
+        ],
+        "summary": "Add a new Result",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Responds with success flag and posted data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application.json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultBody"
+              }
+            }
+          }
+        }
+      }
+    },
     "/reservation/": {
       "get": {
         "tags": [
@@ -1336,351 +1594,6 @@
         }
       }
     },
-    "/result/": {
-      "get": {
-        "tags": [
-          "Result"
-        ],
-        "summary": "Retrieve a list of results",
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Displaying a list of results",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultList"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Responds with not found error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpNotFound"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Responds with error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpInternalError"
-                }
-              }
-            }
-          }
-        },
-        "security": []
-      },
-      "post": {
-        "tags": [
-          "Result"
-        ],
-        "summary": "Add a new Result",
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Responds with success flag and posted data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Responds with invalid request error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvalidResult"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Responds with unauthenticated error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpUnauthenticated"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Responds with unauthorized error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpUnauthorized"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Responds with error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpInternalError"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application.json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResultBody"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/result/{id}": {
-      "get": {
-        "tags": [
-          "Result"
-        ],
-        "summary": "Retrieve a single Result",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Displaying a single Result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Responds with invalid request error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvalidId"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Responds with not found error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpNotFound"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Responds with error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpInternalError"
-                }
-              }
-            }
-          }
-        },
-        "security": []
-      },
-      "put": {
-        "tags": [
-          "Result"
-        ],
-        "summary": "Update Result",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Responds with success flag and posted data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Responds with invalid request error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvalidResult"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Responds with unauthenticated error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpUnauthenticated"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Responds with unauthorized error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpUnauthorized"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Responds with error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpInternalError"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application.json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResultBody"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Result"
-        ],
-        "summary": "Delete one Result",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Responds with success flag and deleted data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Responds with invalid request error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InvalidId"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Responds with unauthenticated error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpUnauthenticated"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Responds with unauthorized error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpUnauthorized"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Responds with error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpInternalError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/team/": {
       "get": {
         "tags": [
@@ -1785,9 +1698,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "401": {
             "description": "Responds with unauthenticated error message",
@@ -1960,9 +1870,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "401": {
             "description": "Responds with unauthenticated error message",
@@ -2516,6 +2423,60 @@
             }
           }
         }
+      }
+    },
+    "/forgotten-password": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/reset-password/{id}/{emailToken}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "emailToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/{id}/reset-password": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {}
       }
     }
   },

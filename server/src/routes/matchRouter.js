@@ -2,7 +2,7 @@ const express = require('express');
 const matchController = require('../controllers/matchController');
 const { isLoggedIn, isAdmin } = require('../middleware/authorizationHandler');
 const { callbackErrorHandler } = require('../middleware/errorMiddlewareHandler');
-const { validateId, validateMatch } = require('../middleware/requestValidationHandler');
+const { validateId, validateMatch, validateResult } = require('../middleware/requestValidationHandler');
 
 const router = express.Router();
 
@@ -231,5 +231,179 @@ router.delete('/:id',
   } */
 
   validateId, isLoggedIn, isAdmin, callbackErrorHandler(matchController.deleteMatch));
+router.put('/:id/result/:resId',
+  /* #swagger.tags = ['Match']
+  #swagger.requestBody = {
+      required: true,
+      content: {
+        'application.json': {
+          schema: { $ref: '#/definitions/ResultBody' }
+        }
+      }
+    }
+
+    #swagger.summary = 'Update Result'
+        #swagger.responses[200] = {
+              description: 'Responds with success flag and posted data',
+              content: {
+                  'application/json': {
+                      schema: {
+                        $ref: '#/definitions/ResultResponse'
+                      }
+                  }
+              }
+          }
+    #swagger.responses[400] = {
+      description: 'Responds with invalid request error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/InvalidResult'
+              }
+          }
+      }
+    }
+    #swagger.responses[401] = {
+      description: 'Responds with unauthenticated error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/httpUnauthenticated'
+              }
+          }
+      }
+    }
+    #swagger.responses[403] = {
+      description: 'Responds with unauthorized error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/httpUnauthorized'
+              }
+          }
+      }
+    }
+    #swagger.responses[500] = {
+    description: 'Responds with error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpInternalError'
+            }
+        }
+      }
+    }
+  */
+  isLoggedIn, isAdmin, validateResult, callbackErrorHandler(matchController.updateResult));
+router.put('/:id/result',
+  /* #swagger.tags = ['Match']
+  #swagger.requestBody = {
+      required: true,
+      content: {
+        'application.json': {
+          schema: { $ref: '#/definitions/ResultBody' }
+        }
+      }
+    }
+
+    #swagger.summary = 'Add a new Result'
+        #swagger.responses[201] = {
+              description: 'Responds with success flag and posted data',
+              content: {
+                  'application/json': {
+                      schema: {
+                        $ref: '#/definitions/ResultResponse'
+                      }
+                  }
+              }
+          }
+    #swagger.responses[400] = {
+      description: 'Responds with invalid request error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/InvalidResult'
+              }
+          }
+      }
+    }
+    #swagger.responses[401] = {
+      description: 'Responds with unauthenticated error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/httpUnauthenticated'
+              }
+          }
+      }
+    }
+    #swagger.responses[403] = {
+      description: 'Responds with unauthorized error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/httpUnauthorized'
+              }
+          }
+      }
+    }
+    #swagger.responses[500] = {
+    description: 'Responds with error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpInternalError'
+            }
+        }
+      }
+    }
+  */
+  validateId, isLoggedIn, isAdmin, validateResult, callbackErrorHandler(matchController.addResult));
+router.delete('/:id/result/:resId',
+  /* #swagger.tags = ['Match']
+    #swagger.summary = 'Delete Result'
+        #swagger.responses[200] = {
+              description: 'Responds with success flag',
+              content: {
+                  'application/json': {
+                      schema: {
+                        $ref: '#/definitions/ResultResponse'
+                      }
+                  }
+              }
+          }
+
+    #swagger.responses[401] = {
+      description: 'Responds with unauthenticated error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/httpUnauthenticated'
+              }
+          }
+      }
+    }
+    #swagger.responses[403] = {
+      description: 'Responds with unauthorized error message',
+      content: {
+          'application/json': {
+              schema: {
+                $ref: '#/definitions/httpUnauthorized'
+              }
+          }
+      }
+    }
+    #swagger.responses[500] = {
+    description: 'Responds with error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpInternalError'
+            }
+        }
+      }
+    }
+  */
+  isLoggedIn, isAdmin, callbackErrorHandler(matchController.deleteResult));
 
 module.exports = router;
