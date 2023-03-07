@@ -69,7 +69,7 @@ const checkConditionsAndNotify = async (reservation) => {
   data.main.temp > 33 ||
     data.main.humidity > 89 ||
     data.wind.speed > 80 ||
-    // data.weather[0].main === 'Rain' ||
+    data.weather[0].main === 'Rain' ||
     data.weather[0].main === 'Snow'
   ) {
     await Reservations.findByIdAndUpdate(reservation.id, { $set: { isCanceled: true } });

@@ -24,13 +24,13 @@ const loginUser = async (req, res) => {
   res.header('UserId', user._id);
   res.set('Access-Control-Expose-Headers', ['Authorization', 'Role', 'UserId']);
 
-  return res.status(200).json({ success: true, message: `User ${user.username} logged in successfully!` });
+  return res.status(HTTP_STATUS.OK).json({ success: true, message: `User ${user.username} logged in successfully!` });
 };
 
 const logoutUser = async (req, res) => {
   res.header('Authorization', '');
 
-  return res.status(200).json({ success: true, message: 'User logged out!' });
+  return res.status(HTTP_STATUS.OK).json({ success: true, message: 'User logged out!' });
 };
 
 const forgottenPassword = async (req, res) => {
@@ -45,14 +45,12 @@ const forgottenPassword = async (req, res) => {
       userId: user._id,
       token: crypto.randomBytes(32).toString('hex')
     }).save();
-  } else {
-    await token.delete();
   }
 
   const link = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
   await forgottenPasswordEmail(user, link);
 
-  res.status(200).json({ success: true, message: 'Password reset link sent to your email account!' });
+  res.status(HTTP_STATUS.OK).json({ success: true, message: 'Password reset link sent to your email account!' });
 };
 
 const resetPasswordWithLink = async (req, res) => {
