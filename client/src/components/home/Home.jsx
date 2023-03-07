@@ -1,7 +1,8 @@
 import { useEffect, useState, React } from 'react';
 import axios from 'axios';
-import { Container, Card, Button } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 import { isLoggedIn } from '../../utils/isLoggedIn';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   const [reservations, setReservations] = useState([]);
@@ -41,15 +42,17 @@ export const Home = () => {
                   <div className="d-flex justify-content-between">
                     <div>
                       <p className="mb-1">Field: {reservation.field}</p>
-                      <p className="mb-1">Number of registered players: {reservation.num}</p>
+                      <p className="mb-1">Number of registered players: {reservation.registeredPlayers.length}</p>
                       <p className="mb-1">Time: {new Date(reservation.time).toLocaleString()}</p>
                       <p className="mb-1">Max players for this field: {reservation.maxPlayers}</p>
                     </div>
                     {isLoggedIn() && (
                       <div className="d-grid">
-                        <Button className="mt-5 mb-5 h-25" variant="primary" type="button">
-                          View details
-                        </Button>
+                        <div className="d-grid">
+                          <Link to={`/reservation/${reservation._id}`} className="mt-5 mb-5 h-25 btn btn-primary">
+                            View details
+                          </Link>
+                        </div>
                       </div>
                     )}
                   </div>

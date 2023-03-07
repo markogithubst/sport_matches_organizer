@@ -12,6 +12,7 @@ import { EmailForm } from './components/reset-password/EmailForm';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
+import { ReservationDetails } from './components/reservation/ReservationDetails';
 
 const AppLayout = () => {
   return (
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: 'user',
         element: <UserProfile />
+      },
+      {
+        path: 'reservation/:id',
+        element: <ReservationDetails />
       }
     ]
   }

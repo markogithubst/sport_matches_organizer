@@ -7,7 +7,6 @@ const Match = require('./Match');
 const Field = require('./Field');
 
 const reservationSchema = mongoose.Schema({
-
   field: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Field',
@@ -18,10 +17,6 @@ const reservationSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     autopopulate: true,
     ref: 'Match'
-  },
-  num: {
-    type: Number,
-    default: 0
   },
   time: {
     type: Date,
@@ -49,7 +44,6 @@ const reservationSchema = mongoose.Schema({
     ref: 'User',
     autopopulate: true
   }]
-
 },
 {
   timestamps: true,
