@@ -2519,7 +2519,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasswordUpdateResponse"
+                  "$ref": "#/components/schemas/PasswordUpdatedResponse"
                 }
               }
             }
@@ -2598,7 +2598,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PasswordUpdateResponse"
+                  "$ref": "#/components/schemas/PasswordUpdatedResponse"
                 }
               }
             }

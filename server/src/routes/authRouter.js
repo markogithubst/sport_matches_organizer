@@ -165,7 +165,7 @@ router.patch('/reset-password/:id/:emailToken',
           content: {
               'application/json': {
                   schema: {
-                    $ref: '#/definitions/PasswordUpdateResponse'
+                    $ref: '#/definitions/PasswordUpdatedResponse'
                   }
               }
           }
@@ -224,7 +224,7 @@ router.patch('/:id/reset-password',
           content: {
               'application/json': {
                   schema: {
-                    $ref: '#/definitions/PasswordUpdateResponse'
+                    $ref: '#/definitions/PasswordUpdatedResponse'
                   }
               }
           }
