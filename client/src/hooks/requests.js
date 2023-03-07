@@ -7,12 +7,20 @@ export const httpGetUser = async (userId) => {
 };
 export const httpUpdateUser = async (userId, editedUser) => {
   delete editedUser._id;
-  const token = localStorage.getItem('token');
-  console.log(token);
+
   return await axios.put(`${URL}user/${userId}`,
     editedUser, {
       headers: {
-        Authorization: `${localStorage.getItem('token')}`
+        Authorization: localStorage.getItem('token')
       }
     });
+};
+
+export const httpGetUserHistory = async (id) => {
+  const token = localStorage.getItem('token');
+  return await axios.get(`${URL}user/${id}/history`, {
+    headers: {
+      Authorization: token
+    }
+  });
 };

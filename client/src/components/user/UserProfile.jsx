@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { Spinner, Container, Row } from 'react-bootstrap';
-import { httpGetUser, httpUpdateUser } from '../../hooks/hooks';
+import { httpGetUser, httpUpdateUser } from '../../hooks/requests';
 import { useToastify } from '../../hooks/useToastify';
 import { UserInfo } from './UserInfo';
 
 export const UserProfile = () => {
+  const userId = localStorage.getItem('userid');
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
 
   const editUser = async (editedUser) => {
     try {
@@ -20,17 +21,12 @@ export const UserProfile = () => {
   };
 
   useEffect(() => {
-    const asyncCall = async () => {
-      const { data } = await httpGetUser(localStorage.getItem('userid'));
-      setUser(data.data);
+    const getData = async () => {
+      const userResponse = await httpGetUser(userId);
       setIsLoading(false);
+      setUser(userResponse.data.data);
     };
-    try {
-      asyncCall();
-    } catch (err) {
-      console.error(err);
-    }
-
+    getData();
     return () => {
       // cleanup
     };

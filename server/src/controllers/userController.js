@@ -24,7 +24,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params;
 
-  const userToDelete = await User.findByIdAndDelete(id);
+  const userToDelete = await User.findByIdAndUpdate(id, { isDeleted: true });
 
   if (userToDelete) {
     await Reservation.updateMany({
@@ -43,10 +43,10 @@ const deleteUser = async (req, res) => {
 
 const viewHistory = async (req, res) => {
   const { id } = req.params;
-  const exclude = '-num -isScheduled -isCanceled -isFinished -registeredPlayers';
+  const exclude = '-num -isScheduled -isCanceled -isDeleted -isFinished -registeredPlayers';
 
   // eslint-disable-next-line max-len
-  const userHistory = await Reservation.find({ registeredPlayers: { $in: [id] } }, exclude)
+  const userHistory = await Reservation.find({ registeredPlayers: { $in: [id] }, isFinished: true }, exclude)
     .populate('field', 'name')
     .populate({
       path: 'match',
@@ -68,6 +68,12 @@ const viewHistory = async (req, res) => {
           path: 'players',
           select: 'username'
         }
+      }
+    })
+    .populate({
+      path: 'match',
+      populate: {
+        path: 'result'
       }
     });
 
