@@ -3,7 +3,7 @@ import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import { useState, React } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useToastify } from '../../hooks/useToastify';
+import { useToastifyError } from '../../hooks/useToastify';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const Login = () => {
 
       navigate('/');
     } catch (err) {
-      useToastify(err);
+      useToastifyError(err);
     }
   };
 

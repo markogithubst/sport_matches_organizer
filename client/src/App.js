@@ -11,6 +11,7 @@ import { EmailForm } from './components/reset-password/EmailForm';
 import { UserHistory } from './components/user/UserHistory/UserHistory';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
+import { ReservationDetails } from './components/reservation/ReservationDetails';
 
 const AppLayout = () => {
   return (
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: 'history',
         element: <UserHistory />
+      },
+      {
+        path: 'reservation/:id',
+        element: <ReservationDetails />
       }
     ]
   }

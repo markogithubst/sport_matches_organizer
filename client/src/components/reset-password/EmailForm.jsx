@@ -1,6 +1,6 @@
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { useToastify } from '../../hooks/useToastify';
+import { useToastifyError } from '../../hooks/useToastify';
 import axios from 'axios';
 
 export const EmailForm = () => {
@@ -18,7 +18,7 @@ export const EmailForm = () => {
       setData(response.data);
       e.target.reset();
     } catch (err) {
-      useToastify(err);
+      useToastifyError(err);
     }
   };
 

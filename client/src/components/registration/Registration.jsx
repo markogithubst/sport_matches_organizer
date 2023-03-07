@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { RegForm } from './RegForm';
 import axios from 'axios';
 import { isLoggedIn } from '../../utils/isLoggedIn';
-import { useToastify } from '../../hooks/useToastify';
+import { useToastifyError } from '../../hooks/useToastify';
 
 export const Registration = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export const Registration = () => {
       await axios.post('http://localhost:8000/user', request);
       navigate('/login');
     } catch (err) {
-      useToastify(err);
+      useToastifyError(err);
     }
   };
 

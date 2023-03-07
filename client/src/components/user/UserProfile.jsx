@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner, Container, Row } from 'react-bootstrap';
 import { httpGetUser, httpUpdateUser } from '../../hooks/requests';
-import { useToastify } from '../../hooks/useToastify';
+import { useToastifyError } from '../../hooks/useToastify';
 import { UserInfo } from './UserInfo';
 
 export const UserProfile = () => {
@@ -15,7 +15,7 @@ export const UserProfile = () => {
       const { data } = await httpUpdateUser(localStorage.getItem('userid'), editedUser);
       setUser({ ...data.data });
     } catch (err) {
-      useToastify(err);
+      useToastifyError(err);
       setUser(prev => { return { ...prev }; });
     }
   };

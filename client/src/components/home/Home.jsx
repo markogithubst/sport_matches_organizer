@@ -3,29 +3,34 @@ import axios from 'axios';
 import { Container, Card } from 'react-bootstrap';
 import { isLoggedIn } from '../../utils/isLoggedIn';
 import { Link } from 'react-router-dom';
+import { useToastifyError } from '../../hooks/useToastify';
 
 export const Home = () => {
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [reservationsResponse, fieldsResponse] = await Promise.all([
-        axios.get('http://localhost:8000/reservation'),
-        axios.get('http://localhost:8000/field')
-      ]);
+      try {
+        const [reservationsResponse, fieldsResponse] = await Promise.all([
+          axios.get('http://localhost:8000/reservation'),
+          axios.get('http://localhost:8000/field')
+        ]);
 
-      const reservations = reservationsResponse.data.data
-        .filter(reservation => !reservation.isFinished && !reservation.isCanceled)
-        .map(reservation => {
-          const field = fieldsResponse.data.data.find(field => field._id === reservation.field);
-          return {
-            ...reservation,
-            field: field.name,
-            maxPlayers: field.maxPlayers
-          };
-        });
+        const reservations = reservationsResponse.data.data
+          .filter(reservation => !reservation.isFinished && !reservation.isCanceled)
+          .map(reservation => {
+            const field = fieldsResponse.data.data.find(field => field._id === reservation.field);
+            return {
+              ...reservation,
+              field: field.name,
+              maxPlayers: field.maxPlayers
+            };
+          });
 
-      setReservations(reservations);
+        setReservations(reservations);
+      } catch (err) {
+        useToastifyError(err);
+      }
     };
     fetchData();
   }, []);

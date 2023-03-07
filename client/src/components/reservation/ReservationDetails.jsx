@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Container, Card, Button } from 'react-bootstrap';
 import { isLoggedIn } from '../../utils/isLoggedIn';
+import { useToastifyError } from '../../hooks/useToastify';
 
 export const ReservationDetails = () => {
   const { id } = useParams();
@@ -12,14 +13,18 @@ export const ReservationDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const reservationResponse = await axios.get(`http://localhost:8000/reservation/${id}`);
-      setReservation(reservationResponse.data.data);
+      try {
+        const reservationResponse = await axios.get(`http://localhost:8000/reservation/${id}`);
+        setReservation(reservationResponse.data.data);
 
-      const fieldResponse = await axios.get(`http://localhost:8000/field/${reservationResponse.data.data.field}`);
-      setField(fieldResponse.data.data);
+        const fieldResponse = await axios.get(`http://localhost:8000/field/${reservationResponse.data.data.field}`);
+        setField(fieldResponse.data.data);
 
-      const userResponse = await axios.get('http://localhost:8000/user');
-      setUsers(userResponse.data.data);
+        const userResponse = await axios.get('http://localhost:8000/user');
+        setUsers(userResponse.data.data);
+      } catch (err) {
+        useToastifyError(err);
+      }
     };
     fetchData();
   }, [id]);
