@@ -124,6 +124,7 @@ What software you need to use the application, and how to install it:
     MAILER_HOST=localhost
     MAILER_PORT=1025
     MAIL_SENDER=somevalidemail
+    BASE_URL="http://localhost:3000"
 ```
 
 **Note:**
