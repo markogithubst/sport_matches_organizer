@@ -10,15 +10,6 @@ router.post('/login',
 /* #swagger.tags = ['Login']
   #swagger.security = []
 
-      #swagger.requestBody = {
-      required: true,
-      content: {
-        'application.json': {
-            schema: { $ref: '#/definitions/LoginBody' }
-        }
-      }
-    }
-
     #swagger.summary = 'User logged in'
     #swagger.responses[200] = {
           description: 'Responds with success flag and successful login message',
@@ -63,6 +54,16 @@ router.post('/login',
         }
       }
     }
+
+    #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/LoginBody' }
+          }
+        }
+      }
+    }
 */
   callbackErrorHandler(authController.loginUser));
 router.get('/logout',
@@ -94,8 +95,204 @@ router.get('/logout',
 */
   callbackErrorHandler(authController.logoutUser));
 
-router.post('/forgotten-password', validateEmail, callbackErrorHandler(authController.forgottenPassword));
-router.get('/reset-password/:id/:emailToken');
-router.patch('/reset-password/:id/:emailToken', callbackErrorHandler(authController.resetPasswordWithLink));
-router.patch('/:id/reset-password', validateId, isLoggedIn, isProfileOwner, validatePassword, callbackErrorHandler(authController.resetPassword));
+router.post('/forgotten-password',
+/* #swagger.tags = ['Forgotten Password']
+  #swagger.security = []
+
+    #swagger.summary = 'Reset password email sent'
+    #swagger.responses[200] = {
+          description: 'Responds with success flag and a message',
+          content: {
+              'application/json': {
+                  schema: {
+                    $ref: '#/definitions/ForgottenPassResponse'
+                  }
+              }
+          }
+      }
+
+    #swagger.responses[400] = {
+    description: 'Responds with invalid request error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/InvalidEmail'
+            }
+        }
+    }
+  }
+
+    #swagger.responses[404] = {
+    description: 'Responds with not found error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/UserNotFound'
+            }
+        }
+      }
+    }
+
+    #swagger.responses[500] = {
+    description: 'Responds with error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpInternalError'
+            }
+        }
+      }
+    }
+
+    #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/ForgottenPassBody' }
+          }
+        }
+      }
+    }
+*/
+  validateEmail, callbackErrorHandler(authController.forgottenPassword));
+router.patch('/reset-password/:id/:emailToken',
+/* #swagger.tags = ['Forgotten Password']
+  #swagger.security = []
+
+    #swagger.summary = 'Password successfuly updated'
+    #swagger.responses[201] = {
+          description: 'Responds with success flag and a message',
+          content: {
+              'application/json': {
+                  schema: {
+                    $ref: '#/definitions/PasswordUpdateResponse'
+                  }
+              }
+          }
+      }
+
+    #swagger.responses[400] = {
+    description: 'Responds with invalid request error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/InvalidResetPassword'
+            }
+        }
+    }
+  }
+
+    #swagger.responses[404] = {
+    description: 'Responds with not found error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpNotFound'
+            }
+        }
+      }
+    }
+
+    #swagger.responses[500] = {
+    description: 'Responds with error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpInternalError'
+            }
+        }
+      }
+    }
+
+    #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/PasswordUpdateBody' }
+          }
+        }
+      }
+    }
+*/
+  callbackErrorHandler(authController.resetPasswordWithLink));
+router.patch('/:id/reset-password',
+/* #swagger.tags = ['Forgotten Password']
+
+    #swagger.summary = 'Password successfuly updated'
+    #swagger.responses[201] = {
+          description: 'Responds with success flag and a message',
+          content: {
+              'application/json': {
+                  schema: {
+                    $ref: '#/definitions/PasswordUpdateResponse'
+                  }
+              }
+          }
+      }
+
+    #swagger.responses[400] = {
+    description: 'Responds with invalid request error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/InvalidResetPassword'
+            }
+        }
+    }
+  }
+
+  #swagger.responses[401] = {
+    description: 'Responds with unauthenticated error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpUnauthenticated'
+            }
+        }
+    }
+  }
+  #swagger.responses[403] = {
+    description: 'Responds with unauthorized error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpUnauthorized'
+            }
+        }
+    }
+  }
+
+    #swagger.responses[404] = {
+    description: 'Responds with not found error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpNotFound'
+            }
+        }
+      }
+    }
+
+    #swagger.responses[500] = {
+    description: 'Responds with error message',
+    content: {
+        'application/json': {
+            schema: {
+              $ref: '#/definitions/httpInternalError'
+            }
+        }
+      }
+    }
+
+    #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/PasswordUpdateBody' }
+          }
+        }
+      }
+    }
+*/
+  validateId, isLoggedIn, isProfileOwner, validatePassword, callbackErrorHandler(authController.resetPassword));
 module.exports = router;

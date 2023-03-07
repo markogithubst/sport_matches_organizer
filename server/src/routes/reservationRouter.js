@@ -44,14 +44,6 @@ router.get('/',
   callbackErrorHandler(reservationController.viewAllReservations));
 router.post('/',
 /* #swagger.tags = ['Reservation']
-#swagger.requestBody = {
-    required: true,
-    content: {
-      'application.json': {
-        schema: { $ref: '#/definitions/ReservationBody' }
-      }
-    }
-  }
 
   #swagger.summary = 'Add a new Reservation'
       #swagger.responses[201] = {
@@ -104,6 +96,16 @@ router.post('/',
       }
     }
   }
+
+  #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/ReservationBody' }
+          }
+        }
+      }
+    }
   */
   isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.createReservation));
 router.get('/filter',
@@ -237,14 +239,6 @@ router.get('/:id',
   validateId, callbackErrorHandler(reservationController.viewSingleReservation));
 router.put('/:id',
 /* #swagger.tags = ['Reservation']
- #swagger.requestBody = {
-    required: true,
-    content: {
-      'application.json': {
-        schema: { $ref: '#/definitions/ReservationBody' }
-      }
-    }
-  }
 
   #swagger.summary = 'Update Reservation'
       #swagger.responses[202] = {
@@ -297,6 +291,16 @@ router.put('/:id',
       }
     }
   }
+
+  #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/ReservationBody' }
+          }
+        }
+      }
+    }
 */
   validateId, isLoggedIn, isAdmin, validateReservation, callbackErrorHandler(reservationController.updateReservation));
 router.put('/:id/add-player/:playerId',

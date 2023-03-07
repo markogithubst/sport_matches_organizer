@@ -123,14 +123,7 @@ router.put('/:id',
 /* #swagger.tags = ['Team']
 
   #swagger.summary = 'Update a single Team'
-  #swagger.requestBody = {
-      required: true,
-      content: {
-        'application.json': {
-          schema: { $ref: '#/definitions/TeamBody' }
-        }
-      }
-    }
+
   #swagger.responses[202] = {
       description: 'Responds with updated team and success flag',
       content: {
@@ -190,6 +183,16 @@ router.put('/:id',
       }
     }
   }
+
+  #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/TeamBody' }
+          }
+        }
+      }
+    }
 
 */
   validateId, isLoggedIn, isAdmin, validateTeam, callbackErrorHandler(teamController.updateTeam));

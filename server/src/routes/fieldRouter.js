@@ -44,14 +44,7 @@ router.get('/',
 router.post('/',
 /* #swagger.tags = ['Field']
   #swagger.summary = 'Add a new Field'
-  #swagger.requestBody = {
-      required: true,
-      content: {
-        'application.json': {
-          schema: { $ref: '#/definitions/FieldBody' }
-        }
-      }
-    }
+
   #swagger.responses[201] = {
         description: 'Responds with success flag and posted data',
         content: {
@@ -102,6 +95,16 @@ router.post('/',
       }
     }
   }
+
+  #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/FieldBody' }
+          }
+        }
+      }
+    }
 */
   isLoggedIn, isAdmin, validateField, callbackErrorHandler(fieldController.createField));
 router.get('/:id',
@@ -153,14 +156,6 @@ router.get('/:id',
 router.put('/:id',
 /* #swagger.tags = ['Field']
   #swagger.summary = 'Update an existig field'
-  #swagger.requestBody = {
-    required: true,
-    content: {
-      'application.json': {
-        schema: { $ref: '#/definitions/FieldBody' }
-      }
-    }
-  }
   #swagger.responses[202] = {
           description: 'Responds with success flag and updated data',
           content: {
@@ -221,6 +216,15 @@ router.put('/:id',
       }
     }
   }
+  #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/FieldBody' }
+          }
+        }
+      }
+    }
 */
   validateId, isLoggedIn, isAdmin, validateField, callbackErrorHandler(fieldController.updateField));
 router.delete('/:id',

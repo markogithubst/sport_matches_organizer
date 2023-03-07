@@ -90,7 +90,7 @@ const resetPassword = async (req, res) => {
 
   if (!passwordReset) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, data: passwordReset });
+  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: 'Password successfully updated' });
 };
 
 module.exports = {

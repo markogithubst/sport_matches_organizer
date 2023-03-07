@@ -123,7 +123,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/FieldBody"
               }
@@ -281,7 +281,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/FieldBody"
               }
@@ -750,7 +750,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ResultBody"
               }
@@ -912,7 +912,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ResultBody"
               }
@@ -1033,7 +1033,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ReservationBody"
               }
@@ -1259,7 +1259,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ReservationBody"
               }
@@ -1829,7 +1829,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TeamBody"
               }
@@ -2019,7 +2019,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UserBody"
               }
@@ -2245,7 +2245,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UserBody"
               }
@@ -2384,7 +2384,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application.json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/LoginBody"
               }
@@ -2427,13 +2427,73 @@
     },
     "/forgotten-password": {
       "post": {
+        "tags": [
+          "Forgotten Password"
+        ],
+        "summary": "Reset password email sent",
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Responds with success flag and a message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForgottenPassResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidEmail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgottenPassBody"
+              }
+            }
+          }
+        }
       }
     },
     "/reset-password/{id}/{emailToken}": {
       "patch": {
+        "tags": [
+          "Forgotten Password"
+        ],
+        "summary": "Password successfuly updated",
         "description": "",
         "parameters": [
           {
@@ -2453,11 +2513,67 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Responds with success flag and a message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PasswordUpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidResetPassword"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordUpdateBody"
+              }
+            }
+          }
+        }
       }
     },
     "/{id}/reset-password": {
       "patch": {
+        "tags": [
+          "Forgotten Password"
+        ],
+        "summary": "Password successfuly updated",
         "description": "",
         "parameters": [
           {
@@ -2476,7 +2592,78 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "Responds with success flag and a message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PasswordUpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Responds with invalid request error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidResetPassword"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Responds with unauthenticated error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthenticated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Responds with unauthorized error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpUnauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Responds with not found error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpNotFound"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Responds with error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/httpInternalError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordUpdateBody"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -2487,7 +2674,7 @@
         "properties": {
           "email": {
             "type": "string",
-            "example": "admin@gmail.com"
+            "example": "admin@test.com"
           },
           "password": {
             "type": "string",
@@ -2522,6 +2709,56 @@
           "message": {
             "type": "string",
             "example": "User logged out!"
+          }
+        }
+      },
+      "ForgottenPassBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "admin@test.com"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "ForgottenPassResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Password reset link sent to your email account!"
+          }
+        }
+      },
+      "PasswordUpdateBody": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "example": "12341234"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "PasswordUpdatedResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Password successfully updated"
           }
         }
       },
@@ -2569,13 +2806,13 @@
             "type": "string",
             "example": "Test Field 1"
           },
-          "city": {
-            "type": "string",
-            "example": "Split"
-          },
           "address": {
             "type": "string",
             "example": "Test Address 1"
+          },
+          "city": {
+            "type": "string",
+            "example": "Split"
           },
           "maxPlayers": {
             "type": "number",
@@ -2584,8 +2821,8 @@
         },
         "required": [
           "name",
-          "city",
           "address",
+          "city",
           "maxPlayers"
         ]
       },
@@ -3552,6 +3789,15 @@
           }
         }
       },
+      "UserNotFound": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "User not found!"
+          }
+        }
+      },
       "InvalidField": {
         "type": "object",
         "properties": {
@@ -3626,6 +3872,15 @@
           }
         }
       },
+      "InvalidResetPassword": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "\"password\" length must be at least 8 characters long"
+          }
+        }
+      },
       "InvalidReservation": {
         "type": "object",
         "properties": {
@@ -3693,6 +3948,20 @@
             "example": [
               "\"whiteTeamScore\" must be a number",
               "\"blackTeamScore\" must be less than or equal to 30"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "InvalidEmail": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "array",
+            "example": [
+              "\"email\" must be a valid email"
             ],
             "items": {
               "type": "string"

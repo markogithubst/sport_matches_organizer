@@ -1,28 +1,22 @@
 /* eslint-disable no-useless-escape */
-const dotenv = require('dotenv');
-dotenv.config();
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
-
-require('dotenv').config({
-  path: '.env.development'
-});
 
 const doc = {
   info: {
     title: 'Sports Match Organizer Aplication',
     description: 'Simple API overview'
   },
-  host: `localhost:${process.env.PORT}`,
+  host: 'localhost:8000',
+  schemes: ['http'],
   securityDefinitions: {
     bearerAuth: {
       type: 'http',
       scheme: 'bearer'
     }
   },
-  schemes: ['http'],
   definitions: {
     LoginBody: {
-      $email: 'admin@gmail.com',
+      $email: 'admin@test.com',
       $password: 'password'
     },
     LoginResponse: {
@@ -32,6 +26,20 @@ const doc = {
     LogoutResponse: {
       success: true,
       message: 'User logged out!'
+    },
+    ForgottenPassBody: {
+      $email: 'admin@test.com'
+    },
+    ForgottenPassResponse: {
+      success: true,
+      message: 'Password reset link sent to your email account!'
+    },
+    PasswordUpdateBody: {
+      $password: '12341234'
+    },
+    PasswordUpdatedResponse: {
+      success: true,
+      message: 'Password successfully updated'
     },
     FieldList: {
       success: true,
@@ -47,8 +55,8 @@ const doc = {
     },
     FieldBody: {
       $name: 'Test Field 1',
-      $city: 'Split',
       $address: 'Test Address 1',
+      $city: 'Split',
       $maxPlayers: 10
     },
     FieldResponse: {
@@ -424,7 +432,9 @@ const doc = {
       success: false,
       message: 'You are not authorized to view this page!'
     },
-
+    UserNotFound: {
+      message: 'User not found!'
+    },
     InvalidField: {
       message: [
         '"name" length must be at least 5 characters long',
@@ -457,6 +467,9 @@ const doc = {
     InvalidId: {
       message: '\"id\" length must be at least 24 characters long'
     },
+    InvalidResetPassword: {
+      message: '\"password\" length must be at least 8 characters long'
+    },
     InvalidReservation: {
       message: [
         '"field" length must be at least 24 characters long',
@@ -488,8 +501,12 @@ const doc = {
         '"whiteTeamScore" must be a number',
         '"blackTeamScore" must be less than or equal to 30'
       ]
+    },
+    InvalidEmail: {
+      message: [
+        '\"email\" must be a valid email'
+      ]
     }
-
   },
 
   security: [{

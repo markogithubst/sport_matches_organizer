@@ -103,15 +103,6 @@ router.post('/',
 /* #swagger.tags = ['User']
   #swagger.security = []
 
-  #swagger.requestBody = {
-    required: true,
-    content: {
-      'application.json': {
-        schema: { $ref: '#/definitions/UserBody' }
-      }
-    }
-  }
-
   #swagger.summary = 'Add a new User'
       #swagger.responses[201] = {
             description: 'Responds with success flag and posted data',
@@ -163,6 +154,16 @@ router.post('/',
       }
     }
   }
+
+  #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/UserBody' }
+          }
+        }
+      }
+    }
 */
   validateUser, callbackErrorHandler(userController.registerUser));
 router.get('/:id',
@@ -215,14 +216,6 @@ router.get('/:id',
   validateId, callbackErrorHandler(userController.viewSingleUser));
 router.put('/:id',
 /* #swagger.tags = ['User']
- #swagger.requestBody = {
-    required: true,
-    content: {
-      'application.json': {
-        schema: { $ref: '#/definitions/UserBody' }
-      }
-    }
-  }
 
   #swagger.summary = 'Update User'
       #swagger.responses[201] = {
@@ -275,6 +268,16 @@ router.put('/:id',
       }
     }
   }
+
+  #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/UserBody' }
+          }
+        }
+      }
+    }
 */
   validateId, isLoggedIn, isProfileOwner, validateUser, callbackErrorHandler(userController.updateUser));
 router.delete('/:id',

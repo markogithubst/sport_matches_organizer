@@ -233,14 +233,6 @@ router.delete('/:id',
   validateId, isLoggedIn, isAdmin, callbackErrorHandler(matchController.deleteMatch));
 router.put('/:id/result/:resId',
   /* #swagger.tags = ['Match']
-  #swagger.requestBody = {
-      required: true,
-      content: {
-        'application.json': {
-          schema: { $ref: '#/definitions/ResultBody' }
-        }
-      }
-    }
 
     #swagger.summary = 'Update Result'
         #swagger.responses[200] = {
@@ -293,18 +285,20 @@ router.put('/:id/result/:resId',
         }
       }
     }
+
+    #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/ResultBody' }
+          }
+        }
+      }
+    }
   */
   isLoggedIn, isAdmin, validateResult, callbackErrorHandler(matchController.updateResult));
 router.put('/:id/result',
   /* #swagger.tags = ['Match']
-  #swagger.requestBody = {
-      required: true,
-      content: {
-        'application.json': {
-          schema: { $ref: '#/definitions/ResultBody' }
-        }
-      }
-    }
 
     #swagger.summary = 'Add a new Result'
         #swagger.responses[201] = {
@@ -354,6 +348,16 @@ router.put('/:id/result',
             schema: {
               $ref: '#/definitions/httpInternalError'
             }
+        }
+      }
+    }
+
+    #swagger.requestBody={
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": { $ref: '#/definitions/ResultBody' }
+          }
         }
       }
     }
