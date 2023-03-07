@@ -71,7 +71,8 @@ const userSchema = Joi.object({
   email: Joi.string().min(3).max(50).email({ minDomainSegments: 2 }).required(),
   password: Joi.string().min(8).max(20),
   phone: Joi.string().regex(/^\+(?:\d\s?){6,14}\d$/).required(),
-  role: Joi.string().valid('ADMIN', 'USER')
+  role: Joi.string().valid('ADMIN', 'USER'),
+  isDeleted: Joi.boolean()
 
 }).options({ abortEarly: false });
 
