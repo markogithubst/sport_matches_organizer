@@ -121,6 +121,7 @@ What software you need to use the application, and how to install it:
     JWT_EXPIRATION=expirationtime
     PORT=port
     API_KEY=weatherapikey
+    API_URL='https://api.openweathermap.org/data/2.5/weather'
     MAILER_HOST=localhost
     MAILER_PORT=1025    
     MAIL_SENDER='example@notification.com'
