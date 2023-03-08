@@ -27,12 +27,6 @@ const loginUser = async (req, res) => {
   return res.status(HTTP_STATUS.OK).json({ success: true, message: `User ${user.username} logged in successfully!` });
 };
 
-const logoutUser = async (req, res) => {
-  res.header('Authorization', '');
-
-  return res.status(HTTP_STATUS.OK).json({ success: true, message: 'User logged out!' });
-};
-
 const forgottenPassword = async (req, res) => {
   const { email } = req.body;
 
@@ -68,9 +62,10 @@ const resetPasswordWithLink = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   const user = await User.findByIdAndUpdate({ _id: id }, { password: hashedPassword });
-  if (!user) throw new NotFoundError(ErrorMessages.userNotFound);
 
-  await token.delete();
+  if (!user) { throw new NotFoundError(ErrorMessages.userNotFound); } else {
+    await token.delete();
+  }
 
   res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: 'Password successfully updated' });
 };
@@ -93,7 +88,6 @@ const resetPassword = async (req, res) => {
 
 module.exports = {
   loginUser,
-  logoutUser,
   forgottenPassword,
   resetPasswordWithLink,
   resetPassword

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 
-export const ResultForm = (PropTypes) => {
+export const AddResultForm = (PropTypes) => {
   return (
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
@@ -22,8 +22,8 @@ export const ResultForm = (PropTypes) => {
                       </Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter username"
-                        name="username"
+                        placeholder="Enter score for Black Team"
+                        name="blackTeamScore"
                         value={PropTypes.formData.blackTeamScore}
                         onChange={PropTypes.handleChange}
                       />
@@ -34,13 +34,13 @@ export const ResultForm = (PropTypes) => {
                       controlId="formBasicFirstName"
                     >
                       <Form.Label className="text-center">
-                          First Name
+                      White Team Score
                       </Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter first name"
-                        name="name"
-                        value={PropTypes.formData.name}
+                        placeholder="Enter score for White Team"
+                        name="whiteTeamScore"
+                        value={PropTypes.formData.whiteTeamScore}
                         onChange={PropTypes.handleChange}
                       />
                     </Form.Group>

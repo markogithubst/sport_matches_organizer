@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { HistoryItem } from './HistoryItem';
+import { MatchItem } from '../../match/MatchItem';
 import { httpGetUserHistory } from '../../../hooks/requests';
 import { useToastifyError } from '../../../hooks/useToastify';
 
@@ -12,7 +12,7 @@ export const UserHistory = () => {
     const getData = async () => {
       try {
         const { data } = await httpGetUserHistory(userId);
-        console.log(data);
+
         setHistory(data);
       } catch (e) {
         useToastifyError(e);
@@ -26,9 +26,9 @@ export const UserHistory = () => {
   }, []);
 
   return (
-    <Container className=' rounded'>
+    <Container className='rounded'>
       {history && history.map(item => {
-        return <HistoryItem className="mt-5 shadow" key={item._id} item={item}></HistoryItem>;
+        return <MatchItem className="mt-5 shadow" match={item.match} key={item._id} field={item.field}></MatchItem>;
       })}
     </Container>
   );

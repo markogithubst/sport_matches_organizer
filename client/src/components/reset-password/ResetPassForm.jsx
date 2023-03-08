@@ -29,7 +29,7 @@ export const ResetPasswordForm = (propTypes) => {
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control type="password" name="confirmPassword" onChange={propTypes.handleChange} placeholder="Re-enter Password" />
                       </Form.Group>
-                      {propTypes.data && <div className='alert alert-danger'>{propTypes.data.error}</div>}
+
                       <div className="d-grid">
                         <Button variant="primary" type="submit">
                           Reset Password

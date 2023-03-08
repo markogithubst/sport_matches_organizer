@@ -2,7 +2,6 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { isLoggedIn } from '../../utils/isLoggedIn';
 import { useToastifyError } from '../../hooks/useToastify';
@@ -12,9 +11,6 @@ export const Navigation = () => {
   const onLogoutHandler = async (e) => {
     try {
       e.preventDefault();
-
-      const response = await axios.get('http://localhost:8000/logout');
-      console.log(response);
 
       localStorage.removeItem('role');
       localStorage.removeItem('token');

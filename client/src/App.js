@@ -9,6 +9,8 @@ import { ResetPassword } from './components/reset-password/ResetPass';
 import { ToastContainer } from 'react-toastify';
 import { EmailForm } from './components/reset-password/EmailForm';
 import { UserHistory } from './components/user/UserHistory/UserHistory';
+import { AddResult } from './components/add-result/AddResult';
+import { Match } from './components/match/Match';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 import { ReservationDetails } from './components/reservation/ReservationDetails';
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
       {
         path: 'reservation/:id',
         element: <ReservationDetails />
+      },
+      {
+        path: 'match/:id/result',
+        element: <AddResult />
+      },
+      {
+        path: 'match/:id',
+        element: <Match />
       }
     ]
   }

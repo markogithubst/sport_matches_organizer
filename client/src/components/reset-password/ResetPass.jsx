@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ResetPasswordForm } from './ResetPassForm';
 import axios from 'axios';
-import { useToastifyError, useToastifySuccess } from '../../hooks/useToastify';
+import { useToastifyError, useToastifySuccess, useToastifyWarning } from '../../hooks/useToastify';
 
 export const ResetPassword = () => {
   const [formData, setFormData] = useState();
-  const [data, setData] = useState();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
@@ -17,12 +16,12 @@ export const ResetPassword = () => {
 
     try {
       if (formData.confirmPassword !== formData.password) {
-        setData({ error: 'Passwords need to match!' });
+        useToastifyWarning('Passwords need to match!');
         return;
       }
       const request = { password: formData.password };
       await axios.patch(`http://localhost:8000/reset-password/${id}/${emailToken}`, request);
-      useToastifySuccess();
+      useToastifySuccess('Password seuccessfully updated!');
 
       navigate('/login');
     } catch (err) {
@@ -40,6 +39,6 @@ export const ResetPassword = () => {
     }));
   };
   return (
-    <ResetPasswordForm formData={formData} data={data} handleSubmit={handleSubmit} handleChange={handleChange } />
+    <ResetPasswordForm formData={formData} handleSubmit={handleSubmit} handleChange={handleChange } />
   );
 };

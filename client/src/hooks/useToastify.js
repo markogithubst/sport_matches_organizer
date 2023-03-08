@@ -23,6 +23,10 @@ export const useToastifyError = (err) => {
   }
 };
 
-export const useToastifySuccess = () => {
-  toast.success('Success!', options);
+export const useToastifySuccess = (message) => {
+  toast.success(message, options);
+};
+
+export const useToastifyWarning = (message) => {
+  toast.warning(message, options);
 };

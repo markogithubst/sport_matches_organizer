@@ -24,3 +24,7 @@ export const httpGetUserHistory = async (id) => {
     }
   });
 };
+
+export const httpGetMatch = async (id) => {
+  return await axios.get(`${URL}match/${id}`);
+};

@@ -1,16 +1,39 @@
-const { getOne, getAll, deleteOne, updateOne } = require('./crudController');
+const { getAll, deleteOne, updateOne } = require('./crudController');
 const Match = require('../models/Match');
 const Result = require('../models/Result');
 const mongoose = require('mongoose');
 const { ErrorMessages } = require('../errors/errorMessages');
 const { NotFoundError } = require('../errors/Errors');
+const { HTTP_STATUS } = require('../utils/httpCodes');
 
 const viewAllMacthes = async (req, res) => {
   await getAll(Match, req, res);
 };
 
 const viewSingleMatch = async (req, res) => {
-  await getOne(Match, req, res);
+  const { id } = req.params;
+
+  const matchDetails = await Match.findOne({ _id: id })
+    .populate('result')
+    .populate({
+      path: 'blackTeam',
+      model: 'Team',
+      populate: {
+        path: 'players',
+        model: 'user'
+      }
+    })
+    .populate({
+      path: 'whiteTeam',
+      model: 'Team',
+      populate: {
+        path: 'players',
+        model: 'user'
+      }
+    });
+
+  if (!matchDetails) throw new NotFoundError(ErrorMessages.dataNotFound);
+  res.status(HTTP_STATUS.OK).json({ success: true, data: matchDetails });
 };
 
 const updateMatch = async (req, res) => {
@@ -31,7 +54,7 @@ const addResult = async (req, res) => {
 
   if (!addResultToMatch) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(201).json({ success: true, data: addResultToMatch });
+  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, data: addResultToMatch });
 };
 
 const updateResult = async (req, res) => {
@@ -41,7 +64,7 @@ const updateResult = async (req, res) => {
 
   if (!updatedResult) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(200).json({ success: true, data: updatedResult });
+  res.status(HTTP_STATUS.OK).json({ success: true, data: updatedResult });
 };
 
 const deleteResult = async (req, res) => {
@@ -51,7 +74,7 @@ const deleteResult = async (req, res) => {
 
   if (!deletedResult) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(200).json({ success: true, data: deletedResult });
+  res.status(HTTP_STATUS.OK).json({ success: true, data: deletedResult });
 };
 
 module.exports = {

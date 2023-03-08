@@ -79,7 +79,7 @@ const viewHistory = async (req, res) => {
 
   if (!userHistory.length) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(200).json(userHistory);
+  res.status(HTTP_STATUS.OK).json(userHistory);
 };
 
 module.exports = {
