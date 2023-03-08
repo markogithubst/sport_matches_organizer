@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/errorMessages');
 const { NotFoundError, AuthorizationError } = require('../errors/Errors');
+const { HTTP_STATUS } = require('../utils/httpCodes');
 
 const createReservation = async (req, res) => {
   await createOne(Reservation, req, res);
@@ -33,7 +34,7 @@ const cancelReservation = async (req, res) => {
 
   if (!dataUpdated) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(200).json({ success: true, data: dataUpdated });
+  res.status(HTTP_STATUS.OK).json({ success: true, data: dataUpdated });
 };
 
 const addPlayerToReservation = async (req, res) => {
@@ -42,13 +43,12 @@ const addPlayerToReservation = async (req, res) => {
   const find = await Reservation
     .findByIdAndUpdate({ _id: req.params.id },
       {
-        $addToSet: { registeredPlayers: mongoose.Types.ObjectId(player) },
-        $inc: { num: 1 }
+        $addToSet: { registeredPlayers: mongoose.Types.ObjectId(player) }
       });
 
   if (!find) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(200).json({ success: true });
+  res.status(HTTP_STATUS.OK).json({ success: true });
 };
 
 const removePlayerFromReservation = async (req, res) => {
@@ -59,18 +59,17 @@ const removePlayerFromReservation = async (req, res) => {
   const find = await Reservation
     .findByIdAndUpdate({ _id: req.params.id },
       {
-        $pull: { registeredPlayers: mongoose.Types.ObjectId(player) },
-        $inc: { num: -1 }
+        $pull: { registeredPlayers: mongoose.Types.ObjectId(player) }
       });
 
   if (!find) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(200).json({ success: true });
+  res.status(HTTP_STATUS.OK).json({ success: true });
 };
 
 const filterReservation = async (req, res) => {
   const { hour, dayOfWeek, date } = req.query;
-  const exclude = '-registeredPlayers -num';
+  const exclude = '-registeredPlayers';
   const startDateTime = new Date(`${date}T00:00:00.000+00:00`);
   const endDateTime = new Date(`${date}T23:59:00.000+00:00`);
 
@@ -93,7 +92,7 @@ const filterReservation = async (req, res) => {
 
   if (!filteredReservation.length) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(200).json({ filteredReservation });
+  res.status(HTTP_STATUS.OK).json({ filteredReservation });
 };
 
 module.exports = {
