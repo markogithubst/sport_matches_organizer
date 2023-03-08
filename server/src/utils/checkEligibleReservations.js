@@ -1,20 +1,8 @@
 const { fetchWeather } = require('./fetchWeather');
 const Reservations = require('../models/Reservation');
 const { notifyPlayers } = require('./reservationEmail');
-
-const mailContexts = {
-  badWeather: {
-    cancelationReason: 'bad weather',
-    subject: 'CAGEBALL Match Canceled - Bad weather'
-  },
-  notEnoughPlayers: {
-    cancelationReason: 'insufficent number of registered players',
-    subject: 'CAGEBALL Match Canceled - Insufficet players'
-  },
-  scheduled: {
-    subject: 'CAGEBALL Match Confiramtion'
-  }
-};
+const { mailContexts } = require('./mailContexts');
+const { weatherConsts } = require('./weatherConstants');
 
 const checkEligibleReservations = async () => {
   const today = new Date();
@@ -51,7 +39,7 @@ const createMatchForReservation = async (id) => {
 
 const checkConditionsAndNotify = async (reservation) => {
   const numOfPlayers = reservation.registeredPlayers.length;
-  if (numOfPlayers !== 6) {
+  if (numOfPlayers !== reservation.field.maxPlayers) {
     await Reservations.findByIdAndUpdate(reservation.id, { $set: { isCanceled: true } });
     notifyPlayers(reservation, mailContexts.notEnoughPlayers);
     return;
@@ -60,17 +48,16 @@ const checkConditionsAndNotify = async (reservation) => {
   const data = await fetchWeather(reservation.field.city);
   if (!data) { // Match will be played if Weather API is not available
     await createMatchForReservation(reservation.id);
-    console.log(data);
     notifyPlayers(reservation, mailContexts.scheduled);
     return;
   }
   if (
-    data.main.temp < 4 ||
-  data.main.temp > 33 ||
-    data.main.humidity > 89 ||
-    data.wind.speed > 80 ||
-    data.weather[0].main === 'Rain' ||
-    data.weather[0].main === 'Snow'
+    data.main.temp < weatherConsts.minTemp ||
+  data.main.temp > weatherConsts.maxTemp ||
+    data.main.humidity > weatherConsts.maxHumidity ||
+    data.wind.speed > weatherConsts.maxWindSpeed ||
+    data.weather[0].main === weatherConsts.rain ||
+    data.weather[0].main === weatherConsts.snow
   ) {
     await Reservations.findByIdAndUpdate(reservation.id, { $set: { isCanceled: true } });
     notifyPlayers(reservation, mailContexts.badWeather);

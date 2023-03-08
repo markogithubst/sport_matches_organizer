@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form, InputGroup } from 'react-bootstrap';
 
 export const RegForm = (PropTypes) => {
   return (
@@ -13,6 +13,25 @@ export const RegForm = (PropTypes) => {
                 <h2 className="fw-bold mb-5 text-center">Register</h2>
                 <div className="mb-3">
                   <Form onSubmit={PropTypes.handleSubmit}>
+                    <InputGroup className="mb-3">
+                      <InputGroup.Text>First and last name</InputGroup.Text>
+                      <Form.Control
+                        aria-label="name"
+                        type="text"
+                        placeholder="Enter first name"
+                        name="name"
+                        value={PropTypes.formData.name}
+                        onChange={PropTypes.handleChange}
+                      />
+                      <Form.Control
+                        aria-label="surname"
+                        type="text"
+                        placeholder="Enter last name"
+                        name="surname"
+                        value={PropTypes.formData.name}
+                        onChange={PropTypes.handleChange}
+                      />
+                    </InputGroup>
                     <Form.Group
                       className="mb-3"
                       controlId="formBasicUsername"
@@ -25,38 +44,6 @@ export const RegForm = (PropTypes) => {
                         placeholder="Enter username"
                         name="username"
                         value={PropTypes.formData.username}
-                        onChange={PropTypes.handleChange}
-                      />
-                    </Form.Group>
-
-                    <Form.Group
-                      className="mb-3"
-                      controlId="formBasicFirstName"
-                    >
-                      <Form.Label className="text-center">
-                          First Name
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter first name"
-                        name="name"
-                        value={PropTypes.formData.name}
-                        onChange={PropTypes.handleChange}
-                      />
-                    </Form.Group>
-
-                    <Form.Group
-                      className="mb-3"
-                      controlId="formBasicLastName"
-                    >
-                      <Form.Label className="text-center">
-                          Last Name
-                      </Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter last name"
-                        name="surname"
-                        value={PropTypes.formData.surname}
                         onChange={PropTypes.handleChange}
                       />
                     </Form.Group>
@@ -81,7 +68,7 @@ export const RegForm = (PropTypes) => {
                       <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="password"
-                        placeholder="Password"
+                        placeholder="Enter Password"
                         name="password"
                         value={PropTypes.formData.password}
                         onChange={PropTypes.handleChange}
@@ -100,10 +87,18 @@ export const RegForm = (PropTypes) => {
                     </Form.Group>
                     <div className="d-grid">
                       <Button variant="primary" type="submit">
-                          Login
+                          Register
                       </Button>
                     </div>
                   </Form>
+                  <div className="mt-3">
+                    <p className="mb-0  text-center">
+                        Already have an account?{' '}
+                      <a href="/login" className="text-primary fw-bold">
+                          Log in
+                      </a>
+                    </p>
+                  </div>
                 </div>
               </div>
             </Card.Body>

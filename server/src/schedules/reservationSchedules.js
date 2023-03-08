@@ -4,11 +4,11 @@ const { checkEligibleReservations } = require('../utils/checkEligibleReservation
 const { checkFinishedMatchResults } = require('../utils/resultsReminderEmail');
 
 const initScheduledJobs = () => {
-  const checkWeatherJob = cron.schedule('0 9 * * *', async () => {
+  const checkWeatherJob = cron.schedule(process.env.CRON_WEATHER, async () => {
     checkEligibleReservations();
   });
 
-  const checkResults = cron.schedule('5 9 * * *', async () => {
+  const checkResults = cron.schedule(process.env.CRON_RESULT, async () => {
     checkFinishedMatchResults();
   });
 

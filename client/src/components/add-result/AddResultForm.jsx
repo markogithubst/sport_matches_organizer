@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form, InputGroup } from 'react-bootstrap';
 
 export const AddResultForm = (PropTypes) => {
   return (
@@ -13,38 +13,27 @@ export const AddResultForm = (PropTypes) => {
                 <h2 className="fw-bold mb-5 text-center">Add Match Results</h2>
                 <div className="mb-3">
                   <Form onSubmit={PropTypes.handleSubmit}>
-                    <Form.Group
-                      className="mb-3"
-                      controlId="formBlackScore"
-                    >
-                      <Form.Label className="text-center">
-                          Black Team Score
-                      </Form.Label>
+                    <InputGroup className="mb-3">
+                      <InputGroup.Text>Enter Scores</InputGroup.Text>
                       <Form.Control
+                        aria-label="blackTeamScore"
                         type="text"
-                        placeholder="Enter score for Black Team"
+                        placeholder="Black Team Score"
                         name="blackTeamScore"
                         value={PropTypes.formData.blackTeamScore}
                         onChange={PropTypes.handleChange}
                       />
-                    </Form.Group>
-
-                    <Form.Group
-                      className="mb-3"
-                      controlId="formBasicFirstName"
-                    >
-                      <Form.Label className="text-center">
-                      White Team Score
-                      </Form.Label>
                       <Form.Control
+                        aria-label="whiteTeamScore"
                         type="text"
-                        placeholder="Enter score for White Team"
+                        placeholder="White Team Score"
                         name="whiteTeamScore"
                         value={PropTypes.formData.whiteTeamScore}
                         onChange={PropTypes.handleChange}
                       />
-                    </Form.Group>
-                    <div className="d-grid">
+                    </InputGroup>
+
+                    <div className="d-grid mt-4">
                       <Button variant="primary" type="submit">
                           Submit Result
                       </Button>

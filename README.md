@@ -122,9 +122,11 @@ What software you need to use the application, and how to install it:
     PORT=port
     API_KEY=weatherapikey
     MAILER_HOST=localhost
-    MAILER_PORT=1025
-    MAIL_SENDER=somevalidemail
+    MAILER_PORT=1025    
+    MAIL_SENDER='example@notification.com'
     BASE_URL="http://localhost:3000"
+    CRON_RESULT='* * * * *'
+    CRON_WEATHER='0 0 0 0 0'
 ```
 
 **Note:**
