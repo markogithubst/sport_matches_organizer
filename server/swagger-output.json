@@ -2335,7 +2335,7 @@
         "tags": [
           "Login"
         ],
-        "summary": "User logged in",
+        "summary": "Login user",
         "description": "",
         "parameters": [],
         "responses": {
@@ -2398,7 +2398,7 @@
         "tags": [
           "Forgotten Password"
         ],
-        "summary": "Reset password email sent",
+        "summary": "Send email with recovery link for password",
         "description": "",
         "parameters": [],
         "responses": {
@@ -2461,7 +2461,7 @@
         "tags": [
           "Forgotten Password"
         ],
-        "summary": "Password successfuly updated",
+        "summary": "Reset password with recovery link",
         "description": "",
         "parameters": [
           {
@@ -2541,7 +2541,7 @@
         "tags": [
           "Forgotten Password"
         ],
-        "summary": "Password successfuly updated",
+        "summary": "Reset password for logged in user",
         "description": "",
         "parameters": [
           {

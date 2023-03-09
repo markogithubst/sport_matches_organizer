@@ -10,7 +10,7 @@ router.post('/login',
 /* #swagger.tags = ['Login']
   #swagger.security = []
 
-    #swagger.summary = 'User logged in'
+    #swagger.summary = 'Login user'
     #swagger.responses[200] = {
           description: 'Responds with success flag and successful login message',
           content: {
@@ -70,7 +70,7 @@ router.post('/forgotten-password',
 /* #swagger.tags = ['Forgotten Password']
   #swagger.security = []
 
-    #swagger.summary = 'Reset password email sent'
+    #swagger.summary = 'Send email with recovery link for password'
     #swagger.responses[200] = {
           description: 'Responds with success flag and a message',
           content: {
@@ -130,7 +130,7 @@ router.patch('/reset-password/:id/:emailToken',
 /* #swagger.tags = ['Forgotten Password']
   #swagger.security = []
 
-    #swagger.summary = 'Password successfuly updated'
+    #swagger.summary = 'Reset password with recovery link
     #swagger.responses[201] = {
           description: 'Responds with success flag and a message',
           content: {
@@ -189,7 +189,7 @@ router.patch('/reset-password/:id/:emailToken',
 router.patch('/:id/reset-password',
 /* #swagger.tags = ['Forgotten Password']
 
-    #swagger.summary = 'Password successfuly updated'
+    #swagger.summary = 'Reset password for logged in user'
     #swagger.responses[201] = {
           description: 'Responds with success flag and a message',
           content: {
