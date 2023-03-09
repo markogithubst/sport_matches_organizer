@@ -61,7 +61,7 @@ Once the match has been finished, a user with admin access is expected to input 
 <br>
 
 ## Database diagram
-![Database diagram](db-diagram.png)
+![Database diagram](database-diagram.png)
 
 ### Built With
 
