@@ -66,35 +66,6 @@ router.post('/login',
     }
 */
   callbackErrorHandler(authController.loginUser));
-router.get('/logout',
-/* #swagger.tags = ['Logout']
-
-    #swagger.summary = 'User logged out'
-    #swagger.responses[200] = {
-          description: 'Responds with success flag and successful logout message',
-          content: {
-              'application/json': {
-                  schema: {
-                    $ref: '#/definitions/LogoutResponse'
-                  }
-              }
-          }
-      }
-
-  #swagger.responses[500] = {
-  description: 'Responds with error message',
-  content: {
-      'application/json': {
-          schema: {
-            $ref: '#/definitions/httpInternalError'
-          }
-      }
-    }
-  }
-
-*/
-  callbackErrorHandler(authController.logoutUser));
-
 router.post('/forgotten-password',
 /* #swagger.tags = ['Forgotten Password']
   #swagger.security = []

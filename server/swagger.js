@@ -23,10 +23,6 @@ const doc = {
       success: true,
       message: 'User admin logged in successfully!'
     },
-    LogoutResponse: {
-      success: true,
-      message: 'User logged out!'
-    },
     ForgottenPassBody: {
       $email: 'admin@test.com'
     },

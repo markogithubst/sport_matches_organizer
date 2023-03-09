@@ -31,8 +31,7 @@ const matchSchema = mongoose.Schema({
 });
 
 matchSchema.pre('find', function () {
-  const exclude = '-createdAt -updatedAt';
-  this.populate('result', exclude).populate('whiteTeam', exclude).populate('blackTeam', exclude);
+  this.populate('result').populate('whiteTeam').populate('blackTeam');
 });
 
 module.exports = mongoose.model('Match', matchSchema);

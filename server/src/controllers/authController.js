@@ -3,7 +3,7 @@ const Token = require('../models/Token');
 const bcrypt = require('bcrypt');
 const { hashPassword } = require('../utils/hashPassword');
 const { ErrorMessages } = require('../errors/errorMessages');
-const { ValidationError, NotFoundError, AuthorizationError } = require('../errors/Errors');
+const { ValidationError, NotFoundError, AuthorizationError, AuthenticationError } = require('../errors/Errors');
 const { HTTP_STATUS } = require('../utils/httpCodes');
 const { createJWT } = require('../token.js');
 const { forgottenPasswordEmail } = require('../utils/forgottenPasswordEmail');
@@ -16,7 +16,7 @@ const loginUser = async (req, res) => {
   if (!user) throw new NotFoundError(ErrorMessages.userNotFound);
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
-  if (!isPasswordCorrect) throw new ValidationError(ErrorMessages.passError);
+  if (!isPasswordCorrect) throw new AuthenticationError(ErrorMessages.passError);
 
   const token = createJWT(user);
 

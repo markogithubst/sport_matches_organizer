@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 app.use(
   cors({
-    origin: 'http://localhost:3000'
+    origin: process.env.BASE_URL
   })
 );
 app.use(morgan('combined', { stream: accessLogStream }));

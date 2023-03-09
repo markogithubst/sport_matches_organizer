@@ -2393,38 +2393,6 @@
         }
       }
     },
-    "/logout": {
-      "get": {
-        "tags": [
-          "Logout"
-        ],
-        "summary": "User logged out",
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Responds with success flag and successful logout message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogoutResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Responds with error message",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/httpInternalError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/forgotten-password": {
       "post": {
         "tags": [
@@ -2696,19 +2664,6 @@
           "message": {
             "type": "string",
             "example": "User admin logged in successfully!"
-          }
-        }
-      },
-      "LogoutResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": true
-          },
-          "message": {
-            "type": "string",
-            "example": "User logged out!"
           }
         }
       },

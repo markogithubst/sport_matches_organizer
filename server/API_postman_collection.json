@@ -6,26 +6,19 @@
 	},
 	"item": [
 		{
-			"name": "LOGIN",
+			"name": "AUTH",
 			"item": [
 				{
 					"name": "LOGIN",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"mate@example.com\",\n  \"password\": \"admin123\"\n}",
+							"raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"admin1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -44,20 +37,15 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "FIELD",
-			"item": [
+				},
 				{
-					"name": "FIELD",
+					"name": "FORGOTTEN PASSWORD",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Test\",\n    \"address\": \"Address 1122, Split\"\n}",
+							"raw": "{\n    \"email\": \"iburazintest.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,18 +53,94 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:{{port}}/field",
+							"raw": "localhost:{{port}}/forgotten-password",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
-								"field"
+								"forgotten-password"
 							]
 						}
 					},
 					"response": []
 				},
+				{
+					"name": "RESET PASSWORD WITH LINK",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/reset-password/63eb788d339bb827e5fe71d5/b998eb7f269cc8a0630b2aff5c4ac62115c8f7d5a50423d3f6ad51624d23b59f",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"reset-password",
+								"63eb788d339bb827e5fe71d5",
+								"b998eb7f269cc8a0630b2aff5c4ac62115c8f7d5a50423d3f6ad51624d23b59f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESET PASSWORD",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI2YWJmOTc5MjI5MTIzNGNkNmE3NyIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjc3ODQ2OTQ0LCJleHAiOjE2Nzc5MzMzNDR9.xrpbqBiWqxE6lfFYjYCG9-44SqcZ64G7ozuF4fwhfp9",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"12341234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/63eb6abf9792291234cd6a77/reset-password/",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"63eb6abf9792291234cd6a77",
+								"reset-password",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FIELD",
+			"item": [
 				{
 					"name": "ALL FIELDS",
 					"request": {
@@ -109,6 +173,43 @@
 							"path": [
 								"field",
 								"1234"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIELD",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI3ODhkMzM5YmI4MjdlNWZlNzFkNSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODExNTYyNywiZXhwIjoxNjc4MjAyMDI3fQ.GDZ5LN-JjE3UvNAcfum2PH55tvNx3AKPtIp80Jgxtvc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"skdjfhkjshgkhsdgf\",\n    \"address\": \"adresa adfksjhfkghsdkg\",\n    \"maxPlayers\": 10,\n    \"city\": \"Split\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/field",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"field"
 							]
 						}
 					},
@@ -167,33 +268,6 @@
 			"name": "MATCH",
 			"item": [
 				{
-					"name": "MATCH",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"whiteTeam\": \"63eb7aa9dda73e59e84aa445\",\n  \"blackTeam\": \"63eb7aa9dda73e59e84aa446\",\n  \"result\": \"63eb9799ce5e472179891d4b\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:{{port}}/match",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"match"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "ALL MATCHES",
 					"request": {
 						"method": "GET",
@@ -217,14 +291,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/match/63eb7f4a8bda2a035ce6454c",
+							"raw": "localhost:{{port}}/match/63eb7f4a8bda2a035ce6454f",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"match",
-								"63eb7f4a8bda2a035ce6454c"
+								"63eb7f4a8bda2a035ce6454f"
 							]
 						}
 					},
@@ -276,138 +350,82 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "RESULT",
-			"item": [
-				{
-					"name": "RESULT",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWU0YjY4MzE2NmU4MDA4MTZhMTI1MCIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjc2NjIxNzc5LCJleHAiOjE2NzY3MDgxNzl9.EGiB7MXHW-3o3NDQleJ_-fD566AcqB9QP0BQ1LZW0YI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"whiteTeamScore\": 5,\n  \"blackTeamScore\": 4\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:{{port}}/result",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"result"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "ALL RESULTS",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:{{port}}/result",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"result"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "RESULT",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:{{port}}/result/63eb7dfe5f58194a262d8277",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"result",
-								"63eb7dfe5f58194a262d8277"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "RESULT",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjc2NTQ1MzE0LCJleHAiOjE2NzY2MzE3MTR9.sH6rXJFh_ajkBWYD1iTdnon4scLZ2sMK2ZBRd69F2l8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"whiteTeamScore\": 6,\n  \"blackTeamScore\": 12\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:{{port}}/result/63eb7dfe5f58194a262d8277",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"result",
-								"63eb7dfe5f58194a262d8277"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ONE RESULT",
+					"name": "DELETE RESULT",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/result/63eb6bf303ffb651ea1b3ba1",
+							"raw": "localhost:{{port}}/match/63eb7f4a8bda2a035ce6454e/result/6405f2ada21fd2abf4dbdcbc",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
+								"match",
+								"63eb7f4a8bda2a035ce6454e",
 								"result",
-								"63eb6bf303ffb651ea1b3ba1"
+								"6405f2ada21fd2abf4dbdcbc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD RESULT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"blackTeamScore\": 2, \n    \"whiteTeamScore\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/match/63eb7f4a8bda2a035ce6454e/result",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"match",
+								"63eb7f4a8bda2a035ce6454e",
+								"result"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDIT RESULT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"blackTeamScore\": 6, \n    \"whiteTeamScore\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/match/63eb7f4a8bda2a035ce6454e/result/6405f2ada21fd2abf4dbdcbc",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"match",
+								"63eb7f4a8bda2a035ce6454e",
+								"result",
+								"6405f2ada21fd2abf4dbdcbc"
 							]
 						}
 					},
@@ -418,33 +436,6 @@
 		{
 			"name": "TEAM",
 			"item": [
-				{
-					"name": "TEAM",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"players\": [\n        \"63eb6abf9792291234cd6a75\",\n        \"63eb6abf9792291234cd6a76\",\n        \"63eb6abf9792291234cd6a77\"\n    ],\n    \"color\": \"black\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:{{port}}/team",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"team"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "ALL TEAMS",
 					"request": {
@@ -535,33 +526,6 @@
 			"name": "USER",
 			"item": [
 				{
-					"name": "USER",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"jops12\",\n    \"name\": \"Josip\",\n    \"surname\": \"Bogunovic\",\n    \"password\": \"password\",\n    \"email\": \"jboguno@gmail.com\",\n    \"phone\": \"+385993404575\",\n    \"role\": \"USER\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:{{port}}/user",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"user"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "ALL USERS",
 					"request": {
 						"method": "GET",
@@ -585,61 +549,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a75",
+							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a7",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"user",
-								"63eb6abf9792291234cd6a75"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "USER",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"username\": \"john1234\",\n  \"name\": \"John\",\n  \"surname\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"mysecret12\",\n  \"phone\": \"0985555555\",\n  \"role\": \"USER\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a77",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"user",
-								"63eb6abf9792291234cd6a77"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ONE USER",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:{{port}}/user/63eb788d339bb827e5fe77d4",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"user",
-								"63eb788d339bb827e5fe77d4"
+								"63eb6abf9792291234cd6a7"
 							]
 						}
 					},
@@ -653,7 +570,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWU0YjY4MzE2NmU4MDA4MTZhMTI1MCIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNjc2NTYxMjc0LCJleHAiOjE2NzY2NDc2NzR9.YfJv8F7LaG3zjyxPYgB1_4Yc4HbkGGRcrTnvZGmKaLM",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -661,15 +578,109 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a80/history",
+							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a76/history",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"user",
-								"63eb6abf9792291234cd6a80",
+								"63eb6abf9792291234cd6a76",
 								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"surname\": \"Bogunovic\",\n    \"password\": \"passwor\",\n    \"email\": \"jbogunogmail.com\",\n    \"phone\": \"385993404575\",\n    \"role\": \"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/user",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI3ODhkMzM5YmI4MjdlNWZlNzFkNSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODEwMzYzMSwiZXhwIjoxNjc4MTkwMDMxfQ.i_aVLkXO1JL4K_cUH4JItQeKm7hCplsnm5tJ6NUBZjY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"john1234\",\n  \"name\": \"John\",\n  \"surname\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"mysecret12\",\n  \"phone\": \"0985555555\",\n  \"role\": \"ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/user/63eb788d339bb827e5fe71d5",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"63eb788d339bb827e5fe71d5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ONE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{port}}/user/63eb6abf9792291234cd6a7",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"user",
+								"63eb6abf9792291234cd6a7"
 							]
 						}
 					},
@@ -731,14 +742,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/reservation/63efb0187b276e8b81e316db",
+							"raw": "localhost:{{port}}/reservation/63eb7dfe5f58194a262d8222",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"reservation",
-								"63efb0187b276e8b81e316db"
+								"63eb7dfe5f58194a262d8222"
 							]
 						}
 					},
@@ -747,11 +758,21 @@
 				{
 					"name": "RESERVATION",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI3ODhkMzM5YmI4MjdlNWZlNzFkNSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzI0Njk5NCwiZXhwIjoxNjc3MzMzMzk0fQ.SlytcTzgTJpNTSr2eHst-g5OirTnUwKVtOZWWbgmy7I",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"field\": \"63eb76f1c6a15537f1bbb59f\",\n  \"match\": \"63eb7f4a8bda2a035ce6454c\",\n  \"isCanceled\": false,\n  \"isFilled\": true,\n  \"registeredPlayers\": [\n    \"63eb6abf9792291234cd6a75\",\n    \"63eb6abf9792291234cd6a76\",\n    \"63eb6abf9792291234cd6a77\",\n    \"63eb788d339bb827e5fe77d2\",\n    \"63eb788d339bb827e5fe77d3\",\n    \"63eb788d339bb827e5fe77d4\"\n  ]\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -759,14 +780,53 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:{{port}}/reservation/63eb965b7971904d408d8a47",
+							"raw": "localhost:{{port}}/reservation/cancel/63eb76f1c6a15537f1bbb5a0",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"reservation",
-								"63eb965b7971904d408d8a47"
+								"cancel",
+								"63eb76f1c6a15537f1bbb5a0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CANCEL RESERVATION",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZWI3ODhkMzM5YmI4MjdlNWZlNzFkNSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3NzI0Njk5NCwiZXhwIjoxNjc3MzMzMzk0fQ.SlytcTzgTJpNTSr2eHst-g5OirTnUwKVtOZWWbgmy7I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"field\": \"63eb76f1c6a15537f1bbb59f\",\n  \"match\": \"63eb7f4a8bda2a035ce6454c\",\n  \"time\": \"2023-03-28T19:30:00Z\",\n  \"num\": 4,\n  \"isCanceled\": false,\n  \"registeredPlayers\": [\n    \"63eb6abf9792291234cd6a75\",\n    \"63eb6abf9792291234cd6a76\",\n    \"63eb6abf9792291234cd6a77\",\n    \"63eb788d339bb827e5fe77d2\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/reservation/63eb76f1c6a15537f1bbb5a0",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"reservation",
+								"63eb76f1c6a15537f1bbb5a0"
 							]
 						}
 					},
@@ -792,37 +852,12 @@
 					"response": []
 				},
 				{
-					"name": "FILTER BY DATE",
+					"name": "FILTER",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/reservation/filter?date=2023-03-27",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"reservation",
-								"filter"
-							],
-							"query": [
-								{
-									"key": "date",
-									"value": "2023-03-27"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FILTER BY DAY OF WEEK",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:{{port}}/reservation/filter?dayOfWeek=7",
+							"raw": "localhost:{{port}}/reservation/filter?dayOfWeek=2&date=2023-03-22&hour=13",
 							"host": [
 								"localhost"
 							],
@@ -834,29 +869,12 @@
 							"query": [
 								{
 									"key": "dayOfWeek",
-									"value": "7"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FILTER BY HOUR",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:{{port}}/reservation/filter?hour=13",
-							"host": [
-								"localhost"
-							],
-							"port": "{{port}}",
-							"path": [
-								"reservation",
-								"filter"
-							],
-							"query": [
+									"value": "2"
+								},
+								{
+									"key": "date",
+									"value": "2023-03-22"
+								},
 								{
 									"key": "hour",
 									"value": "13"
@@ -872,16 +890,16 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:{{port}}/reservation/63efb0187b276e8b81e316db/add-player/63eb6abf9792291234cd6a75",
+							"raw": "localhost:{{port}}/reservation/63eb7dfe5f58194a262d824/add-player/63eb788d339bb827e5fe77d",
 							"host": [
 								"localhost"
 							],
 							"port": "{{port}}",
 							"path": [
 								"reservation",
-								"63efb0187b276e8b81e316db",
+								"63eb7dfe5f58194a262d824",
 								"add-player",
-								"63eb6abf9792291234cd6a75"
+								"63eb788d339bb827e5fe77d"
 							]
 						}
 					},
