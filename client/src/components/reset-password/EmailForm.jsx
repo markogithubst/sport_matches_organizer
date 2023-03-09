@@ -14,7 +14,7 @@ export const EmailForm = (props) => {
               <Card.Body>
                 <div className="mb-5 mt-md-4">
                   <h2 className="fw-bold mb-5 text-center">Forgot your password?</h2>
-                  {props.response && <div className='alert alert-success'>{props.response.message}</div>}
+                  {props.data && <div className='alert alert-success'>{props.data.message}</div>}
                   <div className="mb-3">
                     <Form onSubmit={props.handleSubmit}>
                       <Form.Label>Enter your email and we'll send you a link to reset your password.</Form.Label>

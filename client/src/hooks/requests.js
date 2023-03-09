@@ -33,7 +33,7 @@ export const httpGetReservation = async (id) => {
 };
 
 export const httpPasswordChange = async (data, user) => {
-  return await axios.patch(`${URL}${user.id}/reset-password`, data, {
+  return await axios.patch(`${URL}/${user.id}/reset-password`, data, {
     headers: {
       Authorization: user.token
     }

@@ -8,6 +8,7 @@ const { HTTP_STATUS } = require('../utils/httpCodes');
 const { createJWT } = require('../token.js');
 const { forgottenPasswordEmail } = require('../utils/forgottenPasswordEmail');
 const crypto = require('crypto');
+const { successMessages } = require('../utils/successMessages');
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -25,7 +26,7 @@ const loginUser = async (req, res) => {
   res.header('UserId', user._id);
   res.set('Access-Control-Expose-Headers', ['Authorization', 'Role', 'UserId']);
 
-  return res.status(HTTP_STATUS.OK).json({ success: true, message: `User ${user.username} logged in successfully!` });
+  return res.status(HTTP_STATUS.OK).json({ success: true, message: successMessages.userLoggedIn(user.username) });
 };
 
 const forgottenPassword = async (req, res) => {
@@ -45,7 +46,7 @@ const forgottenPassword = async (req, res) => {
   const link = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
   await forgottenPasswordEmail(user, link);
 
-  res.status(HTTP_STATUS.OK).json({ success: true, message: `Password reset link sent to ${user.email}!` });
+  res.status(HTTP_STATUS.OK).json({ success: true, message: successMessages.linkSentToUserMail(user.email) });
 };
 
 const resetPasswordWithLink = async (req, res) => {
@@ -59,7 +60,7 @@ const resetPasswordWithLink = async (req, res) => {
 
   if (!token) throw new ValidationError(ErrorMessages.invalidQuery);
 
-  const hashedPassword = hashPassword(password);
+  const hashedPassword = await hashPassword(password);
 
   const user = await User.findByIdAndUpdate({ _id: id }, { password: hashedPassword });
 
@@ -67,7 +68,7 @@ const resetPasswordWithLink = async (req, res) => {
     await token.delete();
   }
 
-  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: 'Password successfully updated' });
+  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: successMessages.passwordUpdated });
 };
 
 const resetPassword = async (req, res) => {
@@ -78,9 +79,9 @@ const resetPassword = async (req, res) => {
     const user = await User.findById(id);
 
     if (await bcrypt.compare(password, user.password)) {
-      user.password = newPassword;
+      user.password = await hashPassword(newPassword);
       user.save();
-      return;
+      return res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: successMessages.passwordUpdated });
     } else {
       throw new AuthorizationError(ErrorMessages.incorrectPassword);
     }
@@ -93,7 +94,7 @@ const resetPassword = async (req, res) => {
 
   if (!passwordReset) throw new NotFoundError(ErrorMessages.dataNotFound);
 
-  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: 'Password successfully updated' });
+  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: successMessages.passwordUpdated });
 };
 
 module.exports = {

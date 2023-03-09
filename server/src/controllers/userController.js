@@ -4,6 +4,7 @@ const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
 const { HTTP_STATUS } = require('../utils/httpCodes.js');
+const { successMessages } = require('../utils/successMessages');
 
 const registerUser = async (req, res) => {
   await createOne(User, req, res);
@@ -31,14 +32,13 @@ const deleteUser = async (req, res) => {
       registeredPlayers: { $in: [id] }
     },
     {
-      $inc: { num: -1 },
       $pull: { registeredPlayers: id }
     });
   } else {
     throw new NotFoundError(ErrorMessages.dataNotFound);
   }
 
-  res.status(HTTP_STATUS.OK).json({ success: true, message: `${userToDelete.username} deleted!` });
+  res.status(HTTP_STATUS.OK).json({ success: true, message: successMessages.userDeleted(userToDelete.username) });
 };
 
 const viewHistory = async (req, res) => {

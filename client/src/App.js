@@ -7,7 +7,7 @@ import { Home } from './components/home/Home';
 import { UserProfile } from './components/user/UserProfile';
 import { ResetPassword } from './components/reset-password/ResetPass';
 import { ToastContainer } from 'react-toastify';
-import { EmailForm } from './components/reset-password/EmailForm';
+import { SendEmail } from './components/reset-password/SendEmail';
 import { UserHistory } from './components/user/UserHistory/UserHistory';
 import { AddResult } from './components/add-result/AddResult';
 import { Match } from './components/match/Match';
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'forgotten-password',
-        element: <EmailForm/>
+        element: <SendEmail/>
       },
       {
         path: 'admin/register',
