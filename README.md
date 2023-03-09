@@ -33,7 +33,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a web application that helps users organize their matches. It is built with NodeJS, Express and Mongoose. Integration tests are written using Jest.
+This is a web application that helps users organize their matches. Backend is built with NodeJS, Express, Mongo and Mongoose. Frontend is built with React and React Bootstrap. Integration tests are written using Jest.
 
 The application allows users to: 
 - register 
@@ -60,7 +60,8 @@ Once the match has been finished, a user with admin access is expected to input 
 
 <br>
 
-
+## Database diagram
+![Database diagram](db-diagram.png)
 
 ### Built With
 
@@ -70,6 +71,8 @@ Once the match has been finished, a user with admin access is expected to input 
 * [Docker](https://www.docker.com/)
 * [MongoDB](https://www.mongodb.com/)
 * [Mongoose](https://www.mongoosejs.com/)
+* [React](https://reactjs.org/docs/getting-started.html)
+* [React Bootstrap](https://react-bootstrap.github.io/)
 
 <br>
 
@@ -83,6 +86,9 @@ Once the match has been finished, a user with admin access is expected to input 
  - eslint (to make the code more consistent and to detect problematic code patterns that could lead to bugs)
  - swagger-autogen (for generating description from the API code) 
  - swagger-ui-express (for adding Swagger UI to the API)
+ - cors ( for allowing requests from front end to back end )
+ - bcrypt (for password hashing and verification)
+ - react-toastify (for adding pop up messages in front end)
 
  <br>
 
@@ -91,6 +97,8 @@ What software you need to use the application, and how to install it:
 
 - [NodeJS](https://nodejs.org/en/download/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 

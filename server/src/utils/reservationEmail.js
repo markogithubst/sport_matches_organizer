@@ -15,10 +15,12 @@ const notifyPlayers = async (reservation, context) => {
 const generateEmailText = (player, context, info) => {
   const reason = context.cancelationReason;
   return reason
-    ? `${player.name} ${player.surname}, 
-    We are informing you that the match scheduled for ${info.time} at ${info.location} is canceled due to ${reason}.`
-    : `${player.name} ${player.surname}, 
-    We are informing you that the match scheduled for ${info.time} at ${info.location} will be played on schedule.`;
+    ? `<p>${player.name} ${player.surname}, <br> <br>
+    We are informing you that the match scheduled for ${info.time} at ${info.location} is canceled due to ${reason}.</p>
+    <br> <br> <p>Sports Matches Organizer Support</p>`
+    : `<p>${player.name} ${player.surname}, <br> <br>
+    We are informing you that the match scheduled for ${info.time} at ${info.location} will be played on schedule.</p>
+    <br> <br> <p>Sports Matches Organizer Support</p>`;
 };
 
 module.exports.notifyPlayers = notifyPlayers;
