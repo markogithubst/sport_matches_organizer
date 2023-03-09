@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useToastifyError, useToastifyWarning } from '../../hooks/useToastify';
 import { ConfirmPasswordForm } from './ResetPasswordModal/ConfirmPasswordForm';
-import { warningMessages } from '../../utils/warninMessages';
+import { warningMessages } from '../../utils/responseMessages';
 import { isLoggedIn } from '../../utils/isLoggedIn';
 import { httpPasswordChange } from '../../hooks/requests';
 

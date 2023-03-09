@@ -45,7 +45,7 @@ const forgottenPassword = async (req, res) => {
   const link = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
   await forgottenPasswordEmail(user, link);
 
-  res.status(HTTP_STATUS.OK).json({ success: true, message: 'Password reset link sent to your email account!' });
+  res.status(HTTP_STATUS.OK).json({ success: true, message: `Password reset link sent to ${user.email}!` });
 };
 
 const resetPasswordWithLink = async (req, res) => {

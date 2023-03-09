@@ -69,7 +69,7 @@ const userSchema = Joi.object({
   username: Joi.string().min(4).max(16).required(),
   name: Joi.string().min(3).max(25).required(),
   surname: Joi.string().min(3).max(25).required(),
-  email: Joi.string().min(3).max(50).email({ minDomainSegments: 2 }).required(),
+  email: Joi.string().email({ minDomainSegments: 2 }).required(),
   password: Joi.string().min(8).max(20),
   phone: Joi.string().regex(/^\+(?:\d\s?){6,14}\d$/).required(),
   role: Joi.string().valid('ADMIN', 'USER'),

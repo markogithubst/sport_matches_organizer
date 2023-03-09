@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Button, Row, Container, Card, Form, InputGroup } from 'react-bootstrap';
 
-export const AddResultForm = (PropTypes) => {
+export const AddResultForm = (props) => {
   return (
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
@@ -12,24 +12,30 @@ export const AddResultForm = (PropTypes) => {
               <div className="mb-5 mt-md-4">
                 <h2 className="fw-bold mb-5 text-center">Add Match Results</h2>
                 <div className="mb-3">
-                  <Form onSubmit={PropTypes.handleSubmit}>
+                  <Form onSubmit={props.handleSubmit}>
                     <InputGroup className="mb-3">
                       <InputGroup.Text>Enter Scores</InputGroup.Text>
                       <Form.Control
                         aria-label="blackTeamScore"
-                        type="text"
+                        type="number"
+                        required
+                        min={0}
+                        max={12}
                         placeholder="Black Team Score"
                         name="blackTeamScore"
-                        value={PropTypes.formData.blackTeamScore}
-                        onChange={PropTypes.handleChange}
+                        value={props.formData.blackTeamScore}
+                        onChange={props.handleChange}
                       />
                       <Form.Control
                         aria-label="whiteTeamScore"
-                        type="text"
+                        required
+                        type="number"
+                        min={0}
+                        max={12}
                         placeholder="White Team Score"
                         name="whiteTeamScore"
-                        value={PropTypes.formData.whiteTeamScore}
-                        onChange={PropTypes.handleChange}
+                        value={props.formData.whiteTeamScore}
+                        onChange={props.handleChange}
                       />
                     </InputGroup>
 

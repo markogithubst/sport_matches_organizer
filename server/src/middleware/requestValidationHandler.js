@@ -1,12 +1,13 @@
 // eslint-disable-next-line max-len
 const { idSchema, passwordSchema, emailSchema, resetParamsSchema, doubleIdSchema, fieldSchema, matchSchema, reservationSchema, resultSchema, teamSchema, userSchema, querySchema } = require('../schemas/schemas');
 const { validateSchema } = require('../schemas/validateSchema');
+const { HTTP_STATUS } = require('../utils/httpCodes');
 
 const validateParams = (schema) => (req, res, next) => {
   const { error } = schema.validate(req.params);
 
   if (error) {
-    return res.status(400).json({ message: error.details.map(err => err.message) });
+    return res.status(HTTP_STATUS.INVALID).json({ message: error.details.map(err => err.message) });
   }
   next();
 };
@@ -14,7 +15,7 @@ const validateParams = (schema) => (req, res, next) => {
 const validateQuery = (req, res, next) => {
   const { error } = querySchema.validate(req.query);
   if (error) {
-    return res.status(400).json({ message: error.details.map(err => err.message) });
+    return res.status(HTTP_STATUS.INVALID).json({ message: error.details.map(err => err.message) });
   }
   next();
 };

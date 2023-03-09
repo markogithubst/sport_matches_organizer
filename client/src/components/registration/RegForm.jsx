@@ -1,7 +1,7 @@
 import React from 'react';
-import { Col, Button, Row, Container, Card, Form, InputGroup } from 'react-bootstrap';
+import { Col, Button, Row, Container, Card, Form, InputGroup, FloatingLabel } from 'react-bootstrap';
 
-export const RegForm = (PropTypes) => {
+export const RegForm = (props) => {
   return (
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
@@ -12,79 +12,94 @@ export const RegForm = (PropTypes) => {
               <div className="mb-5 mt-md-4">
                 <h2 className="fw-bold mb-5 text-center">Register</h2>
                 <div className="mb-3">
-                  <Form onSubmit={PropTypes.handleSubmit}>
+                  <Form onSubmit={props.handleSubmit}>
                     <InputGroup className="mb-3">
                       <InputGroup.Text>First and last name</InputGroup.Text>
                       <Form.Control
                         aria-label="name"
                         type="text"
+                        required
+                        minLength={3}
+                        maxLength={25}
                         placeholder="Enter first name"
                         name="name"
-                        value={PropTypes.formData.name}
-                        onChange={PropTypes.handleChange}
+                        value={props.formData.name}
+                        onChange={props.handleChange}
                       />
                       <Form.Control
                         aria-label="surname"
                         type="text"
+                        required
+                        minLength={3}
+                        maxLength={25}
                         placeholder="Enter last name"
                         name="surname"
-                        value={PropTypes.formData.name}
-                        onChange={PropTypes.handleChange}
+                        value={props.formData.name}
+                        onChange={props.handleChange}
                       />
                     </InputGroup>
-                    <Form.Group
+                    <FloatingLabel
+                      label="Username"
                       className="mb-3"
                       controlId="formBasicUsername"
                     >
-                      <Form.Label className="text-center">
-                          Username
-                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter username"
                         name="username"
-                        value={PropTypes.formData.username}
-                        onChange={PropTypes.handleChange}
+                        required
+                        minLength={4}
+                        maxLength={16}
+                        value={props.formData.username}
+                        onChange={props.handleChange}
                       />
-                    </Form.Group>
+                    </FloatingLabel>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Label className="text-center">
-                          Email address
-                      </Form.Label>
+                    <FloatingLabel
+                      label="Email Address"
+                      className="mb-3"
+                      controlId="formBasicEmail">
+
                       <Form.Control
                         type="email"
                         placeholder="Enter email"
                         name="email"
-                        value={PropTypes.formData.email}
-                        onChange={PropTypes.handleChange}
+                        required
+                        value={props.formData.email}
+                        onChange={props.handleChange}
                       />
-                    </Form.Group>
+                    </FloatingLabel>
 
-                    <Form.Group
+                    <FloatingLabel
+                      label="Password"
                       className="mb-3"
                       controlId="formBasicPassword"
                     >
-                      <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="password"
                         placeholder="Enter Password"
                         name="password"
-                        value={PropTypes.formData.password}
-                        onChange={PropTypes.handleChange}
+                        required
+                        minLength={8}
+                        maxLength={20}
+                        value={props.formData.password}
+                        onChange={props.handleChange}
                       />
-                    </Form.Group>
+                    </FloatingLabel>
 
-                    <Form.Group className="mb-3" controlId="formBasicPhone">
-                      <Form.Label>Phone Number</Form.Label>
+                    <FloatingLabel
+                      label="Phone Number"
+                      className="mb-3"
+                      controlId="formBasicPhone">
                       <Form.Control
                         type="tel"
                         placeholder="Enter phone number"
                         name="phone"
-                        value={PropTypes.formData.phone}
-                        onChange={PropTypes.handleChange}
+                        required
+                        value={props.formData.phone}
+                        onChange={props.handleChange}
                       />
-                    </Form.Group>
+                    </FloatingLabel>
                     <div className="d-grid">
                       <Button variant="primary" type="submit">
                           Register

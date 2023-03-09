@@ -1,7 +1,8 @@
-import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
+/* eslint-disable react/no-unescaped-entities */
+import { Col, Button, Row, Container, Card, Form, FloatingLabel } from 'react-bootstrap';
 import React from 'react';
 
-export const ResetPasswordForm = (propTypes) => {
+export const ResetPasswordForm = (props) => {
   return (
     <div>
       <Container>
@@ -14,21 +15,23 @@ export const ResetPasswordForm = (propTypes) => {
                 <div className="mb-5 mt-md-4">
                   <h2 className="fw-bold mb-5 text-center">Reset Password</h2>
                   <div className="mb-3">
-                    <Form onSubmit={propTypes.handleSubmit}>
-                      <Form.Group
+                    <Form onSubmit={props.handleSubmit}>
+                      <FloatingLabel
+                        label="New Pasword"
                         className="mb-3"
                         controlId="formBasicPassword"
                       >
-                        <Form.Label>New Password</Form.Label>
-                        <Form.Control type="password" name="password" onChange={propTypes.handleChange} placeholder="Password" />
-                      </Form.Group>
-                      <Form.Group
+
+                        <Form.Control type="password" name="password" onChange={props.handleChange} placeholder="Password" />
+                      </FloatingLabel>
+                      <FloatingLabel
+                        label="Confirm Password"
                         className="mb-3"
                         controlId="formConfirmPassword"
                       >
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password" name="confirmPassword" onChange={propTypes.handleChange} placeholder="Re-enter Password" />
-                      </Form.Group>
+
+                        <Form.Control type="password" name="confirmPassword" onChange={props.handleChange} placeholder="Re-enter Password" />
+                      </FloatingLabel>
 
                       <div className="d-grid">
                         <Button variant="primary" type="submit">
@@ -38,7 +41,7 @@ export const ResetPasswordForm = (propTypes) => {
                     </Form>
                     <div className="mt-3">
                       <p className="mb-0  text-center">
-                        Don&apos;t have an account?{' '}
+                        Don't have an account?{' '}
                         <a href="/register" className="text-primary fw-bold">
                           Sign Up
                         </a>
