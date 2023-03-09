@@ -12,8 +12,8 @@ export const Home = () => {
     const fetchData = async () => {
       try {
         const [reservationsResponse, fieldsResponse] = await Promise.all([
-          axios.get('http://localhost:8000/reservation'),
-          axios.get('http://localhost:8000/field')
+          axios.get(`${process.env.REACT_APP_SERVER_URL}/reservation`),
+          axios.get(`${process.env.REACT_APP_SERVER_URL}/field`)
         ]);
 
         const reservations = reservationsResponse.data.data
@@ -46,10 +46,10 @@ export const Home = () => {
                 <li key={reservation._id} className="list-group-item">
                   <div className="d-flex justify-content-between">
                     <div>
-                      <p className="mb-1">Field: {reservation.field}</p>
-                      <p className="mb-1">Number of registered players: {reservation.registeredPlayers.length}</p>
-                      <p className="mb-1">Time: {new Date(reservation.time).toLocaleString()}</p>
-                      <p className="mb-1">Max players for this field: {reservation.maxPlayers}</p>
+                      <p className="mb-1"><strong>Field:</strong> {reservation.field}</p>
+                      <p className="mb-1"><strong>Number of registered players:</strong> {reservation.registeredPlayers.length}</p>
+                      <p className="mb-1"><strong>Time:</strong> {new Date(reservation.time).toLocaleString()}</p>
+                      <p className="mb-1"><strong>Max players for this field:</strong> {reservation.maxPlayers}</p>
                     </div>
                     {isLoggedIn() && (
                       <div className="d-grid">

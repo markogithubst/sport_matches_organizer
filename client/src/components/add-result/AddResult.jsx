@@ -22,7 +22,7 @@ export const AddResult = () => {
     event.preventDefault();
     try {
       const request = { ...formData };
-      await axios.put(`http://localhost:8000/match/${id}/result`, request, {
+      await axios.put(`${process.env.REACT_APP_SERVER_URL}/match/${id}/result`, request, {
         headers: {
           Authorization: token
         }

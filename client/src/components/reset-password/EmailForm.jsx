@@ -11,7 +11,7 @@ export const EmailForm = () => {
     e.preventDefault();
     try {
       const request = { email: formData.email };
-      const response = await axios.post('http://localhost:8000/forgotten-password',
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/forgotten-password`,
         request
       );
 

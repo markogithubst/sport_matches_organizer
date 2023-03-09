@@ -143,13 +143,15 @@ Apart from the development .env, .env.test environment should also be defined in
    ```
 
 
-6. Run development server with (navigate to server folder)
-   ```sh
-   npm run dev
-   ```
+6. Create .env file in client folder. Example below:
+
+```sh
+    REACT_APP_SERVER_URL=http://localhost:8000
+    EXTEND_ESLINT = true
+```
 
 
-  7. Run server and client  (root folder)
+7. Run server and client  (root folder)
   ```sh
   npm run app
   ```

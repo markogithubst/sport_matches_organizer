@@ -1,4 +1,4 @@
-const { getOne, getAll, deleteOne, createOne, updateOne } = require('./crudController');
+const { getAll, deleteOne, createOne, updateOne } = require('./crudController');
 const mongoose = require('mongoose');
 const Reservation = require('../models/Reservation');
 const { ErrorMessages } = require('../errors/errorMessages');
@@ -14,7 +14,42 @@ const viewAllReservations = async (req, res) => {
 };
 
 const viewSingleReservation = async (req, res) => {
-  await getOne(Reservation, req, res);
+  const { id } = req.params;
+
+  const viewOneReservation = await Reservation.findOne({ _id: id })
+    .populate('field')
+    .populate('registeredPlayers', 'username')
+    .populate({
+      path: 'match',
+      populate: {
+        path: 'whiteTeam',
+        select: 'players ',
+        populate: {
+          path: 'players',
+          select: 'username'
+        }
+      }
+    })
+    .populate({
+      path: 'match',
+      populate: {
+        path: 'blackTeam',
+        select: 'players',
+        populate: {
+          path: 'players',
+          select: 'username'
+        }
+      }
+    })
+    .populate({
+      path: 'match',
+      populate: {
+        path: 'result'
+      }
+    });
+  if (!viewOneReservation) throw new NotFoundError(ErrorMessages.dataNotFound);
+
+  res.status(HTTP_STATUS.OK).json(viewOneReservation);
 };
 
 const updateReservation = async (req, res) => {

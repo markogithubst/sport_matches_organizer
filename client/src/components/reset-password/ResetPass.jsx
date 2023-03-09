@@ -20,7 +20,7 @@ export const ResetPassword = () => {
         return;
       }
       const request = { password: formData.password };
-      await axios.patch(`http://localhost:8000/reset-password/${id}/${emailToken}`, request);
+      await axios.patch(`${process.env.REACT_APP_SERVER_URL}/reset-password/${id}/${emailToken}`, request);
       useToastifySuccess('Password seuccessfully updated!');
 
       navigate('/login');

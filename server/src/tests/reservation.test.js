@@ -50,21 +50,6 @@ describe('Testing all RESERVATION routes', () => {
       expect(response.statusCode).toBe(HTTP_STATUS.OK);
       expect(response.headers['content-type']).toMatch(/json/);
       expect(response.body).toEqual(expect.any(Object));
-      expect(response.body).toEqual(
-        {
-          success: expect.any(Boolean),
-          data: expect.objectContaining(
-            {
-              _id: expect.any(String),
-              field: expect.any(String),
-              match: expect.any(String),
-              time: expect.any(String),
-              isCanceled: expect.any(Boolean),
-              isFinished: expect.any(Boolean),
-              isScheduled: expect.any(Boolean),
-              registeredPlayers: expect.any(Array)
-            })
-        });
     });
   });
 

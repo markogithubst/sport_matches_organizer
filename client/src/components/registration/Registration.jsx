@@ -25,7 +25,7 @@ export const Registration = () => {
     event.preventDefault();
     try {
       const request = { ...formData };
-      await axios.post('http://localhost:8000/user', request);
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/user`, request);
       navigate('/login');
     } catch (err) {
       useToastifyError(err);
