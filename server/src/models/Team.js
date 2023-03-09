@@ -25,7 +25,7 @@ teamSchema.pre('find', async function () {
   this.populate({
     path: 'players',
     model: 'User',
-    select: 'username'
+    select: 'username isDeleted'
   });
 });
 

@@ -1,9 +1,10 @@
 import { useState, React } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RegForm } from './RegForm';
+import { successMessages } from '../../utils/responseMessages';
 import axios from 'axios';
 import { isLoggedIn } from '../../utils/isLoggedIn';
-import { useToastifyError } from '../../hooks/useToastify';
+import { useToastifyError, useToastifySuccess } from '../../hooks/useToastify';
 
 export const Registration = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export const Registration = () => {
       const request = { ...formData };
       await axios.post(`${process.env.REACT_APP_SERVER_URL}/user`, request);
       navigate('/login');
+      useToastifySuccess(successMessages.userRegistered);
     } catch (err) {
       useToastifyError(err);
     }

@@ -308,15 +308,18 @@ const doc = {
               players: [
                 {
                   _id: '63eb6abf9792291234cd6a75',
-                  username: 'jops'
+                  username: 'jops',
+                  isDeleted: true
                 },
                 {
                   _id: '63eb6abf9792291234cd6a76',
-                  username: 'marks'
+                  username: 'marks',
+                  isDeleted: false
                 },
                 {
                   _id: '63eb6abf9792291234cd6a77',
-                  username: 'ivks3'
+                  username: 'ivks3',
+                  isDeleted: false
                 }
               ]
             },
@@ -325,15 +328,18 @@ const doc = {
               players: [
                 {
                   _id: '63eb788d339bb827e5fe77d2',
-                  username: 'franks'
+                  username: 'franks',
+                  isDeleted: false
                 },
                 {
                   _id: '63eb788d339bb827e5fe77d3',
-                  username: 'lovrks'
+                  username: 'lovrks',
+                  isDeleted: false
                 },
                 {
                   _id: '63eb788d339bb827e5fe77d4',
-                  username: 'karlks'
+                  username: 'karlks',
+                  isDeleted: false
                 }
               ]
             },

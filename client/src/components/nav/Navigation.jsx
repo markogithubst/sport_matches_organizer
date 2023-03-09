@@ -4,7 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { isLoggedIn } from '../../utils/isLoggedIn';
-import { useToastifyError } from '../../hooks/useToastify';
+import { useToastifyError, useToastifySuccess } from '../../hooks/useToastify';
+import { successMessages } from '../../utils/responseMessages';
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -12,10 +13,8 @@ export const Navigation = () => {
     try {
       e.preventDefault();
 
-      localStorage.removeItem('role');
-      localStorage.removeItem('token');
-      localStorage.removeItem('userid');
-
+      localStorage.clear();
+      useToastifySuccess(successMessages.userLoggedOut);
       navigate('/');
     } catch (err) {
       useToastifyError(err);

@@ -3,5 +3,8 @@ export const warningMessages = {
 };
 
 export const successMessages = {
-  passwordUpdated: 'Password successfully updated!'
+  passwordUpdated: 'Password successfully updated!',
+  userRegistered: 'User registration successful!',
+  userLoggedOut: 'User logged out successfully!',
+  userUpdated: 'User successfully updated!'
 };

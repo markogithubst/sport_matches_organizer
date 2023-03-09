@@ -6,9 +6,7 @@ const { mailContexts } = require('./mailContexts');
 const { weatherConsts } = require('./weatherConstants');
 
 const checkEligibleReservations = async () => {
-  const today = new Date();
-  const tomorrow = new Date(today);
-
+  const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   const reservations = await Reservations.find({
@@ -26,8 +24,7 @@ const checkEligibleReservations = async () => {
     model: 'User'
   });
 
-  // eslint-disable-next-line prefer-const, no-unreachable-loop
-  for (let reservation of reservations) {
+  for (const reservation of reservations) {
     checkConditionsAndNotify(reservation);
   }
 };

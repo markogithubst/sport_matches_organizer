@@ -76,9 +76,7 @@ const resetPassword = async (req, res) => {
 
   if (newPassword) {
     const user = await User.findById(id);
-    console.log(user);
-    console.log(password, newPassword);
-    console.log(await bcrypt.compare(password, user.password));
+
     if (await bcrypt.compare(password, user.password)) {
       user.password = newPassword;
       user.save();

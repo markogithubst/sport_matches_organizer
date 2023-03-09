@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { useToastifyError, useToastifyWarning } from '../../hooks/useToastify';
+import { useNavigate } from 'react-router-dom';
+import { useToastifyError, useToastifySuccess, useToastifyWarning } from '../../hooks/useToastify';
 import { ConfirmPasswordForm } from './ResetPasswordModal/ConfirmPasswordForm';
-import { warningMessages } from '../../utils/responseMessages';
+import { warningMessages, successMessages } from '../../utils/responseMessages';
 import { isLoggedIn } from '../../utils/isLoggedIn';
 import { httpPasswordChange } from '../../hooks/requests';
 
 export const ResetPassword = (props) => {
   const user = isLoggedIn();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     password: '',
     newPassword: '',
@@ -23,9 +25,12 @@ export const ResetPassword = (props) => {
         password: data.password,
         newPassword: data.newPassword
       }, user);
+      useToastifySuccess(successMessages.passwordUpdated);
+      localStorage.clear();
+      navigate('/login');
     } catch (err) {
       useToastifyError(err);
-    }
+    };
   };
   return (
     <Modal

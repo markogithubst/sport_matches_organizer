@@ -20,7 +20,8 @@ module.exports = [
     email: 'mvukusic@test.com',
     password: 'password',
     phone: '+385993404576',
-    role: 'USER'
+    role: 'USER',
+    isDeleted: true
   },
   {
     _id: new ObjectId('63eb6abf9792291234cd6a77'),

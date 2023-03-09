@@ -3419,6 +3419,10 @@
                           "username": {
                             "type": "string",
                             "example": "ivks3"
+                          },
+                          "isDeleted": {
+                            "type": "boolean",
+                            "example": false
                           }
                         }
                       }
@@ -3444,6 +3448,10 @@
                           "username": {
                             "type": "string",
                             "example": "karlks"
+                          },
+                          "isDeleted": {
+                            "type": "boolean",
+                            "example": false
                           }
                         }
                       }

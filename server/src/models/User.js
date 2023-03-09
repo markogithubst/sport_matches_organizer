@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const { hashPassword } = require('../utils/hashPassword');
 
 const userSchema = mongoose.Schema({
@@ -70,14 +69,9 @@ const userSchema = mongoose.Schema({
     }
   }
 });
-userSchema.method('compare', async function (passwordToCompare) {
-  console.log('this', this.password, passwordToCompare);
-  return await bcrypt.compare('password', this.password);
-});
 
 userSchema.pre('save', async function (next) {
   this.password = hashPassword(this.password);
-
   next();
 });
 

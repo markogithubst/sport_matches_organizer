@@ -43,7 +43,7 @@ const deleteUser = async (req, res) => {
 
 const viewHistory = async (req, res) => {
   const { id } = req.params;
-  const exclude = '-num -isScheduled -isCanceled -isDeleted -isFinished -registeredPlayers';
+  const exclude = ' -isScheduled -isCanceled -isFinished -registeredPlayers';
 
   // eslint-disable-next-line max-len
   const userHistory = await Reservation.find({ registeredPlayers: { $in: [id] }, isFinished: true }, exclude)
@@ -52,10 +52,8 @@ const viewHistory = async (req, res) => {
       path: 'match',
       populate: {
         path: 'whiteTeam',
-        select: 'players ',
         populate: {
-          path: 'players',
-          select: 'username'
+          path: 'players'
         }
       }
     })
@@ -63,10 +61,8 @@ const viewHistory = async (req, res) => {
       path: 'match',
       populate: {
         path: 'blackTeam',
-        select: 'players',
         populate: {
-          path: 'players',
-          select: 'username'
+          path: 'players'
         }
       }
     })
@@ -75,7 +71,7 @@ const viewHistory = async (req, res) => {
       populate: {
         path: 'result'
       }
-    });
+    }).lean();
 
   if (!userHistory.length) throw new NotFoundError(ErrorMessages.dataNotFound);
 
