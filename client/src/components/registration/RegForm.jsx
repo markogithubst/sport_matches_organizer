@@ -34,7 +34,7 @@ export const RegForm = (props) => {
                         maxLength={25}
                         placeholder="Enter last name"
                         name="surname"
-                        value={props.formData.name}
+                        value={props.formData.surname}
                         onChange={props.handleChange}
                       />
                     </InputGroup>
