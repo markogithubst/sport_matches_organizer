@@ -39,6 +39,7 @@ The application allows users to:
 - register 
 - log in / log out
 - update and delete their account
+- reset password from user profile, reset password from recovery link in email if password forgotten
 - make a reservation for a match in the future
 - view their match history along with the corresponding results
 - unregistered users can filter reservations for upcoming matches by date, day of the week and hour
@@ -55,7 +56,7 @@ Cron job is used to perform checks on reservations every day at 9AM.
 
 Once the match has been finished, a user with admin access is expected to input the result of the match. 
 - Another cron job is set to check if the results have been added for the matches that are finished. 
-- If there are no results, admin users will be notified via email.
+- If there are no results, admin users will be notified via email with a link to add result.
 
 <br>
 
