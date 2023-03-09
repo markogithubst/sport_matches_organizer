@@ -1,8 +1,9 @@
 const User = require('../models/User');
 const Token = require('../models/Token');
 const bcrypt = require('bcrypt');
+const { hashPassword } = require('../utils/hashPassword');
 const { ErrorMessages } = require('../errors/errorMessages');
-const { ValidationError, NotFoundError } = require('../errors/Errors');
+const { ValidationError, NotFoundError, AuthorizationError } = require('../errors/Errors');
 const { HTTP_STATUS } = require('../utils/httpCodes');
 const { createJWT } = require('../token.js');
 const { forgottenPasswordEmail } = require('../utils/forgottenPasswordEmail');
@@ -58,8 +59,7 @@ const resetPasswordWithLink = async (req, res) => {
 
   if (!token) throw new ValidationError(ErrorMessages.invalidQuery);
 
-  const salt = await bcrypt.genSalt();
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const hashedPassword = hashPassword(password);
 
   const user = await User.findByIdAndUpdate({ _id: id }, { password: hashedPassword });
 
@@ -72,10 +72,22 @@ const resetPasswordWithLink = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   const { id } = req.params;
-  const { password } = req.body;
+  const { password, newPassword } = req.body;
 
-  const salt = await bcrypt.genSalt();
-  const hashedPassword = await bcrypt.hash(password, salt);
+  if (newPassword) {
+    const user = await User.findById(id);
+    console.log(user);
+    console.log(password, newPassword);
+    console.log(await bcrypt.compare(password, user.password));
+    if (await bcrypt.compare(password, user.password)) {
+      user.password = newPassword;
+      user.save();
+      return;
+    } else {
+      throw new AuthorizationError(ErrorMessages.incorrectPassword);
+    }
+  }
+  const hashedPassword = await hashPassword(password);
 
   const passwordReset = await User.findByIdAndUpdate({ _id: id }, { password: hashedPassword }, {
     new: true

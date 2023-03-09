@@ -8,7 +8,8 @@ const idSchema = Joi.object({
 });
 
 const passwordSchema = Joi.object({
-  password: Joi.string().min(8).max(20).required()
+  password: Joi.string().min(8).max(20).required(),
+  newPassword: Joi.string().min(8).max(20)
 });
 
 const emailSchema = Joi.object({

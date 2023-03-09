@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { hashPassword } = require('../utils/hashPassword');
 
 const userSchema = mongoose.Schema({
   username: {
@@ -69,10 +70,13 @@ const userSchema = mongoose.Schema({
     }
   }
 });
+userSchema.method('compare', async function (passwordToCompare) {
+  console.log('this', this.password, passwordToCompare);
+  return await bcrypt.compare('password', this.password);
+});
 
 userSchema.pre('save', async function (next) {
-  const salt = await bcrypt.genSalt();
-  this.password = await bcrypt.hash(this.password, salt);
+  this.password = hashPassword(this.password);
 
   next();
 });
