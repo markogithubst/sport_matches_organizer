@@ -185,7 +185,7 @@ router.patch('/reset-password/:id/:emailToken',
       }
     }
 */
-  callbackErrorHandler(authController.resetPasswordWithLink));
+  validatePassword, callbackErrorHandler(authController.resetPasswordWithLink));
 router.patch('/:id/reset-password',
 /* #swagger.tags = ['Forgotten Password']
 
