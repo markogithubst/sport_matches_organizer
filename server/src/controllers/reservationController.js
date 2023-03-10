@@ -16,7 +16,7 @@ const viewAllReservations = async (req, res) => {
 const viewSingleReservation = async (req, res) => {
   const { id } = req.params;
 
-  const viewOneReservation = await Reservation.findOne({ _id: id })
+  const viewOneReservation = await Reservation.findOne({ _id: id }, '-color')
     .populate('field')
     .populate('registeredPlayers', 'username')
     .populate({

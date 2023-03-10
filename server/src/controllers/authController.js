@@ -43,8 +43,8 @@ const forgottenPassword = async (req, res) => {
     }).save();
   }
 
-  const link = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
-  await forgottenPasswordEmail(user, link);
+  const recoveryLink = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
+  await forgottenPasswordEmail(user, recoveryLink);
 
   res.status(HTTP_STATUS.OK).json({ success: true, message: successMessages.linkSentToUserMail(user.email) });
 };
@@ -75,26 +75,17 @@ const resetPassword = async (req, res) => {
   const { id } = req.params;
   const { password, newPassword } = req.body;
 
-  if (newPassword) {
-    const user = await User.findById(id);
+  const user = await User.findById(id);
 
-    if (await bcrypt.compare(password, user.password)) {
-      user.password = await hashPassword(newPassword);
-      user.save();
-      return res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: successMessages.passwordUpdated });
-    } else {
-      throw new AuthorizationError(ErrorMessages.incorrectPassword);
-    }
+  if (!user) throw new NotFoundError(ErrorMessages.dataNotFound);
+
+  if (await bcrypt.compare(password, user.password)) {
+    user.password = await hashPassword(newPassword);
+    user.save();
+    return res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: successMessages.passwordUpdated });
+  } else {
+    throw new AuthorizationError(ErrorMessages.incorrectPassword);
   }
-  const hashedPassword = await hashPassword(password);
-
-  const passwordReset = await User.findByIdAndUpdate({ _id: id }, { password: hashedPassword }, {
-    new: true
-  });
-
-  if (!passwordReset) throw new NotFoundError(ErrorMessages.dataNotFound);
-
-  res.status(HTTP_STATUS.ACCEPTED).json({ success: true, message: successMessages.passwordUpdated });
 };
 
 module.exports = {

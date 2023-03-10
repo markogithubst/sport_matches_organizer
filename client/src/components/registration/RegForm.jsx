@@ -21,6 +21,7 @@ export const RegForm = (props) => {
                         required
                         minLength={3}
                         maxLength={25}
+                        pattern="/^[a-zA-Z]+$/"
                         placeholder="Enter first name"
                         name="name"
                         value={props.formData.name}
@@ -32,6 +33,7 @@ export const RegForm = (props) => {
                         required
                         minLength={3}
                         maxLength={25}
+                        pattern="/^[a-zA-Z]+$/"
                         placeholder="Enter last name"
                         name="surname"
                         value={props.formData.surname}

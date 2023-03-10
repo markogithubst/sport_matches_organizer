@@ -15,22 +15,8 @@ const viewSingleMatch = async (req, res) => {
 
   const matchDetails = await Match.findOne({ _id: id })
     .populate('result')
-    .populate({
-      path: 'blackTeam',
-      model: 'Team',
-      populate: {
-        path: 'players',
-        model: 'user'
-      }
-    })
-    .populate({
-      path: 'whiteTeam',
-      model: 'Team',
-      populate: {
-        path: 'players',
-        model: 'user'
-      }
-    });
+    .populate('blackTeam')
+    .populate('whiteTeam');
 
   if (!matchDetails) throw new NotFoundError(ErrorMessages.dataNotFound);
   res.status(HTTP_STATUS.OK).json({ success: true, data: matchDetails });

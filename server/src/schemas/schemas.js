@@ -67,8 +67,8 @@ const teamSchema = Joi.object({
 
 const userSchema = Joi.object({
   username: Joi.string().min(4).max(16).required(),
-  name: Joi.string().min(3).max(25).required(),
-  surname: Joi.string().min(3).max(25).required(),
+  name: Joi.string().min(3).max(25).pattern(/^[a-zA-Z]+$/).required(),
+  surname: Joi.string().min(3).max(25).pattern(/^[a-zA-Z]+$/).required(),
   email: Joi.string().email({ minDomainSegments: 2 }).required(),
   password: Joi.string().min(8).max(20),
   phone: Joi.string().regex(/^\+(?:\d\s?){6,14}\d$/).required(),

@@ -1,7 +1,6 @@
 const { fetchWeather } = require('./fetchWeather');
 const Reservations = require('../models/Reservation');
 const { notifyPlayers } = require('./reservationEmail');
-
 const { mailContexts } = require('./mailContexts');
 const { weatherConsts } = require('./weatherConstants');
 

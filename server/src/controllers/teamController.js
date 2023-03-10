@@ -1,6 +1,5 @@
 const { getAll, deleteOne, updateOne } = require('./crudController');
 const Team = require('../models/Team');
-
 const { ErrorMessages } = require('../errors/ErrorMessages');
 const { NotFoundError } = require('../errors/Errors');
 const { HTTP_STATUS } = require('../utils/httpCodes');

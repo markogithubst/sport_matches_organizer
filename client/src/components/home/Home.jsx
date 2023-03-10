@@ -1,6 +1,6 @@
 import { useEffect, useState, React } from 'react';
 import axios from 'axios';
-import { Container, Card } from 'react-bootstrap';
+import { Button, Container, Card } from 'react-bootstrap';
 import { isLoggedIn } from '../../utils/isLoggedIn';
 import { Link } from 'react-router-dom';
 import { useToastifyError } from '../../hooks/useToastify';
@@ -54,8 +54,10 @@ export const Home = () => {
                     {isLoggedIn() && (
                       <div className="d-grid">
                         <div className="d-grid">
-                          <Link to={`/reservation/${reservation._id}`} className="mt-5 mb-5 h-25 btn btn-primary">
-                            View details
+                          <Link to={`/reservation/${reservation._id}`} className="mt-5 mb-5 h-25">
+                            <Button variant="primary" type="submit">
+                              View Details
+                            </Button>
                           </Link>
                         </div>
                       </div>
