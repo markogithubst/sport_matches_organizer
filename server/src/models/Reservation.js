@@ -10,12 +10,10 @@ const reservationSchema = mongoose.Schema({
   field: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Field',
-    autopopulate: true,
     required: true
   },
   match: {
     type: mongoose.Schema.Types.ObjectId,
-    autopopulate: true,
     ref: 'Match'
   },
   time: {
@@ -64,7 +62,7 @@ reservationSchema.method('createMatch', async function () {
     const selector = Math.round(Math.random());
     if (selector === 0 && blackTeam.players.length < this.field.maxPlayers / 2) {
       blackTeam.players.push(player);
-    } else if (selector === 1 && blackTeam.players.length < this.field.maxPlayers / 2) {
+    } else if (selector === 1 && whiteTeam.players.length < this.field.maxPlayers / 2) {
       whiteTeam.players.push(player);
     } else {
       blackTeam.players.length === this.field.maxPlayers / 2

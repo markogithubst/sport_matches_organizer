@@ -36,26 +36,26 @@ export const Home = () => {
   }, []);
 
   return (
-    <Container className="container">
-      <h1 className="my-3">All Reservations</h1>
-      <Card className="shadow">
+    <Container className='container'>
+      <h1 className='my-3'>All Reservations</h1>
+      <Card className='shadow'>
         <Card.Body>
           <div>
-            <ul className="list-group">
+            <ul className='list-group'>
               {reservations.map(reservation => (
-                <li key={reservation._id} className="list-group-item">
-                  <div className="d-flex justify-content-between">
+                <li key={reservation._id} className='list-group-item'>
+                  <div className='d-flex justify-content-between'>
                     <div>
-                      <p className="mb-1"><strong>Field:</strong> {reservation.field}</p>
-                      <p className="mb-1"><strong>Number of registered players:</strong> {reservation.registeredPlayers.length}</p>
-                      <p className="mb-1"><strong>Time:</strong> {new Date(reservation.time).toLocaleString()}</p>
-                      <p className="mb-1"><strong>Max players for this field:</strong> {reservation.maxPlayers}</p>
+                      <p className='mb-1'><strong>Field:</strong> {reservation.field}</p>
+                      <p className='mb-1'><strong>Number of registered players:</strong> {reservation.registeredPlayers.length}</p>
+                      <p className='mb-1'><strong>Time:</strong> {new Date(reservation.time).toLocaleString()}</p>
+                      <p className='mb-1'><strong>Max players for this field:</strong> {reservation.maxPlayers}</p>
                     </div>
                     {isLoggedIn() && (
-                      <div className="d-grid">
-                        <div className="d-grid">
-                          <Link to={`/reservation/${reservation._id}`} className="mt-5 mb-5 h-25">
-                            <Button variant="primary" type="submit">
+                      <div className='d-grid'>
+                        <div className='d-grid'>
+                          <Link to={`/reservation/${reservation._id}`} className='mt-5 mb-5 h-25'>
+                            <Button variant='primary' type='submit'>
                               View Details
                             </Button>
                           </Link>

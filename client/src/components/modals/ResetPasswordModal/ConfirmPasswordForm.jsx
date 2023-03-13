@@ -10,17 +10,31 @@ export const ConfirmPasswordForm = (props) => {
   return (
     <Form>
       <FloatingLabel
-        controlId="floatingInput"
-        label="Old password"
-        className="mb-4"
+        controlId='floatingInput'
+        label='Old password'
+        className='mb-4'
       >
-        <Form.Control onChange={changeHandler} name='password' type="password" placeholder="*******" />
+        <Form.Control
+          onChange={changeHandler}
+          name='password'
+          required
+          minLength={8}
+          maxLength={20}
+          type='password'
+          placeholder='*******' />
       </FloatingLabel>
-      <FloatingLabel className='mb-1' controlId="floatingNew" label="New password ">
-        <Form.Control minLength={8} onChange={changeHandler} name='newPassword' type="password" placeholder="********" />
+      <FloatingLabel className='mb-1' controlId='floatingNew' label='New password'>
+        <Form.Control
+          required
+          minLength={8}
+          maxLength={20}
+          onChange={changeHandler}
+          name='newPassword'
+          type='password'
+          placeholder='********' />
       </FloatingLabel>
-      <FloatingLabel controlId="floatingConfirm" label="Confirm password ">
-        <Form.Control onChange={changeHandler} name='confirmPassword' type="password" placeholder="********" />
+      <FloatingLabel controlId='floatingConfirm' label='Confirm password'>
+        <Form.Control onChange={changeHandler} name='confirmPassword' type='password' placeholder='********' />
       </FloatingLabel>
     </Form>
   );

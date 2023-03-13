@@ -80,7 +80,7 @@ const router = createBrowserRouter([
 export const App = () => {
   return (<><RouterProvider router={router} />
     <ToastContainer
-      position="top-right"
+      position='top-right'
       autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}
@@ -89,7 +89,7 @@ export const App = () => {
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="light" />
+      theme='light' />
   </>
 
   );

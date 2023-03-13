@@ -1,10 +1,10 @@
 const weatherConsts = {
-  minTemp: 4,
-  maxTemp: 33,
-  maxHumidity: 89,
-  maxWindSpeed: 80,
-  rain: 'Rain',
-  snow: 'Snow'
+  MIN_TEMP: 4,
+  MAX_TEMP: 33,
+  MAX_HUMIDITY: 89,
+  MAX_WIND_SPEED: 80,
+  RAIN: 'Rain',
+  SNOW: 'Snow'
 };
 
 module.exports = { weatherConsts };

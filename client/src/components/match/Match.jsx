@@ -28,7 +28,7 @@ export const Match = () => {
   return (
     <Container className='rounded'>
       {match &&
-         <MatchItem className="mt-5 shadow" match={match} key={match._id}></MatchItem>
+         <MatchItem className='mt-5 shadow' match={match} key={match._id}></MatchItem>
       }
     </Container>
   );

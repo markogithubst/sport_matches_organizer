@@ -49,12 +49,12 @@ const checkConditionsAndNotify = async (reservation) => {
     return;
   }
   if (
-    data.main.temp < weatherConsts.minTemp ||
-  data.main.temp > weatherConsts.maxTemp ||
-    data.main.humidity > weatherConsts.maxHumidity ||
-    data.wind.speed > weatherConsts.maxWindSpeed ||
-    data.weather[0].main === weatherConsts.rain ||
-    data.weather[0].main === weatherConsts.snow
+    data.main.temp < weatherConsts.MIN_TEMP ||
+    data.main.temp > weatherConsts.MAX_TEMP ||
+    data.main.humidity > weatherConsts.MAX_HUMIDITY ||
+    data.wind.speed > weatherConsts.MAX_WIND_SPEED ||
+    data.weather[0].main === weatherConsts.RAIN ||
+    data.weather[0].main === weatherConsts.SNOW
   ) {
     await Reservations.findByIdAndUpdate(reservation.id, { $set: { isCanceled: true } });
     notifyPlayers(reservation, mailContexts.badWeather);

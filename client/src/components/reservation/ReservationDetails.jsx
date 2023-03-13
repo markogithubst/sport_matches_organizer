@@ -42,20 +42,20 @@ export const ReservationDetails = () => {
     return <div>You need to be logged in to view this page!</div>;
   }
   return (
-    <Container className="container">
-      <h1 className="my-3">Reservation Details</h1>
-      <Card className="shadow">
+    <Container className='container'>
+      <h1 className='my-3'>Reservation Details</h1>
+      <Card className='shadow'>
         <Card.Body>
           {!isLoaded && <h1>Loading</h1>}
           {isLoaded && (
             <div>
-              <p className="mb-2"><strong>Field Name:</strong> {reservation.field?.name}</p>
-              <p className="mb-2"><strong>Field Address:</strong> {reservation.field?.address}</p>
-              <p className="mb-2"><strong>Field City:</strong> {reservation.field?.city}</p>
-              <p className="mb-2"><strong>Number of registered players:</strong> {reservation.registeredPlayers?.length || 0}</p>
-              <p className="mb-2"><strong>Time of the reservation:</strong> {new Date(reservation.time)?.toLocaleString()}</p>
-              <p className="mb-2"><strong>Max players for this field:</strong> {reservation.field?.maxPlayers}</p>
-              <p className="mb-2">
+              <p className='mb-2'><strong>Field Name:</strong> {reservation.field?.name}</p>
+              <p className='mb-2'><strong>Field Address:</strong> {reservation.field?.address}</p>
+              <p className='mb-2'><strong>Field City:</strong> {reservation.field?.city}</p>
+              <p className='mb-2'><strong>Number of registered players:</strong> {reservation.registeredPlayers?.length || 0}</p>
+              <p className='mb-2'><strong>Time of the reservation:</strong> {new Date(reservation.time)?.toLocaleString()}</p>
+              <p className='mb-2'><strong>Max players for this field:</strong> {reservation.field?.maxPlayers}</p>
+              <p className='mb-2'>
                 <strong>Registered players usernames:</strong>{' '}
                 {reservation.registeredPlayers?.map((player) => player.username).join(', ')}
               </p>

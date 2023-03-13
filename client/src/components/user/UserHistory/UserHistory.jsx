@@ -28,7 +28,7 @@ export const UserHistory = () => {
   return (
     <Container className='rounded'>
       {history && history.map(item => {
-        return <MatchItem className="mt-5 shadow" match={item.match} key={item._id} field={item.field}></MatchItem>;
+        return <MatchItem className='mt-5 shadow' match={item.match} key={item._id} field={item.field}></MatchItem>;
       })}
     </Container>
   );

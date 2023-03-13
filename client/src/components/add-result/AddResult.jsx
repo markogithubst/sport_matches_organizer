@@ -42,7 +42,7 @@ export const AddResult = () => {
   if (user.role === 'USER') {
     return <>
       <h1> 403 Unauthorized</h1>
-      <a href="/">Home</a>
+      <a href='/'>Home</a>
     </>;
   }
   return (

@@ -35,12 +35,12 @@ export const ResetPassword = (props) => {
   return (
     <Modal
       show={props.showModal}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
+      size='lg'
+      aria-labelledby='contained-modal-title-vcenter'
       centered
     >
       <Modal.Header >
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title id='contained-modal-title-vcenter'>
             Reset password
         </Modal.Title>
       </Modal.Header>
@@ -48,7 +48,7 @@ export const ResetPassword = (props) => {
         <ConfirmPasswordForm data={data} setData={setData} modalSubmitHandler={modalSubmitHandler} />
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={modalSubmitHandler} variant="primary">Submit</Button>
+        <Button onClick={modalSubmitHandler} variant='primary'>Submit</Button>
         <Button variant='warning' onClick={props.toggleModal}>Cancel</Button>
       </Modal.Footer>
     </Modal>
